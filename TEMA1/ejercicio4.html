@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="imagen"></div>
+
+    <select id="sitios">
+    <option value="atardecer">Atardecer</option>
+    <option value="bosque">Bosque</option>
+    <option value="lago">Lago</option>
+    </select>
+    
+
+    <script>
+        // Ejercicio 1.4: Cargar una lista plegable con nombres de imágenes que tienes guardadas en el disco y cuando se selecciona una de la lista, visualizar esa imagen.
+        document.getElementById("sitios").addEventListener("change", function() {
+        // Guardamos el valor seleccionado
+        const sitio = this.value;
+        const imagen = document.createElement('img');
+
+        let foto;
+
+        const contenedor = document.getElementById("imagen");
+    
+        if (sitio == "atardecer") {
+            foto = imagen.src = "TEMA1/IMG/atardecer.jpg";
+            contenedor.innerHTML = ""
+            contenedor.appendChild(imagen);
+        } else if (sitio == "bosque") {
+            foto = imagen.src = "TEMA1/IMG/bosque.jpg";
+            contenedor.innerHTML = ""
+            contenedor.appendChild(imagen);
+        } else {
+            foto = imagen.src = "TEMA1/IMG/lago.jpg";
+            contenedor.innerHTML = ""
+            contenedor.appendChild(imagen);
+        }
+        
+    });
+    </script>
+</body>
+</html>

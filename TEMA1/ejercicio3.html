@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio3</title>
+</head>
+<body>
+
+    <label for="Mensaje">Escribe un mensaje:</label>
+    <input type="text" id="mensaje">
+    <button onclick="Mostrar()">Mostrar texto</button>
+    <br>
+    <div id="mostrar"></div>
+
+    <script>
+        // Ejercicio 1.3: Solicitar en un <input> un texto y mostrarlo en una capa <div>
+        // pulsando sobre un botón.
+        function Mostrar() {
+            const mensaje = document.getElementById("mensaje");
+            const valor = mensaje.value;
+            document.getElementById("mostrar").innerHTML = valor
+        }
+    </script>
+</body>
+</html>

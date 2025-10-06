@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p id="texto">Texto a modificar su estilo</p>
+
+    <select id="txtcursiva">
+    <option value="normal">Normal</option>
+    <option value="cursiva">Cursiva</option>
+    </select>
+
+    <select id="txtnegrita">
+    <option value="normal">Normal</option>
+    <option value="negrita">Negrita</option>
+    </select>
+
+    <script>
+        // Ejercicio 1.5: Crear una página con un texto y dos listas plegables, una indica que
+        // el texto se ponga en negrita o no, y la otra si el texto se pone en cursiva o no.
+        const texto = document.getElementById("texto");
+
+        document.getElementById("txtcursiva").addEventListener("change", function() {
+        // Guardamos el valor seleccionado
+        const cursiva = this.value;
+
+        if (cursiva == "cursiva") {
+            texto.style.fontStyle = "italic";
+        } else {
+            texto.style.fontStyle = "normal";
+        }
+        });
+
+        document.getElementById("txtnegrita").addEventListener("change", function() {
+        // Guardamos el valor seleccionado
+        const negrita = this.value;
+
+        if (negrita == "negrita") {
+            texto.style.fontWeight = "bold";
+        } else {
+            texto.style.fontWeight = "normal";
+        }
+        });
+    </script>
+</body>
+</html>

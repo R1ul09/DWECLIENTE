@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio2</title>
+</head>
+<body>
+  <label for="color">Elige tu color favorito:</label>
+  <select id="color">
+    <option value="rojo">Rojo</option>
+    <option value="azul">Azul</option>
+    <option value="morado">Morado</option>
+    <option value="verde">Verde</option>
+  </select>
+
+  <script>
+      // Cuando cambie la selección del color...
+      document.getElementById("color").addEventListener("change", function() {
+      // Guardamos el valor seleccionado
+      let color = this.value;
+      
+      // Lo mostramos por consola
+      console.log("Has elegido:", color);
+    });
+  </script>
+</body>
+</html>
