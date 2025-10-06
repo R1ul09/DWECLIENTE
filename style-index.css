@@ -1,0 +1,71 @@
+    body {
+      background: radial-gradient(circle at top left, #2a003e, #0a0012);
+      color: #eee;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    nav {
+      background-color: rgba(80, 0, 150, 0.8);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(160, 0, 255, 0.4);
+    }
+
+    nav a {
+      color: #e6ccff !important;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fff !important;
+      text-shadow: 0 0 10px #b366ff;
+    }
+
+    .hero {
+      padding: 8rem 1rem;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: #c77dff;
+      text-shadow: 0 0 25px #9d4edd;
+      margin-bottom: 1rem;
+    }
+
+    .hero h3 {
+      color: #e0aaff;
+      text-shadow: 0 0 15px #b57cff;
+    }
+
+    footer {
+      background-color: rgba(50, 0, 100, 0.7);
+      color: #ccc;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(160, 0, 255, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-custom {
+      background: linear-gradient(90deg, #6a00f4, #b5179e);
+      border: none;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      box-shadow: 0 0 15px #b5179e;
+      transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      box-shadow: 0 0 25px #ff70d9;
+      transform: scale(1.05);
+    }
