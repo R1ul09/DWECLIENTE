@@ -4,9 +4,11 @@
       font-family: 'Orbitron', sans-serif;
       text-align: center;
       min-height: 100vh;
+      padding-bottom: auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
     }
 
     nav {
@@ -47,6 +49,9 @@
       background-color: rgba(50, 0, 100, 0.7);
       color: #ccc;
       padding: 1rem;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
       box-shadow: 0 0 10px rgba(160, 0, 255, 0.4);
     }
 
