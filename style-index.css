@@ -45,6 +45,15 @@
       text-shadow: 0 0 15px #b57cff;
     }
 
+    .tema-card {
+      background-color: rgba(30, 0, 60, 0.8);
+      color: #e0caff;
+      border: 1px solid rgba(180, 100, 255, 0.3);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(140, 0, 255, 0.3);
+    }
+
     footer {
       background-color: rgba(50, 0, 100, 0.7);
       color: #ccc;
