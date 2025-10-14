@@ -6,17 +6,16 @@
     <title>Flechasemana</title>
 </head>
 <body>
-    <script>
-        // Creamos un array con todos los dias de la semana
-        let diasSemana = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
-        // Y lo sacamos por consola con .map(), que lo que hace es crear un nuevo array y en este caso
-        console.log(diasSemana.map(dias => dias.length));
-        // Mostraremos la longitud de palabras de cada dia y la suma total
-        let sumaDias= diasSemana.reduce((acumulador, elemento) => {
-        return acumulador + elemento.length;
-        }, 0);
-        // Muestra la suma de la longitud de los dias
-        console.log(sumaDias);
-    </script>
+    <H3>Dias de la semana</H3>
+    <div id="dias"></div>
+    <br>
+    <div id="diasSemana"></div>
+    <br>
+    <div id="sumaDeDias"></div>
+    <br>
+    <div id="diaMasLargo"></div>
+    <br>
+    <div id="diaMasCorto"></div>
+    <script src="ejemplo1.js"></script>
 </body>
 </html>
