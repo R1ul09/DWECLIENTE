@@ -1,0 +1,69 @@
+body {
+        font-family: sans-serif;
+        margin: 20px;
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    h1, h2 {
+        color: #0069d9;
+    }
+
+    table {
+        width: 60%; 
+        border-collapse: collapse; 
+        margin: 20px 0; 
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    }
+
+    th, td {
+        padding: 10px; 
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    button {
+        padding: 8px 16px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        transition: background-color 0.2s;
+    }
+
+    #botonAnadir, #botonMasHabitantes, #botonMenosHabitantes {
+        background-color: #28a745;
+    }
+
+    #botonBorrar {
+        background-color: #dc3545;
+    }
+    
+    button:hover {
+        opacity: 0.9;
+    }
+
+    #borrarCiudad select {
+        padding: 6px;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+    #totalCiudades {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #e9ecef;
+        border-radius: 4px;
+        display: inline-block;
+    }
