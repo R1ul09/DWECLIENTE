@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Ejercicio 9</h2>
+    <div id="dias">
+
+    </div>
+    <script>
+        /* 9. Escriba un programa JavaScript para calcular los días que quedan hasta la
+        próxima Navidad.
+        */
+        const fechaActual = new Date();
+        const anioActual = fechaActual.getFullYear();
+        const navidad = new Date(anioActual, 11, 25);
+
+        let dias;
+
+        dias = navidad.getTime() - fechaActual.getTime();
+
+        dias = Math.trunc(dias/1000/60/60/24);
+
+        if (fechaActual > navidad) {
+            anioActual + 1;
+        }
+
+        document.getElementById("dias").innerHTML = "Quedan " + dias + " para la navidad de " + anioActual;        
+    </script>
+</body>
+</html>
