@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Creamos un array grande para que se note la diferencia
+        let numeros = [];
+        for (let i = 0; i < 10000000; i++) {
+        numeros.push(i);
+        }
+
+        //  Medimos el tiempo del .map() 
+        // guardamos el tiempo antes de empezar
+        let startMap = Date.now();
+
+        // el map crea un nuevo array multiplicando cada número por 2
+        let nuevoArray = numeros.map(num => num * 2); 
+
+        // guardamos el tiempo al terminar
+        let endMap = Date.now(); 
+        console.log("Tiempo con .map():", endMap - startMap, "ms");
+
+        //  Medimos el tiempo del .forEach() 
+        // guardamos el tiempo antes de empezar
+        let startForEach = Date.now(); 
+
+        // este array lo usaremos para guardar los resultados del forEach
+        let resultado = []; 
+        numeros.forEach(num => {
+            // hacemos lo mismo pero con forEach
+            resultado.push(num * 2);
+        });
+
+        // guardamos el tiempo al terminar
+        let endForEach = Date.now();
+        console.log("Tiempo con .forEach():", endForEach - startForEach, "ms");
+
+        // ---- Medimos otra cosa (por ejemplo, un simple bucle for) ----
+        let startFor = Date.now();
+
+        let resultadoFor = [];
+        for (let i = 0; i < numeros.length; i++) {
+            // mismo cálculo con for
+            resultadoFor.push(numeros[i] * 2);
+        }
+
+        let endFor = Date.now();
+        console.log("Tiempo con for:", endFor - startFor, "ms");
+
+    </script>
+</body>
+</html>
