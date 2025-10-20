@@ -14,7 +14,12 @@
         */
         let nombreUsuario = prompt("Dime el nombre para la variable:");
 
-        let 
+        // esto usa el contenido de esa variable como nombre de una nueva “variable global”.
+        // Así que si el usuario escribe edad, lo que realmente estás creando es como si hubieras escrito:
+        // window.edad = "Hola";
+        window[nombreUsuario] = "Hola";
+
+        console.log(nombreUsuario);
     </script>
 </body>
 </html>

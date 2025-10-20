@@ -3,7 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Conversor de Temperaturas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap'); 
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #72EDF2 10%, #5150D3 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .contenedor {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.8); 
+        }
+
+        .contenedor::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(30px);
+        }
+
+        .contenedor::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(25px);
+        }
+
+        h2 {
+            color: #5150D3;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 2em;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            text-align: left;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+
+        input[type="number"],
+        select {
+            width: calc(100% - 24px);
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            color: #444;
+            background-color: #f9f9f9;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #5150D3;
+            box-shadow: 0 0 0 3px rgba(81, 80, 211, 0.2);
+            background-color: #fff;
+            outline: none;
+        }
+
+        select {
+            background-image: url('data:image/svg+xml;charset=US-8859-1,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%235150D3%22%20d%3D%22M287%20197.3l-114.9-114.9a17.7%2017.7%200%200%200-25.2%200L5.4%20197.3c-7.8%207.8-7.8%2020.5%200%2028.3s20.5%207.8%2028.3%200L146.2%20117.9l112.9%20112.9c7.8%207.8%2020.5%207.8%2028.3%200s7.8-20.4%200-28.2z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 16px;
+            padding-right: 40px; 
+        }
+        
+        /* Resultado */
+        #resultado {
+            margin-top: 35px;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #e3f2fd;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #5150D3;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        label[for="medida"],
+        label[for="conversion"] {
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
     <div class="contenedor">
@@ -12,24 +144,18 @@
         <label for="temperatura">Temperatura:</label>
         <input type="number" id="temperatura" placeholder="Escribe un número">
 
-        <br>
-        <br>
         <label for="medida">De:</label>
         <select id="medida">
             <option value="c">Celsius (°C)</option>
             <option value="f">Fahrenheit (°F)</option>
         </select>
 
-        <br>
-        <br>
         <label for="conversion">A:</label>
         <select id="conversion">
             <option value="f">Fahrenheit (°F)</option>
             <option value="c">Celsius (°C)</option>
         </select>
 
-        <br>
-        <br>
         <div id="resultado">Escribe una temperatura para ver el resultado</div>
     </div>
 

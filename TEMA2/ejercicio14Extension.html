@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Escriba un ejercicio de JavaScript para obtener la extensión de un nombre de archivo.
+        let nombreArchivo = prompt("Dime el nombre del archivo y la extension (ejemplo: hola.html)");
+
+        let punto = 0;
+        for (let i = 0; i < nombreArchivo.length; i++) {
+            if (nombreArchivo[i] == ".") {
+                punto = i;
+            }
+        }
+
+        let extension = nombreArchivo.substring(punto, nombreArchivo.length);
+
+        document.write("La extension del archivo que pusiste es " + extension);
+    </script>
+</body>
+</html>

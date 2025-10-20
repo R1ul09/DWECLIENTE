@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="numero1">Introduce el primer numero</label>
+    <input type="number" id="numero1">
+    <br>
+    <label for="numero2">Introduce el primer numero</label>
+    <input type="number" id="numero2">
+    <br>
+    <button id="calcular">calcular</button>
+    <p id="resultado"></p>
+    <script>
+        // 16. Escriba un programa JavaScript para calcular la suma de los dos números
+        // enteros dados. Si los dos valores son iguales, devuelve el triple de su suma.
+        let numero1input = document.getElementById("numero1");
+        let numero2input = document.getElementById("numero2");
+        let boton = document.getElementById("calcular");
+
+        boton.addEventListener("click", () => {
+            let numero1 = parseInt(numero1input.value);
+            let numero2 = parseInt(numero2input.value);
+            let suma = numero1 + numero2;
+
+            if (numero1 == numero2) {
+                suma *= 3;
+                document.getElementById("resultado").innerHTML = "El resultado de " + numero1 + " + " + numero2 + " es: " + suma;
+            } else {
+                document.getElementById("resultado").innerHTML = "El resultado de " + numero1 + " + " + numero2 + " es: " + suma;
+            }
+
+        })
+    </script>
+</body>
+</html>
