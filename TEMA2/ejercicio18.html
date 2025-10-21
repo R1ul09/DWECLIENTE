@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="numero1">Introduce el numero 1:</label>
+    <input type="number" id="numero1">
+    <br>
+    <label for="numero2">Introduce el numero 2:</label>
+    <input type="number" id="numero2">
+    <br>
+    <button id="comprobar">comprobar</button>
+    <br>
+    <p id="resultado"></p>
+    <script>
+        /*
+        Escriba un programa JavaScript para verificar dos números dados y devolver 
+        verdadero si uno de los números es 50 o si su suma es 50
+        */
+        let comprobar = document.getElementById("comprobar");
+
+        comprobar.addEventListener("click", () => {
+            let numero1 = parseInt(document.getElementById("numero1").value);
+            let numero2 = parseInt(document.getElementById("numero2").value);
+
+            let comprueba = false;
+
+            if ((numero1 == 50 || numero2 == 50) || (numero1 + numero2 == 50)) {
+                comprueba = true
+            }
+
+            document.getElementById("resultado").innerHTML = "El resultado es: " + comprueba;
+        })
+        
+    </script>
+</body>
+</html>

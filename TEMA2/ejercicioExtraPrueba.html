@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="numero1">Introduce el primer numero:</label>
+    <input type="number" id="numero1">
+    <br>
+    <label for="numero2">Introduce el segundo numero:</label>
+    <input type="number" id="numero2">
+    <br>
+    <label for="numero3">Introduce el tercer numero:</label>
+    <input type="number" id="numero3">
+    <br>
+    <button id="comprobar">comprobar</button>
+    <br>
+    <p id="ganador"></p>
+
+    <script>
+        // Tenemos que hacer mirar de 3 numeros, cuales es el que mas se acerca a 213
+        
+
+        comprobar.addEventListener("click", () => {
+            let numero1 = parseInt(document.getElementById("numero1").value);
+            let numero2 = parseInt(document.getElementById("numero2").value);
+            let numero3 = parseInt(document.getElementById("numero3").value);
+
+            let comprobar = document.getElementById("comprobar");
+            const numeroGanador = Math.random() * 300 + 1;
+
+            let resta1 = Math.abs(numeroGanador - numero1);
+            let resta2 = Math.abs(numeroGanador - numero2);
+            let resta3 = Math.abs(numeroGanador - numero3);
+            
+            if (resta1 < resta2 && resta1 < resta3) {
+                document.getElementById("ganador").innerHTML = "El que mas se acerca es el numero 1: " + numero1;
+            } else if (resta2 < resta1 && resta2 < resta3) {
+                document.getElementById("ganador").innerHTML = "El que mas se acerca es el numero 2: " + numero2;
+            } else if (resta3 < resta1 && resta3 < resta2) {
+                document.getElementById("ganador").innerHTML = "El que mas se acerca es el numero 3: " + numero3;
+            } else {
+                document.getElementById("ganador").innerHTML = "Los numero son iguales o hay alguna dato incorrecto";
+            }
+
+            console.log(numeroGanador);
+        })
+        
+
+    </script>
+</body>
+</html>

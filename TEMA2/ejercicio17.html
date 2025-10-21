@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="numero">Introduce un numero</label>
+    <input type="number" id="numero" placeholder="Escribe un número">
+    <br>
+    <p id="resultado"></p>
+    <script>
+        // Escriba un programa JavaScript para calcular la diferencia absoluta entre un 
+        // número especificado y 19. Devuelve el triple de su diferencia absoluta si el número 
+        ///especificado es mayor que 19.
+        let numeroInput = document.getElementById("numero");
+
+        numeroInput.addEventListener("input", () =>{
+            let numero = parseInt(numeroInput.value);
+            let resultado = 0;
+
+            if (numero > 19) {
+                resultado = Math.abs(19 - numero) * 3;
+            } else {
+                resultado = Math.abs(19 - numero);
+            }
+
+            document.getElementById("resultado").innerHTML = "La diferencia entre " + numero + " y 19 es: " + resultado;
+        });
+    </script>
+</body>
+</html>
