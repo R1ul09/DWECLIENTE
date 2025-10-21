@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="resultado"></p>
+    <script>
+        /*
+        4. Escriba una función de JavaScript para extraer un número específico de
+        caracteres de una cadena*/
+        let cadena = prompt("Introduce una cadena de caracteres");
+        let cantidad = parseInt(prompt("Introduce cuantos caracteres quieres pillar"));
+
+        function extraerCaracteres() {
+            let cadenaConTresCaracteresPrimeros = "";
+            for (let i = 0; i < cantidad; i++) {
+                cadenaConTresCaracteresPrimeros += cadena.charAt(i);
+            }
+
+            document.getElementById("resultado").innerHTML = "Los 3 primeros caracteres de " + cadena + " son: " +"<strong>" + cadenaConTresCaracteresPrimeros+ "</strong>";
+        }
+
+        extraerCaracteres();
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="palabra">Escriba una Palabra</label>
+    <input type="text" id="palabra">
+    <p id="resultado"></p>
+    <script>
+        /*
+        Escriba una función de JavaScript para poner en mayúscula la primera letra
+        de cada palabra en una cadena
+        */
+        const palabraCompletaInput = document.getElementById("palabra");
+
+        function mayusculaPrimera() {
+
+            // Tomo el valor del input y lo separo por espacios
+            // así obtengo un array donde cada palabra está en una posición
+            const palabraCompleta = palabraCompletaInput.value.split(' ');
+
+            // Aquí guardo el resultado final que voy a ir formando
+            let palabraFinal = "";
+
+            // Esta variable solo la uso para guardar temporalmente la primera letra de cada palabra
+            let primeraLetras = "";
+
+            for (let i = 0; i < palabraCompleta.length; i++) {
+                let palabraActual;
+                
+                // Cojo la primera letra de la palabra y la paso a mayúscula
+                primeraLetras = palabraCompleta[i][0].toUpperCase();
+
+                // Luego le sumo el resto de la palabra tal como está
+                // Lo que hago con slice (1) es cortar desde la posicion 1 pa lante, es decir
+                // si pongo hola => H + ola
+                palabraActual = primeraLetras + palabraCompleta[i].slice(1);
+
+                palabraFinal += palabraActual + " ";
+            }
+            
+            document.getElementById("resultado").innerHTML = "La palabra formateada sería: " + palabraFinal;
+            
+        }
+
+        palabraCompletaInput.addEventListener("input", mayusculaPrimera);
+
+    </script>
+</body>
+</html>
