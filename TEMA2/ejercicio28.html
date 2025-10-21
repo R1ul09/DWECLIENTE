@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="resultado"></p>
+    <script>
+        /*
+        Escriba un programa JavaScript para verificar si dos valores enteros dados están
+        en el rango 50..99 (inclusive). Devuelve verdadero si alguno de ellos está en dicho 
+        rango */
+        let numero1 = parseInt(prompt("Introduce el primer numero:"));
+        let numero2 = parseInt(prompt("Introduce el segundo numero:"));
+        let resultado = false;
+
+        if ((numero1 >= 50 && numero1 <= 99) || (numero2 >= 50 && numero2 <= 99)) {
+            resultado = true;
+            document.getElementById("resultado").innerHTML = "Esta dentro del rango: " + resultado;
+        } else {
+            document.getElementById("resultado").innerHTML = "Esta dentro del rango: " + resultado;
+        }
+        
+    </script>
+    </script>
+</body>
+</html>
