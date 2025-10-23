@@ -13,6 +13,7 @@
     <input type="number" id="posicion">
     <br>
     <button id="insertar">insertar</button>
+    <p id="resultado"></p>
     <script>
         /*
         14. Escriba una función de JavaScript para insertar una cadena dentro de una 
@@ -27,25 +28,27 @@
         */
         const insertar = document.getElementById("insertar");
 
-        function insertarCadena(cadenaOriginal, cadenaAInsertar, posicion) {
-            // Extrae la parte de la cadena antes de la posición.
-            const parte1 = cadenaOriginal.slice(0, posicion);
-            // Extrae la parte de la cadena después de la posición.
-            const parte2 = cadenaOriginal.slice(posicion);
-            // Combina las partes con la nueva cadena en el medio.
-            return parte1 + cadenaAInsertar + parte2;
+        insertar.addEventListener("click", () => {
+            let cadenaNuevaInput = document.getElementById("cadena");
+            let posicionInput = document.getElementById("posicion");
 
-            console.log(resultado);
-        }
+            function insertarCadena() {
+                const cadenaPrincipal = "Estamos haciendo ejercicios";
+                let cadenaNueva = cadenaNuevaInput.value;
+                let posicion = Number(posicionInput.value);
 
-        const cadenaPrincipal = "Estamos haciendo ejercicios";
-        const cadenaNueva = document.getElementById("cadena");
-        const posicion = document.getElementById("posicion").value;
-        const resultado = insertarCadena(cadenaPrincipal, cadenaNueva, posicion);
+                // Extraemos la parte de la cadena antes de la posición
+                const parte1 = cadenaPrincipal.slice(0, posicion);
+                // Extraemos la parte de la cadena después de la posición
+                const parte2 = cadenaPrincipal.slice(posicion);
+                // Combinamos las partes con la nueva cadena en el medio
+                const partefinal = parte1 + cadenaNueva + parte2;
 
-        insertar.addEventListener("click", insertarCadena());
-        
+                document.getElementById("resultado").innerHTML = partefinal;
+            }
 
+            insertarCadena();
+        });
     </script>
 </body>
 </html>
