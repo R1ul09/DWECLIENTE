@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="cadena">Introduce la cadena a meter en la frase:</label>
+    <input type="text" id="cadena">
+    <br>
+    <label for="posicion">Introduce la posicion donde se va a meter:</label>
+    <input type="number" id="posicion">
+    <br>
+    <button id="insertar">insertar</button>
+    <script>
+        /*
+        14. Escriba una función de JavaScript para insertar una cadena dentro de una 
+        cadena en una posición particular (el valor predeterminado es 1). 
+        Ejemplo
+        (insert ('Estamos haciendo ejercicios.'));
+        (insert ('Estamos haciendo ejercicios.', 'JavaScript'));
+        (insert ('Estamos haciendo algunos ejercicios.', 'JavaScript', 18));
+        "Estamos haciendo ejercicios".
+        "JavaScript Estamos haciendo  ejercicios".
+        "Estamos haciendo algunos ejercicios de JavaScript".
+        */
+        const insertar = document.getElementById("insertar");
+
+        function insertarCadena(cadenaOriginal, cadenaAInsertar, posicion) {
+            // Extrae la parte de la cadena antes de la posición.
+            const parte1 = cadenaOriginal.slice(0, posicion);
+            // Extrae la parte de la cadena después de la posición.
+            const parte2 = cadenaOriginal.slice(posicion);
+            // Combina las partes con la nueva cadena en el medio.
+            return parte1 + cadenaAInsertar + parte2;
+
+            console.log(resultado);
+        }
+
+        const cadenaPrincipal = "Estamos haciendo ejercicios";
+        const cadenaNueva = document.getElementById("cadena");
+        const posicion = document.getElementById("posicion").value;
+        const resultado = insertarCadena(cadenaPrincipal, cadenaNueva, posicion);
+
+        insertar.addEventListener("click", insertarCadena());
+        
+
+    </script>
+</body>
+</html>
