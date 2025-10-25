@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Regla: La unica regla en este ejercicio es que cuando metas una frase,</h3>
+    <h3>las separes por espacios, ejemplo: para que funcione es "hola buenas", no "holabuenas"</h3>
+    <label for="texto">Introduce una frase</label>
+    <input type="text" id="texto">
+    <br>
+    <label for="subtexto">Introduce la palabra a buscar</label>
+    <input type="text" id="subtexto">
+    <br>
+    <button id="comprobar">comprobar</button>
+    <p id="resultado"></p>
+    <script>
+        /*
+        Escriba una función de JavaScript para encontrar una palabra dentro de 
+        una cadena. 
+        console.log (palabra_búsqueda('El zorro marrón', 'zorro'));
+        console.log (palabra_búsqueda ('aa, bb, aa', 'aa'));
+        Resultado:
+        "'zorro' se encontró 1 veces".
+        "'aa' se encontró 2 veces."
+        */
+        let textoInput = document.getElementById("texto");
+        const comprobar = document.getElementById("comprobar");
+        let resultado = document.getElementById("resultado");
+        let subcadenaInput = document.getElementById("subtexto");
+
+        comprobar.addEventListener("click", () => {
+            let texto = textoInput.value;
+            let subcadena = subcadenaInput.value;
+
+            function mostrarPalabras() {
+                let arrayTexto = texto.split(' ');
+                let contadorArray = {};
+
+                for (let i = 0; i < arrayTexto.length; i++) {
+                    let palabraActual = arrayTexto[i];
+
+                    if (contadorArray[palabraActual]) {
+                        contadorArray[palabraActual] += 1;
+                    } else {
+                        contadorArray[palabraActual] = 1;
+                    }
+                }
+
+                resultado.innerHTML = "";
+
+                // Comprobamos si la palabra buscada (subcadena) existe como clave objeto de conteo
+                if (contadorArray[subcadena]) {
+                    //Si existe, la palabra (subcadena) como clave para obtener el valor del contador
+                    let vecesEncontradas = contadorArray[subcadena];
+                    
+                    //Muestra el resultado final
+                    resultado.innerHTML = subcadena + " se encontró " + vecesEncontradas + " veces.";
+                } else {
+                    // Si no existe, muestra el mensaje de no encontrado
+                    resultado.innerHTML = "La palabra '" + subcadena + "' no se encontró en el texto.";
+                }
+                
+            }
+
+            mostrarPalabras();
+        })
+    </script>
+</body>
+</html>
