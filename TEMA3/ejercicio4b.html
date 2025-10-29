@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="mes">Introduce el mes (numero):</label>
+    <input type="number" id="mes">
+    <br>
+    <label for="anio">Introduce el año:</label>
+    <input type="number" id="anio">
+    <br>
+    <button id="comprobar">comprobar</button>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        /*
+        Escriba una función de JavaScript para obtener el nombre del mes a partir de
+        una fecha en particular.
+        Funcion( mes,año) Devuelve 30 o 31 dias
+        */
+
+        let mesInput = document.getElementById("mes");
+        let anioInput = document.getElementById("anio");
+        const comprobar = document.getElementById("comprobar");
+
+        comprobar.addEventListener("click", () => {
+            let mes = parseInt(mesInput.value);
+            let anio = parseInt(anioInput.value);
+            let isBisiesto = false;
+
+            if (anio % 4 === 0 && (anio % 100 !== 0 || anio % 400 === 0)) {
+                isBisiesto = true;
+            }
+
+            function diasFecha(mes, anio) {
+                let dias = 0;
+                
+                if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+                    dias = 31;
+                } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+                    dias = 30;
+                } else if (mes == 2 && isBisiesto) {
+                    dias = 29;
+                } else if (mes == 2) {
+                    dias = 28;
+                } else {
+                    document.getElementById("resultado").innerHTML = "Mes incorrecto";
+                }
+
+                document.getElementById("resultado").innerHTML = "El mes que se ha indicado tiene " + dias + " dias";
+            }
+
+            diasFecha(mes, anio);
+        })
+    </script>
+</body>
+</html>

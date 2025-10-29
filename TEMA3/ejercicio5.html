@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="palabra">Introduce el caracter a añadir al array:</label>
+    <input type="text" id="caracter">
+    <button id="añadir">añadir</button>
+    <br>
+    <button id="calcular">calcular</button>
+    <br>
+    <div id="array"></div>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        /*
+        Escriba un programa JavaScript simple para unir todos los elementos de una 
+        matriz en una cadena
+        */
+        const array = [];
+        let caracterInput = document.getElementById("caracter");
+        const añadir = document.getElementById("añadir");
+        const calcular = document.getElementById("calcular");
+
+        añadir.addEventListener("click", () => {
+            let caracter = caracterInput.value;
+            if (caracter.trim() !== "") {
+                array.push(caracter);
+                document.getElementById("array").innerHTML = "El array es el siguiente:" + array;
+                caracterInput.value = "";
+            }
+        })
+
+        let palabraCompleta = "";
+
+        calcular.addEventListener("click", () => {
+            function convertirArray(array) {
+                let palabraActual = "";
+                
+                for (let i = 0; i < array.length; i++) {
+                    palabraActual = array[i];
+                    palabraCompleta += palabraActual;
+                }
+
+                document.getElementById("array").innerHTML = "El array es el siguiente: " + array;
+                document.getElementById("resultado").innerHTML = "La palabra completa es: " + palabraCompleta;
+            }
+
+            convertirArray(array);
+        })
+        
+    </script>
+</body>
+</html>

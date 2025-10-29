@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="numero">Introduce el numero a añadir al array:</label>
+    <input type="number" id="numeroAñadir">
+    <button id="añadir">añadir</button>
+    <br>
+    <label for="numero">Introduce el numero/s a eliminar del array:</label>
+    <input type="number" id="numeroEliminar">
+    <button id="eliminar">eliminar</button>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        /*
+            Escriba una función de JavaScript para eliminar un elemento específico de una 
+            matriz.
+            Remueve ([2,4,5,9],5)             
+            Devuelve [2,4,9]
+        */
+        
+        let numeroAñadirInput = document.getElementById("numeroAñadir");
+        const añadir = document.getElementById("añadir");
+        let numeroEliminarInput = document.getElementById("numeroEliminar");;
+        const eliminar = document.getElementById("eliminar");
+
+        const numeros = [];
+
+        añadir.addEventListener("click", () => {
+            let numeroAñadir = parseInt(numeroAñadirInput.value);
+            if (!isNaN(numeroAñadir)) {
+                numeros.push(numeroAñadir);
+                document.getElementById("resultado").innerHTML = "El array es el siguiente:" + numeros;
+                numeroAñadirInput.value = "";
+            }
+        })
+
+        eliminar.addEventListener("click", () => {
+            let numeroEliminar = parseInt(numeroEliminarInput.value);
+            if (!isNaN(numeroEliminar)) {
+                function eliminarNumero(numero) {
+                    for (let i = 0; i < numeros.length; i++) {
+                        if (numero == numeros[i]) {
+                            // Eliminamos 1 elemento de la posicion 1
+                            numeros.splice(i, 1);
+                            // Y hechamos un paso para atras por si el siguiente fuera el mismo numero
+                            i--;
+                        }
+                    }
+                }
+                numeroEliminarInput.value = "";
+                eliminarNumero(numeroEliminar);
+                document.getElementById("resultado").innerHTML = "El array es el siguiente:" + numeros;
+            }
+        })
+    </script>
+</body>
+</html>

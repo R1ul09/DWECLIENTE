@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Diferencia de fechas en dias</h2>
+    <label for="fecha1">Introduce una fecha:</label>
+    <input type="date" id="fecha1">
+    <br>
+    <label for="fecha1">Introduce la otra fecha:</label>
+    <input type="date" id="fecha2">
+    <br>
+    <button id="comprobar">comprobar</button>
+    <div id="resultado"></div>
+    <script>
+        /*
+        8a. Escriba una función de JavaScript para obtener la diferencia entre dos fechas en 
+        días. 
+        Funcion(fecha1, fecha2)    Devuelve la diferencia de dias
+        */
+        let fecha1Input = document.getElementById("fecha1");
+        let fecha2Input = document.getElementById("fecha2");
+        const comprobar  = document.getElementById("comprobar");
+
+        comprobar.addEventListener("click", () => {
+            let fecha1 = fecha1Input.valueAsDate;
+            let fecha2 = fecha2Input.valueAsDate;
+
+            function diferenciaDias(fecha1, fecha2) {
+
+                let fecha1segundos = fecha1.getTime();
+                let fecha2segundos = fecha2.getTime();
+
+                let resultado = Math.abs(fecha1segundos - fecha2segundos);
+
+                resultado = Math.trunc(resultado/1000/60/60/24);
+
+                document.getElementById("resultado").innerHTML = "La diferencia de dias entre la primera fecha y la segunda es: " + resultado + " dias";
+            }
+
+            diferenciaDias(fecha1, fecha2);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="palabra">Introduce la palabra a añadir al array:</label>
+    <input type="text" id="palabra">
+    <button id="añadir">añadir</button>
+    <br>
+    <button id="calcular">calcular</button>
+    <br>
+    <div id="array"></div>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        /*
+        Escriba un programa JavaScript para encontrar el elemento más frecuente de 
+        una matriz.
+        */
+        const array = [];
+
+        let palabraInput = document.getElementById("palabra");
+        const añadir = document.getElementById("añadir");
+        const calcular = document.getElementById("calcular");
+
+        añadir.addEventListener("click", () => {
+            let palabra = palabraInput.value;
+            if (palabra.trim() !== "") {
+                array.push(palabra);
+                document.getElementById("array").innerHTML = "El array es el siguiente:" + array;
+                palabraInput.value = "";
+            }
+        })
+
+        calcular.addEventListener("click", () => {
+            function palabraMasRepetida(array) {
+                let mapaArray = new Map();
+                let palabraActual = "";
+
+                for (let i = 0; i < array.length; i++) {
+                    palabraActual = array[i];
+                    if (mapaArray.has(palabraActual)) {
+                        mapaArray.set(palabraActual, 
+                        mapaArray.get(palabraActual) + 1);
+                    } else {
+                        mapaArray.set(palabraActual, 1);
+                    }
+                }
+                
+                let frecuenciaMaxima = 0;
+                let elementoMasRepetido = "";
+                // Iteramos sobre las entradas (entries) del Map.
+                for (let entry of mapaArray.entries()) {
+                    // entry es un array de dos elementos: [clave, valor]
+                    // La clave, ej: "hola"
+                    let palabra = entry[0];
+                    // El valor, ej: 2
+                    let frecuencia = entry[1];
+
+                    if (frecuencia > frecuenciaMaxima) {
+                        frecuenciaMaxima = frecuencia;
+                        elementoMasRepetido = palabra;
+                    }
+                }
+                document.getElementById("array").innerHTML = "El array es el siguiente: " + array;
+
+                document.getElementById("resultado").innerHTML = "El elemento mas repetido es: " + elementoMasRepetido;
+            }
+
+            palabraMasRepetida(array);
+        })
+    </script>
+</body>
+</html>

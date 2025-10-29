@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="numero1">Introduce el primer numero:</label>
+    <input type="number" id="numero1">
+    <br>
+    <label for="numero2">Introduce el segundo numero:</label>
+    <input type="number" id="numero2">
+    <br>
+    <label for="numero3">Introduce el tercer numero:</label>
+    <input type="number" id="numero3">
+    <br>
+    <button id="comprobar">comprobar</button>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        /*
+        Escriba una función de JavaScript para obtener el número más alto de tres 
+        números diferentes. 
+        */
+        let numero1input = document.getElementById("numero1");
+        let numero2input = document.getElementById("numero2");
+        let numero3input = document.getElementById("numero3");
+        const comprobar = document.getElementById("comprobar");
+
+        comprobar.addEventListener("click", () => {
+            let numero1 = parseInt(numero1input.value);
+            let numero2 = parseInt(numero2input.value);
+            let numero3 = parseInt(numero3input.value);
+
+            function numeroMasAlto(numero1, numero2, numero3) {
+                if (numero1 > numero2 && numero1 > numero3) {
+                    document.getElementById("resultado").innerHTML = "el numero " + numero1 + " es el mayor";
+                } else if (numero2 > numero1 && numero2 > numero3) {
+                    document.getElementById("resultado").innerHTML = "el numero " + numero2 + " es el mayor";
+                } else if (numero3 > numero1 && numero3 > numero2) {
+                    document.getElementById("resultado").innerHTML = "el numero " + numero3 + " es el mayor";
+                } else {
+                    document.getElementById("resultado").innerHTML = "Ha habido un empate";
+                }
+            }
+
+            numeroMasAlto(numero1, numero2, numero3);
+        })
+
+    </script>
+</body>
+</html>

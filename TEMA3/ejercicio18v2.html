@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="palabra">Introduce el numero a añadir al array:</label>
+    <input type="number" id="numero">
+    <button id="añadir">añadir</button>
+    <br>
+    <button id="calcular">calcular</button>
+    <br>
+    <div id="array"></div>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        /*
+        Escriba una función de JavaScript para calcular el producto de valores en una 
+        matriz
+        */
+        const numeros = [];
+
+        let numeroInput = document.getElementById("numero");
+        const añadir = document.getElementById("añadir");
+        const calcular = document.getElementById("calcular");
+
+        añadir.addEventListener("click", () => {
+            let numero = parseInt(numeroInput.value);
+            if (!isNaN(numero)) {
+                numeros.push(numero);
+                document.getElementById("array").innerHTML = "El array es el siguiente:" + numeros;
+                numeroInput.value = "";
+            }
+        })
+
+        let Total = 1;
+        calcular.addEventListener("click", () => {
+            function multiplicacionMatrices(array) {
+                for (let i = 0; i < array.length; i++) {
+                    let numeroActual = array[i];
+                    Total *= numeroActual;
+                }
+                document.getElementById("array").innerHTML = "El array es el siguiente:" + array;
+                document.getElementById("resultado").innerHTML = "La multiplicacion de los numeros de la matriz de arriba es: " + Total;
+            }
+
+            multiplicacionMatrices(numeros);
+        })
+    </script>
+</body>
+</html>
