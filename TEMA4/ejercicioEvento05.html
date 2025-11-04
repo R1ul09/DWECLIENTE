@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #imagen {
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+    <h1>Si pasas por encima de la imagen obtendras la URL</h1>
+    <img src="amador.jpg" alt="" id="imagen">
+    <div id="url"></div>
+    <script>
+        /*
+        Realizar un evento que muestre la url que tiene asociada cada imagen, cada vez que se pase el ratón
+        por encima de ella.
+        */
+        let imagen = document.getElementById("imagen");
+
+        imagen.addEventListener("mouseover", () => {
+            document.getElementById("url").innerHTML = "La url de la imagen es: " + "<strong>" + imagen.src + "</strong>";
+        })
+
+        /* Si quisieras que se quite cuando ya no este encima
+        imagen.addEventListener("mouseleave", () => {
+            document.getElementById("url").innerHTML = "";
+        })
+        */
+    </script>
+</body>
+</html>

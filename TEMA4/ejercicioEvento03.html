@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>No puedes utilizar el click derecho</h1>
+    <script>
+        /*
+        Deshabilitar el botón derecho del ratón de tu aplicación web.
+        */
+        
+        // Context menu es lo que pasa cuando le das al clcik derecho
+        document.addEventListener("contextmenu", () => {
+            // Lo ponem por defecto para bloquearlo
+            event.preventDefault();
+        })
+    </script>
+</body>
+</html>

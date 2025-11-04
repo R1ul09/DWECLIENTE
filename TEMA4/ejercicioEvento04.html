@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Voy a adivinar que boton del raton vas a pulsar</h1>
+    <script>
+        /* 
+        Realizar un script que cuando pulse el usuario con el botón del ratón en cualquier sitio de la 
+        pantalla, identifique si ha pulsado con el botón derecho o con el izquierdo
+        */
+
+        document.addEventListener("mousedown", (event) => {
+            if (event.button == 0) {
+                alert("Ese es el click izquierdo");
+            }
+
+            if (event.button == 1) {
+                alert("Ese es el click central");
+            }
+
+            if (event.button == 2) {
+                alert("Ese es el click derecho");
+            }
+        })
+    </script>
+</body>
+</html>

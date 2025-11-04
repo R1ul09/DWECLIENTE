@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .centrar-cuadro {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            height: 100vh;
+        }
+
+        #cuadro {
+            width: 300px;
+            height: 100px;
+            border: 3px solid black;
+            display: flex;
+            font-size: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #Reglas {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="Reglas">Reglas</h2>
+    <h3>
+        - Al pulsar botón del ratón el color de fondo del cuadro de mensaje es amarillo. <br>
+        - Cuando se pulsa una tecla, el color de fondo es azul. <br>
+        - Al volver a mover el ratón, el color de fondo vuelve a ser blanco.
+    </h3>
+
+    <div class="centrar-cuadro">
+        <div id="cuadro">Haz algo para cambiarlo de color</div>
+    </div>
+
+    <script>
+        /*
+        eventos:
+        - Al pulsar botón del ratón el color de fondo del cuadro de mensaje debe ser amarillo (#FFFF00).
+        - Cuando se pulsa una tecla, el color de fondo debe ser azul (#CCE6FF).
+        - Al volver a mover el ratón, el color de fondo vuelve a ser blanco.
+        */
+        let cuadro = document.getElementById("cuadro");
+
+        cuadro.addEventListener("mousedown", () => {
+            cuadro.style.backgroundColor = "yellow";
+        });
+
+        window.addEventListener("keypress", () => {
+            cuadro.style.backgroundColor = "blue";
+        });
+
+        cuadro.addEventListener("mousemove", () => {
+            cuadro.style.backgroundColor = "white";
+        });
+    </script>
+</body>
+</html>

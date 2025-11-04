@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+        #imagen {
+            width: 700px;
+            height: 500px;
+        }
+    </style>
+<body>
+    <h1>Manten Click encima para cambiar a messi y suelta para volver</h1>
+    <center><img src="cr7.jpg" alt="" id="imagen" ></center>
+    <script>
+        // Coloque en la aplicación una imagen:
+        //- Mientras se mantenga click pulsado cambiar por otra imagen
+        //- Cuando se suelta el click debe volver a la primera imagen
+        let imagen = document.getElementById("imagen");
+
+        imagen.addEventListener("mousedown", () => {
+            imagen.src = "messi.jpg";
+        })
+
+        imagen.addEventListener("mouseup", () => {
+            imagen.src = "cr7.jpg";
+        })
+    </script>
+</body>
+</html>
