@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Programa para saber que tecla estas usando</h1>
+    <label for="tecla">Escribe para saber que tecla estas usando:</label>
+    <input type="text" id="tecla">
+    <h2 id="resultado"></h2>
+    <script>
+        /*
+        Realizar un script que muestre la tecla pulsada de teclado, y si se ha pulsado combinada con alt, 
+        shift o control también lo indique
+        */
+        let teclaInput = document.getElementById("tecla");
+        teclaInput.addEventListener("keydown", (event) => {
+            let tecla = event.key;
+            let control = event.ctrlKey;
+            let alt = event.altKey;
+            let shift = event.shiftKey;
+            let mensaje = "La tecla pulsada es: <strong>"
+
+            if (control == true) {
+                mensaje += "Control + ";
+            } 
+            
+            if (alt == true) {
+                mensaje += "Alt + ";
+            } 
+            
+            if (shift == true) {
+                mensaje += "Shift + ";
+            }
+
+            mensaje += tecla + "</strong>";
+            document.getElementById("resultado").innerHTML = mensaje;
+        })
+    </script>
+</body>
+</html>

@@ -31,13 +31,14 @@
             font-weight: bold;
         }
     </style>
-    <div id="cuadro">Mueveme con las flechas</div>
+    <div id="cuadro">Mueveme con las flechas normales o las del pad numerico</div>
     <script>
         /*
         Realizar un script que permita mover una caja dentro de la ventana del navegador tanto con las 
         teclas de desplazamiento del teclado central como con las del teclado numérico.
         */
         let cuadro = document.getElementById("cuadro");
+        alert("La caja permite que se salga del borde, pero no se vera =)")
 
         window.addEventListener("keydown", (event) => {
 
