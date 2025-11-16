@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="ejercicioFlamenco.css">
+</head>
+<body>
+    <img src="flamenco.jpg" alt="foto flamenca">
+    <br>
+    <label for="palos">Elige un palo flamenco:</label>
+    <br>
+    <select id="palos">
+        <option value="" selected disabled>Elige un palo</option>
+        <option value="solea">Soleá</option>
+        <option value="alegrias">Alegrías</option>
+        <option value="bulerias">Bulerías</option>
+        <option value="tientos">Tientos</option>
+        <option value="tangos">Tangos</option>
+        <option value="seguiriyas">Seguiriyas</option>
+        <option value="fandangos">Fandangos</option>
+    </select>
+
+    <div id="botones" style="display: none; margin-top: 10px;">
+        <button id="btnTempo">Añadir tempo</button>
+        <button id="btnLetra">Añadir letra</button>
+        <button id="btnCompas">Añadir compás</button>
+    </div>
+
+    <div id="resultado" style="display: none;"></div>
+    <script src="ejercicioFlamenco.js"></script>
+</body>
+</html>

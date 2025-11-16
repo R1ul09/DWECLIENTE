@@ -1,0 +1,135 @@
+body {
+    font-family: 'Times New Roman', Times, serif; /* Fuente más clásica */
+    background-color: #fcfcfc; /* Blanco muy sutil */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Empezar desde arriba */
+    min-height: 100vh;
+    padding-top: 50px; /* Espacio superior */
+    margin: 0;
+}
+
+/* Contenedor principal para centrar mejor los elementos clave */
+.container {
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+}
+
+h3 { /* Título del palo */
+    color: #800000;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 2px solid #b30000;
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #b30000; /* Rojo más intenso */
+}
+
+select {
+    margin: 15px 0 25px 0;
+    padding: 8px 15px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    box-shadow: 0 0 10px rgba(179, 0, 0, 0.4);
+}
+
+
+
+/* --- ESTILO DE BOTONES --- */
+#botones button {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 20px; /* Bordes redondeados tipo pastilla */
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px #800000; /* Sombra para efecto 3D */
+}
+
+#botones button:hover {
+    background-color: #800000;
+    box-shadow: 0 2px #5c0000;
+    transform: translateY(2px); /* Efecto de "presionar" */
+}
+
+#botones button:active {
+    box-shadow: 0 0 #5c0000;
+    transform: translateY(4px);
+}
+
+/* --- ESTILO DE RESULTADO --- */
+#resultado {
+    margin-top: 40px;
+    margin-bottom: 50px;
+    max-width: 700px; /* Más ancho para mejor presentación */
+    text-align: left; /* Alinear texto a la izquierda */
+    background: linear-gradient(145deg, #fff5f5, #ffeaea); /* Gradiente suave */
+    border: 1px solid #ffcccc;
+    border-left: 5px solid #b30000; /* Detalle de color al borde izquierdo */
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    line-height: 1.6; /* Mayor legibilidad */
+}
+
+/* Estilo para los títulos de los datos (Tempo, Letra, etc.) */
+#resultado b {
+    color: #b30000;
+    display: inline-block;
+    min-width: 120px; /* Para alinear un poco el texto */
+    font-weight: bold;
+}
+
+/* Estilo para el compás */
+#resultado .compas-section {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff0f0;
+    border-radius: 5px;
+    border: 1px dashed #b30000;
+    font-family: monospace; /* Fuente fija para el ritmo */
+    font-size: 1.1em;
+}
+
+/* Acentos en negrita */
+#resultado .compas-section b {
+    color: #b30000;
+    font-size: 1.2em; /* Destacar más el acento */
+}
+
+img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(179, 0, 0, 0), rgba(179, 0, 0, 0.75), rgba(179, 0, 0, 0));
+    margin: 20px 0;
+}

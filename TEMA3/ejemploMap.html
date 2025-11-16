@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="palabra">Introduce una frase(cada palabra separada por espacios):</label>
+    <input type="text" id="palabra">
+    <br>
+    <button id="comprobar">comprobar</button>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        let fraseInput = document.getElementById("palabra");
+        const boton = document.getElementById("comprobar");
+        
+        boton.addEventListener("click", () => {
+            // Recojemos la frase
+            let frase = fraseInput.value;
+
+            // Remplazamos cualquier signo por nda literalmente
+            frase = frase.replace(/[.,;:!?'"“”()]/g, '');
+
+            // Lo convertimos a minuscula
+            frase = frase.toLowerCase();
+
+            // Y la dividimos por espacios, (ejemplo: "Hola buenas" => 'hola', 'buenas')
+            const palabras = frase.split(' ');
+
+            // Creamos el map
+            const contador = new Map();
+
+            // Iteramos sobre el
+            palabras.forEach((palabra) => {
+                // Si el map contiene la palabra actual
+                if (contador.has(palabra)) {
+                    // Le añadimos mas uno a esa palabra
+                    contador.set(palabra, contador.get(palabra) + 1);
+                } else {
+                    // Si no pues le ponemos la palabra y el valor uno
+                    contador.set(palabra, 1);
+                }
+            });
+            
+            let resultadoHTML = ""
+            
+            // Por cada palabra en el contador
+            contador.forEach((contador,palabra) => {
+                // La vamos a añadir al resulatdo
+                resultadoHTML += palabra + ": " + contador + " veces<br>";
+            });
+
+            // Lo sacamos por pantalla
+            document.getElementById("resultado").innerHTML = resultadoHTML;
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Suma de arrays con map</h1>
+    <h2>Array 1</h2>
+    <div id="matriz1"></div>
+    <br>
+    <h2>Array 2</h2>
+    <div id="matriz2"></div>
+    <br>
+    <h2>Matriz Resultante</h2>
+    <div id="resultado"></div>
+    <script>
+        // Tenemos que crear 2 matrices de 3x3, pasarlas a map y sumar cada celda con la celda de la otra
+        const matriz1 = 
+        [[1, 2, 3],
+         [4, 5, 6],
+         [7, 8, 9]
+        ];
+
+        const matriz2 = 
+        [[9, 8, 7],
+         [6, 5, 4],
+         [3, 2, 1]
+        ];
+
+        const matrizresultante = matriz1.map(function(fila, i) {
+            return fila.map(function(valor, j) {
+                const suma = matriz1[i][j] + matriz2[i][j];
+                return suma;
+            });
+        });
+
+        console.log(matrizresultante);
+
+        let texto1 = "";
+
+        for (let i = 0; i < matriz1.length; i++) {
+            for (let j = 0; j < matriz1[i].length; j++) {
+                texto1 += matriz1[i][j] + ", ";
+            }
+            texto1 += "<br>";
+        }
+
+        let texto2 = "";
+
+        for (let i = 0; i < matriz2.length; i++) {
+            for (let j = 0; j < matriz2[i].length; j++) {
+                texto2 += matriz2[i][j] + ", ";
+            }
+            texto2 += "<br>";
+        }
+
+        let texto3 = "";
+
+        for (let i = 0; i < matrizresultante.length; i++) {
+            for (let j = 0; j < matrizresultante[i].length; j++) {
+                texto3 += matrizresultante[i][j] + ", ";
+            }
+            texto3 += "<br>";
+        }
+
+        document.getElementById("matriz1").innerHTML = texto1;
+        document.getElementById("matriz2").innerHTML = texto2;
+        document.getElementById("resultado").innerHTML = texto3;
+
+
+
+    </script>
+</body>
+</html>
