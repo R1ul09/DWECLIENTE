@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Convertir un array multidimensional a un array plano</h1>
+    <h3>Mirar la consola (f12)</h3>
+    <script>
+        /*
+        Escribe una función recursiva aplanar que convierta un array de arrays en un array
+        plano.
+        Ejemplo: [1, [2, [3, 4]], 5] → [1, 2, 3, 4, 5].
+        */
+
+        // Creamos una funcion recursiva
+        function convertirArray(array) {
+            // creamos un array vacio donde vamos a ir metiendo cada elemento
+            let arrayPlano = []
+            // hacemos un bucle para recorrer el array que recibimos
+            for (let i = 0; i < array.length; i++) {
+                // miramos si el elemento actual es un sub Array anidado
+                if (Array.isArray(array[i])) {
+                    // Si lo es, llamamos a la funcion y  lo concatenams con el array vacio
+                    arrayPlano = arrayPlano.concat(convertirArray(array[i]));
+                } else {
+                    // Si encontrar un valor normal, un numero por ejemplo, lo añade normal al array 
+                    arrayPlano.push(array[i]);
+                }
+            }
+
+            return arrayPlano;
+            
+        }
+
+        console.log(convertirArray([1, [2, [3, 4]], 5]))
+    </script>
+</body>
+</html>

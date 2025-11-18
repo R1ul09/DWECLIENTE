@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Sistema de archivos y carpetas</h1>
+    <h3>Mirar la consola (f12)</h3>
+    <script>
+        /*
+        4. Dado un objeto que representa un sistema de archivos con carpetas y archivos
+        anidados como un árbol:
+        const fs = {
+        carpeta1: {
+        archivo1: "contenido1",
+        archivo2: "contenido2",
+        subcarpeta: {
+        archivo3: "contenido3"
+        }
+        },
+        carpeta2: {
+        archivo4: "contenido4"
+        }
+        };
+        Crea una función recursiva listarArchivos(obj) que devuelva un array con
+        todos los nombres de archivos:
+        Salida esperada:
+        ["archivo1", "archivo2", "archivo3", "archivo4"]
+        */
+        
+        const carpeta = {
+            carpeta1: {
+                archivo1: "contenido1",
+                archivo2: "contenido2",
+                subcarpeta: {
+                    archivo3: "contenido3"
+                }
+            },
+            carpeta2: {
+                archivo4: "contenido4"
+            }
+        };
+
+        // funcion recursiva para listar los archivos que recibe un objeto
+        function listarArchivos(objeto) {
+            // creo un array donde estaran los archvios
+            let arrayArchivos = [];
+            
+            // recorro todas las claves del objeto (puede ser carpeta o archivo)
+            for (let obj in objeto) {
+                // obtengo el valor de la clave, ejemplo, si fuera: objeto["carpeta1"], pues el valor seria "carpeta1" 
+                // y el objeto seria archivo1
+                // si fuera objeto["archivo1"] el valor seria "archivo1" y el objeto seria "contenido1"
+                // es muy parecido a los diccionarios de python con clave y valor
+                let valor = objeto[obj]
+                
+                // entonces si es de tipo objeto el valor, es como decir, ¿es una carpeta?, el valor es un objeto?
+                if (typeof(valor) == "object") {
+                    // pues lo concatenamos
+                    arrayArchivos = arrayArchivos.concat(listarArchivos(valor));
+
+                } else if (typeof(valor) == "string") {
+                    // Si fuera un string, es decir, es como si ¿es un archivo? pues el valor seria el contindo 
+                    // Es como el caso base, guardamos la clave (el nombre del archivo)
+                    arrayArchivos.push(obj);
+                }
+            }
+
+            return arrayArchivos;
+        }
+
+        console.log(listarArchivos(carpeta))
+    </script>
+</body>
+</html>

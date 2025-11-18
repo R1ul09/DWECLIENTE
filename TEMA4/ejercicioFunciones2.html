@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Funcion de operar sobre 2 numeros</h1>
+    <h3>Mirar la consola (f12)</h3>
+    <script>
+        /*
+        Crea una función operar que reciba dos números y una función que indique la
+        operación a realizar (suma, resta, multiplicación,suma_mul).
+        Ejemplo
+        operar(2,3,suma)
+        5
+        operar(2,3,sumamul)
+        5+6=11
+        Primero hace una suma y luego realiza una multiplicación dando como resultado la
+        suma de ambas operaciones.
+        */
+
+        const suma = (a, b) => a + b;
+        const resta = (a, b) => a - b;
+        const multiplicacion = (a, b) => a * b;
+        const suma_mul = (a, b) => (a + b) + (a * b);
+
+        function operar(a, b, operacion) {
+            let resultado = operacion(a, b);
+            return "Resultado: " + resultado;
+        }
+
+        console.log("operar(2, 3, suma): " + operar(2, 3, suma))
+        console.log("operar(2, 3, resta): " + operar(2, 3, resta))
+        console.log("operar(2, 3, multiplicacion): " + operar(2, 3, multiplicacion))
+        console.log("operar(2, 3, suma_mul): " + operar(2, 3, suma_mul))
+
+    </script>
+</body>
+</html>

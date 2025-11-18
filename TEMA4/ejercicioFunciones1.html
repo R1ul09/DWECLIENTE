@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Crear un usuario recibiendo un objeto</h1>
+    <h3>Mirar la consola (f12)</h3>
+    <script>
+        /*
+        1. Crea una función crearUsuario que reciba un objeto con nombre, edad y pais.
+        Si algún dato falta, usar valores por defecto.
+        Debe devolver una cadena: "Juan, 20 años, España".
+        Valor por defecto= “desconocido”
+        */
+        function crearUsuario({nombre = "desconocido", edad = "desconocidos", pais = "desconocido"}) {
+            let cadena = "Nombre: "+  nombre + ", edad: " + edad + " años, pais: " + pais;
+            return cadena;
+        }
+
+        console.log(crearUsuario({ nombre: "Raul", edad: 20, pais: "España" }));
+        console.log(crearUsuario({ edad: 20, pais: "Alemania" }));
+        console.log(crearUsuario({ nombre: "Raul", pais: "Italia" }));
+        console.log(crearUsuario({ nombre: "Laura", edad: 35 }));
+        console.log(crearUsuario({}));
+    </script>
+</body>
+</html>
