@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio de Permutar un array</h1>
+    <h3>Mirar la consola (f12)</h3>
+    <script>
+        /*
+        Crea una función recursiva permutar(arr) que devuelva un array
+        con todas las permutaciones posibles del array recibido.
+        Ejemplo:
+        permutar([1, 2, 3])
+        Debe generar:
+        [
+        [1,2,3], [1,3,2],
+        [2,1,3], [2,3,1],
+        [3,1,2], [3,2,1]
+        ]
+        */
+
+        function permutar(array) {
+            // Si el array tiene 0 o 1 elemento, ya no hay nada que permutar, así que lo devuelvo tal cual dentro de otro array
+            if (array.length <= 1) {
+                return [array];
+            }
+
+            // Aquí voy guardando todas las permutaciones que vaya encontrando
+            let arraysPosibles = []
+
+            // Recorro el array para ir probando cada elemento como "primer elemento" de una permutación
+            for (let i = 0; i < array.length; i++) {
+
+                // Me quedo con el elemento actual que voy a poner al principio de cada permutación
+                let elementoActual = array[i];
+
+                // qito el elemento actual del array para poder permutar los demás
+                // basicamente hago un array con los elementos restantes
+                let elementosRestantes = array.slice(0, i).concat(array.slice(i + 1))
+
+                // Llamo a la funcion otra vez pero ahora solo con los elementos restantes
+                // Esto me devuelve todas las permutaciones posibles de los que quedan
+                let permutarRestantes = permutar(elementosRestantes)
+
+                // Ahora junto el elemento actual con cada una de las permutaciones de los restantes
+                for (let j = 0; j < permutarRestantes.length; j++) {
+
+                    // y pego el elemento actual delante de la permutación de turno
+                    arraysPosibles.push([elementoActual].concat(permutarRestantes[j]))
+                }
+            } 
+
+            return arraysPosibles;
+        }
+
+        console.log("Ejemplo con [1, 2, 3]");
+        console.log(permutar([1, 2, 3]))
+    </script>
+</body>
+</html>
