@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laberinto</title>
+</head>
+<body>
+    <script>
+        /*
+        Enunciado:
+        Dado un laberinto donde:
+        ● " " = camino
+        ● "X" = pared
+        ● "S" = inicio
+        ● "F" = final
+        Crear una función recursiva resolverLaberinto(lab, x, y, visitado)
+        que determine si existe un camino entre S y F.
+        Debe devolver true si hay salida.
+        */
+
+        const laberinto = [
+            ["S", " ", "X", " "],
+            ["X", " ", "X", " "],
+            [" ", " ", "X", " "],
+            ["X", "X", " ", "F"]
+        ];
+
+        function resolverLaberinto(lab, x, y, visitado) {
+
+            // Comprobamos que estamos dentro del laberinto
+            if (x < 0 || x >= lab.length || y < 0 || y >= lab[0].length) {
+                // me salgo
+                return false; 
+            }
+
+            // si ya pasé por aquí, no quiero repetir
+            if (visitado[x][y]) {
+                return false;
+            }
+
+            // marcamos la casilla como visitada para no volver a pisarla
+            visitado[x][y] = true;
+
+            // si esta casilla es una pared, no se puede pasar
+            if (lab[x][y] === "X") {
+                return false;
+            }
+
+            // sii encuentro la F, ya gané
+            if (lab[x][y] === "F") {
+                return true;
+            }
+
+            // probamos movernos en las 4 direcciones (arriba, abajo, izquierda, derecha)
+            // voy probando cada movimiento recursivo; si alguno devuelve true → ya está
+            // arriba
+            if (resolverLaberinto(lab, x - 1, y, visitado)) return true;
+            // abajo
+            if (resolverLaberinto(lab, x + 1, y, visitado)) return true;
+            // izquierda 
+            if (resolverLaberinto(lab, x, y - 1, visitado)) return true;
+            // derecha
+            if (resolverLaberinto(lab, x, y + 1, visitado)) return true;
+
+            // si no hay salida por ningún lado, devuelvo false
+            return false;
+        }
+
+        // creo la matriz visitado del mismo tamaño que el laberinto
+        // pero que por defecto sea false
+        const visitado = laberinto.map(fila => fila.map(() => false));
+
+        // Buscamos la posición de S, es decir la salida o el inicio
+        let startX = 0;
+        let startY = 0;
+
+        // recorremos el laberinto, donde la i va a ser la x
+        for (let i = 0; i < laberinto.length; i++) {
+            // y lo volvemos a recorrer para que la j sea la y
+            for (let j = 0; j < laberinto[i].length; j++) {
+                // y ahora si la posicion del laberinto en la que esta es S
+                if (laberinto[i][j] === "S") {
+                    // pues lo atrbuimos las posiciones
+                    startX = i;
+                    startY = j;
+                }
+            }
+        }
+
+        console.log(resolverLaberinto(laberinto, startX, startY, visitado));
+    </script>
+</body>
+</html>
