@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Funcion Callback Devuelve Funcion</h1>
+    <h2>Mirar la consola (f12)</h2>
+    <script>
+        /*
+        Ejercicio 2
+        callback
+        Escribe una función que devuelva otra función que añada un número fijo a cualquier otro número.*/
+
+        // creamos una funcion que recibe un numero
+        function sumar(num){
+            // devolvemos otra funcion
+            return function(n){
+                // devolvemos la suma
+                return n + num;
+            }
+        }
+
+        // llamamos a la funcion metiendola en una variable
+        let sumar5 = sumar(5);
+        console.log(sumar5(10));
+    </script>
+</body>
+</html>

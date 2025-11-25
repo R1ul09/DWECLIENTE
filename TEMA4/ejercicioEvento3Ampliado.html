@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Funcion Expresion validador</h1>
+    <h2>Mirar la consola (f12)</h2>
+    <script>
+        /*
+        Ejercicio 3
+        Usa una expresión de función para crear un validador que revise si una cadena contiene más de 10
+        caracteres.
+        */
+        const validador = function(cadena) {
+        return cadena.length > 10;
+    };
+
+    // esto mostrara true 
+    console.log("hola: " + validador("hola"));
+    // eso mostrara true
+    console.log("programacion: " + validador("programacion"));
+
+    </script>
+</body>
+</html>
