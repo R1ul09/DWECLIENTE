@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Arrow Functions</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+        .producto { 
+            border: 1px solid #ddd;
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+        }
+        .total {
+            font-size: 1.5em; 
+            font-weight: bold; 
+            color: #28a745; 
+        }
+        button { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px;
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
+        button:hover { 
+            background: #0056b3; 
+        }
+        .eliminar { 
+            background: #dc3545; 
+        }
+        .eliminar:hover { 
+            background: #c82333; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Carrito de Compras con Arrow Functions</h1>
+
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <h3>Añadir Producto</h3>
+        <input type="text" id="nombre" placeholder="Nombre del producto" style="margin-right: 10px; padding: 8px;">
+        <input type="number" id="precio" placeholder="Precio (€)" step="0.01" style="margin-right: 10px; padding: 8px;">
+        <button onclick="añadir_Producto()"> Añadir</button>
+    </div>
+
+    <div id="listaProductos"></div>
+
+    <div id="totalContainer" style="margin-top: 20px; text-align: right;"></div>
+
+    <script>
+        // Estado de la aplicación (datos del carrito)
+        let carrito = []; 
+
+        // ===
+        // FUNCIONES FLECHA PRINCIPALES
+        // ===========
+
+        // 1. AÑADIR PRODUCTO AL CARRITO
+        const añadir_Producto = () => {
+            const nombre = document.getElementById('nombre').value.trim();
+            const precio = parseFloat(document.getElementById('precio').value);
+
+            // Validación
+            if (!nombre || precio <= 0 || isNaN(precio)) {
+                alert('X Introduce nombre y precio válido');
+                return;
+            }
+
+            // Crear nuevo producto
+            const nuevo_Producto = {
+                id: Date.now(), // ID único
+                nombre,
+                precio,
+                cantidad: 1
+            };
+
+            // Añadir al carrito
+            carrito.push(nuevo_Producto);
+
+            // Limpiar formulario
+            document.getElementById('nombre').value = "";
+            document.getElementById('precio').value = "";
+
+            // Actualizar vista
+            renderizarCarrito();
+        };
+
+        // 2. ELIMINAR PRODUCTO
+        // DEBES COMPLETAR ESTA FUNCIÓN FLECHA:
+        // const eliminar Producto = (id) => { ... }
+        const eliminar_Producto = (id) => {
+            
+            carrito = carrito.filter(producto => producto.id != id);
+            renderizarCarrito();
+        }
+
+        // 3. CAMBIAR CANTIDAD (Necesaria por el onchange del input)
+        // DEBES COMPLETAR ESTA FUNCIÓN FLECHA:
+        // const cambiarCantidad = (id, nuevaCantidad) => { ... }
+        // Nota: Esta función es necesaria aunque no esté numerada en el PDF.
+        const cambiarCantidad = (id, nuevaCantidad) => {
+
+            carrito = carrito.map(producto => {
+                if (producto.id == id) {
+                    producto.cantidad = nuevaCantidad;
+                    return producto;
+                } else {
+                    return producto;
+                }
+            })
+        }
+
+        // 4. CALCULAR TOTALES
+        const calcularTotales = () => {
+            const totalProductos = carrito.reduce((total, producto) => total + producto.cantidad, 0);
+
+            // DEBES COMPLETAR ESTA PARTE:
+            // const totalPrecio = carrito.reduce((total, producto) => total + ... , 0);
+            const totalPrecio = carrito.reduce((total, producto) => total + producto.cantidad * producto.precio, 0);
+            
+            return { totalProductos, totalPrecio: totalPrecio.toFixed(2) };
+        };
+
+        // 5. VACIAR CARRITO
+        const vaciarCarrito = () => {
+            if (confirm('¿Vaciar todo el carrito?')) {
+                carrito = [];
+                renderizarCarrito();
+            }
+        };
+
+        // 6. RENDERIZAR CARRITO (FUNCIÓN PRINCIPAL)
+        const renderizarCarrito = () => {
+            const lista = document.getElementById('listaProductos');
+            const container_Total = document.getElementById('totalContainer');
+
+            // Si está vacío
+            if (carrito.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #6c757d;"> Carrito vacío. ¡Añade productos!</p>';
+                container_Total.innerHTML = "";
+                return;
+            }
+
+            // Generar HTML con map
+            const productosHTML = carrito.map(producto => `
+                <div class="producto">
+                    <strong>${producto.nombre}</strong>
+                    <span style="float: right;">
+                        ${producto.precio.toFixed(2)}€ x
+                        <input type="number" value="${producto.cantidad}"
+                            min="1" max="99"
+                            onchange="cambiarCantidad(${producto.id}, this.value)"
+                            style="width: 50px; text-align: center;">
+                        = ${(producto.precio * producto.cantidad).toFixed(2)}€
+                    </span>
+                    <br><br>
+                    <button class="eliminar" onclick="eliminar_Producto(${producto.id})">
+                        Eliminar
+                    </button>
+                </div>
+            `).join('');
+            
+            lista.innerHTML = productosHTML;
+
+            // Mostrar totales
+            const totales = calcularTotales();
+            container_Total.innerHTML = `
+                <p> Productos: ${totales.totalProductos}</p>
+                <p class="total">
+                    Total: ${totales.totalPrecio}€
+                </p>
+                <button onclick="vaciarCarrito()" style="background: #ffc107; color: #212529;">
+                    Vaciar Carrito
+                </button>
+            `;
+        };
+    </script>
+</body>
+</html>
