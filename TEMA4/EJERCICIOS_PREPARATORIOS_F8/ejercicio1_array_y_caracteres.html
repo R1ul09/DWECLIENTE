@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio de Funcion de Array y Caracteres</h1>
+    <h2>Mira en la consola (f12)</h2>
+    <script>
+        /*
+        Enunciado
+        Dado un array de palabras, escribe una función capitalizarYContarVocales(words)
+        que:
+        1. Devuelva un nuevo array con cada palabra capitalizada (primera letra en mayúscula
+        y resto en minúscula).
+        2. Devuelva también un objeto que indique el número total de vocales (a, e, i, o, u —
+        sin distinguir mayúsculas/minúsculas) encontradas en todas las palabras.
+        La función debe devolver un objeto con la forma { palabras: [...], totalVocales:
+        N }.
+        Ejemplo
+        ● Entrada: ["hola", "mUndo", "árbol", "PIrrAmiDe"]
+        ● Salida esperada:
+        { palabras: ["Hola", "Mundo", "Árbol", "Pirrámide"],
+        totalVocales: 9 }
+        */
+
+        let array = ["hola", "mUndo", "árbol", "PIrrAmiDe"];
+
+        function capitalizarYContarVocales(words) {
+
+            let totalVocales = 0;
+            const vocales = "aeiou"
+
+            let ArrayCapitalizado = words.map(palabra => {
+
+                for (let i = 0; i < palabra.length; i++) {
+                    if (vocales.includes(palabra[i].toLowerCase())) {
+                        totalVocales++;
+                    }
+                }
+                
+                return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
+                
+            })
+
+            let respuesta = {
+                "palabras": ArrayCapitalizado,
+                "totalVocales": totalVocales
+            }
+            return respuesta;
+        }
+
+        console.log(capitalizarYContarVocales(array));
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio de Recursividad con suma</h1>
+    <h2>Mira en la consola (f12)</h2>
+    <script>
+        /*
+        Ejercicio 2 — Recursividad
+        Enunciado
+        Escribe una función recursiva sumarHasta(n) que calcule la suma de todos los enteros
+        positivos desde 1 hasta n.
+        ● Si n es menor o igual que 0, la función debe devolver 0.
+        ● No usar bucles: resolver únicamente con recursión.
+        Ejemplo
+        ● Entrada: 5 → Salida: 15 (1+2+3+4+5)
+        ● Entrada: 0 → Salida: 0
+        */
+
+        let numero = 15;
+
+        function sumaHasta(n) {
+            if (n <= 0) {
+                return 0;
+            }
+
+            return n + sumaHasta(n - 1);
+        }
+
+        console.log("Numero introducido: " + numero);
+        console.log("Resultado: " + sumaHasta(numero))
+    </script>
+</body>
+</html>

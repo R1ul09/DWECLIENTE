@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio de Arrow Function y Funciones Anonimas</h1>
+    <h2>Mira en la consola (f12)</h2>
+    <script>
+        /*
+        Ejercicio 3 — Funciones anónimas
+        (expresiones de función / arrow
+        functions)
+        Enunciado
+        Crea una función filtrarYTransformar(arr, filtro, transformacion) donde:
+        ● arr es un array de números.
+        ● filtro es una función anónima que recibe un número y devuelve true si debe
+        incluirse.
+        ● transformacion es una función anónima que recibe un número y devuelve su
+        transformación.
+        La función debe devolver un nuevo array que primero filtra arr usando filtro y luego
+        aplica transformacion a los elementos resultantes. Proporciona un ejemplo usando
+        funciones anónimas (arrow functions).
+        Ejemplo
+        ● Entrada:
+        arr = [1,2,3,4,5,6]
+        filtro = n => n % 2 === 0 (pares)
+        transformacion = n => n * n (elevar al cuadrado)
+        ● Salida: [4, 16, 36]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+
+            const filtrados = arr.filter(num => filtro(num));
+
+            const tranformado = filtrados.map(num => transformacion(num));
+
+            return tranformado;
+        }
+
+        let array = [32, 21, 48, 7, 14];
+
+        let filtro = (n) => n % 2 == 0;
+
+        let transformacion = (n) => n * n;
+
+        console.log(filtrarYTransformar(array, filtro, transformacion));
+
+    </script>
+</body>
+</html>

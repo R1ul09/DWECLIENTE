@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio de Callbacks y Asincronia</h1>
+    <h2>Mira en la consola (f12)</h2>
+    <script>
+        /*
+        Ejercicio 4 — Callbacks y funciones en
+        línea (asincronía simulada con
+        setTimeout)
+        Enunciado
+        Implementa una función procesarTareas(tareas, callbackFinal) donde:
+        ● tareas es un array de objetos { id, duracion } (duración en ms).
+        ● Para cada tarea debes simular su ejecución con setTimeout usando su
+        duracion.
+        ● Cuando una tarea termina, debes llamar a una función callback en línea que imprima
+        Tarea <id> completada.
+        ● Cuando todas las tareas hayan terminado, llamar a callbackFinal(resultado)
+        donde resultado es un array de ids de tareas completadas en orden de
+        finalización.
+        Objetivo: practicar callbacks y pasar funciones en línea (inline) para manejar eventos
+        completados.
+        Ejemplo
+        ● Entrada: [{id: 'A', duracion: 300}, {id: 'B', duracion: 100},
+        {id: 'C', duracion: 200}]
+        ● Salida por consola (orden según duraciones):
+        Tarea B completada
+        Tarea C completada
+        Tarea A completada
+        ● callbackFinal recibe ['B','C','A']
+        */
+
+        let tareasProgramadas = [
+            {id: "A", duracion: 100},
+            {id: "B", duracion: 500},
+            {id: "C", duracion: 300}
+        ]
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let tareasTerminadas = [];
+
+            tareas.forEach(tarea => {
+
+                setTimeout(() => {
+                    console.log("Tarea " + tarea.id + " completada");
+                    tareasTerminadas.push(tarea.id);
+                    if (tareasTerminadas.length == tareas.length) {
+                        callbackFinal(tareasTerminadas);
+                    }
+                }, tarea.duracion);
+
+                
+            })
+
+        }
+
+        procesarTareas(tareasProgramadas, function(resultado) {
+            console.log("Finalizado:", resultado);
+        })
+    </script>
+</body>
+</html>
