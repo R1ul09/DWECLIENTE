@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" style="width:200px;height:100px;border:2px solid black;"></div>
+
+    <script>
+        /*
+        EJ3 — Timer controlado por eventos del ratón
+        Pasa el ratón sobre un cuadro → inicia un contador.
+        Saca el ratón → se pausa.
+        Vuelve a entrar → continúa.
+        */
+
+        let box = document.getElementById("box");
+        let tiempo = 0;
+        let intervalo;
+
+        box.onmouseenter = function () {
+            intervalo = setInterval(() => {
+                tiempo++;
+                console.log("Tiempo:", tiempo);
+            }, 1000);
+        };
+
+        box.onmouseleave = function () {
+            clearInterval(intervalo);
+        };
+
+    </script>
+    
+</body>
+</html>

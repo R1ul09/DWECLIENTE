@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="zonaDrop" 
+        ondrop="drop(event)" 
+        ondragover="allow(event)" 
+        style="border:2px dashed black;width:200px;height:150px;">
+    </div>
+
+    <img id="drag" src="cr7.jpg" draggable="true" ondragstart="start(event)" width="120">
+
+    <script>
+        /*
+        EJERCICIO 8 — Drag & Drop básico
+        */
+
+        function allow(ev) {
+            ev.preventDefault(); // permite soltar
+        }
+
+        function start(ev) {
+            ev.dataTransfer.setData("id", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            let info = ev.dataTransfer.getData("id");
+            ev.target.appendChild(document.getElementById(info));
+        }
+
+    </script>
+</body>
+</html>

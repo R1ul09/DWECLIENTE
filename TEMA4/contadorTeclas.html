@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Usa ↑ y ↓ para cambiar el número</p>
+
+    <script>
+        /*
+        EJERCICIO 10 — Contador con teclado
+        */
+
+        let numero = 0;
+
+        document.onkeydown = function (ev) {
+            if (ev.key === "ArrowUp") numero++;
+            if (ev.key === "ArrowDown") numero--;
+
+            console.log("Valor:", numero);
+        };
+    </script>
+</body>
+</html>

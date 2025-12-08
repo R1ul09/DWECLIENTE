@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="nombre" placeholder="Escribe tu nombre">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        /*
+        EJERCICIO 5 — Validación con submit
+        */
+
+        document.getElementById("form").onsubmit = function () {
+            let campo = document.getElementById("nombre");
+
+            if (campo.value.trim() === "") {
+                alert("El nombre no puede estar vacío");
+                return false; // NO se envía el formulario
+            }
+        };
+    </script>
+</body>
+</html>

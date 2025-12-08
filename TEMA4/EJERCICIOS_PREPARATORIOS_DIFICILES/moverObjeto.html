@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="player" style="width:50px;height:50px;background:red;position:absolute;"></div>
+
+    <script>
+        /*
+        EJ6 — Mover un cuadrado por la pantalla con flechas
+        */
+
+        // guardo el cuadrado
+        let player = document.getElementById("player");
+
+        // posiciones iniciales
+        let x = 50;
+        let y = 50;
+
+        // aquí controlo la velocidad normal y la del shift
+        let velocidadNormal = 10;
+        let velocidadRapida = 25;
+
+        // escucho cuando se pulsa una tecla
+        document.onkeydown = function (ev) {
+
+            // aquí miro la velocidad según si pulsa shift o no
+            let v = ev.shiftKey ? velocidadRapida : velocidadNormal;
+
+            // muevo arriba
+            if (ev.key === "ArrowUp") y -= v;
+
+            // muevo abajo
+            if (ev.key === "ArrowDown") y += v;
+
+            // muevo izquierda
+            if (ev.key === "ArrowLeft") x -= v;
+
+            // muevo derecha
+            if (ev.key === "ArrowRight") x += v;
+
+            // aquí evito que salga por la izquierda y arriba
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+
+            // aquí evito que salga por la derecha y abajo
+            if (x > window.innerWidth - 50) x = window.innerWidth - 50;
+            if (y > window.innerHeight - 50) y = window.innerHeight - 50;
+
+            // aplico la posición actualizada
+            player.style.left = x + "px";
+            player.style.top = y + "px";
+        };
+
+    </script>
+</body>
+</html>

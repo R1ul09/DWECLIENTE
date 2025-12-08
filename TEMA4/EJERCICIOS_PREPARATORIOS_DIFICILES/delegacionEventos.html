@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="add">Añadir elemento</button>
+    <ul id="lista"></ul>
+
+    <script>
+        /*
+        EJ1 — Delegación de eventos + elementos dinámicos
+
+        Tienes una lista vacía. Un botón crea elementos nuevos.
+        Cada elemento debe borrarse al hacer click, sin asignar eventos uno por uno.
+        → Tienes que usar delegación de eventos.
+        */
+
+        window.onload = function () {
+
+            let lista = document.getElementById("lista");
+            let boton = document.getElementById("add");
+
+            // Añadir elementos
+            boton.onclick = function () {
+                let li = document.createElement("li");
+                li.textContent = "Elemento " + (lista.children.length + 1);
+                lista.appendChild(li);
+            };
+
+            // Delegación: evento en el UL, no en cada LI
+            lista.onclick = function (ev) {
+                if (ev.target.tagName === "LI") {
+                    ev.target.remove();
+                }
+            };
+        };
+
+    </script>
+</body>
+</html>

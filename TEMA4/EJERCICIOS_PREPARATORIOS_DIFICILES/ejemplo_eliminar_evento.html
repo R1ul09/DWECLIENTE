@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="apagar">Haz click 3 veces</button>
+
+    <script>
+        /*
+        EJERCICIO 7 — removeEventListener
+        */
+
+        let contador = 0;
+        let boton = document.getElementById("apagar");
+
+        function contar() {
+            contador++;
+            console.log("Clicks:", contador);
+
+            if (contador === 3) {
+                boton.removeEventListener("click", contar);
+                console.log("Evento desactivado");
+            }
+        }
+
+        boton.addEventListener("click", contar);
+
+    </script>
+</body>
+</html>

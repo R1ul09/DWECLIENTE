@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="buscar" placeholder="Buscar...">
+    <ul id="sugerencias"></ul>
+
+    <script>
+        /*
+        EJ10 — Sugerencias tipo buscador
+        */
+
+        let buscar = document.getElementById("buscar");
+        let sugerencias = document.getElementById("sugerencias");
+
+        let palabras = ["hola", "huevo", "hueso", "helado", "roca", "raton", "risa"];
+
+        buscar.oninput = function () {
+
+            sugerencias.innerHTML = "";
+
+            let texto = buscar.value.toLowerCase();
+
+            palabras
+                .filter(p => p.startsWith(texto))
+                .forEach(p => {
+                    let li = document.createElement("li");
+                    li.textContent = p;
+                    sugerencias.appendChild(li);
+                });
+        };
+
+    </script>
+</body>
+</html>

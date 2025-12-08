@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="campo" placeholder="Escribe letras">
+
+    <script>
+        /*
+        EJ2 — Control avanzado de teclado
+        Descripción
+
+        Un input donde:
+
+        Se escriben letras.
+
+        Si se pulsa un número → impedir que se escriba.
+
+        Si se pulsa ESC → vaciar el input.
+        */
+
+        let campo = document.getElementById("campo");
+
+        campo.onkeydown = function (ev) {
+
+            if (!isNaN(ev.key) && ev.key !== " ") {
+                ev.preventDefault();
+            }
+
+            if (ev.key === "Escape") {
+                campo.value = "";
+            }
+        };
+
+    </script>
+</body>
+</html>

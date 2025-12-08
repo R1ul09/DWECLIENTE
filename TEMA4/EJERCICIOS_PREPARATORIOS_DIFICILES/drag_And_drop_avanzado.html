@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="zona" 
+        style="width:300px;height:200px;border:3px dashed blue;">
+    </div>
+
+    <div id="items">
+        <div draggable="true" class="item" id="i1">1</div>
+        <div draggable="true" class="item" id="i2">2</div>
+        <div draggable="true" class="item" id="i3">3</div>
+    </div>
+
+    <style>
+    .item {
+        width:50px;
+        height:50px;
+        background:orange;
+        margin:5px;
+        display:inline-block;
+        text-align:center;
+        line-height:50px;
+        font-size:20px;
+    }
+    </style>
+
+    <script>
+        /*
+        EJ8 — Drag & Drop avanzado (mover múltiples elementos)
+        */
+
+        let zona = document.getElementById("zona");
+
+        zona.ondragover = function (ev) {
+            ev.preventDefault();
+        };
+
+        zona.ondrop = function (ev) {
+            ev.preventDefault();
+            let id = ev.dataTransfer.getData("id");
+            zona.appendChild(document.getElementById(id));
+        };
+
+        document.querySelectorAll(".item").forEach(item => {
+            item.ondragstart = function (ev) {
+                ev.dataTransfer.setData("id", item.id);
+            };
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input id="email" placeholder="Email">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        /*
+        EJ7 — Validación manual sin expresiones regulares
+        */
+
+        document.getElementById("form").onsubmit = function () {
+            let email = document.getElementById("email").value;
+
+            if (!email.includes("@") || !email.includes(".")) {
+                alert("Email incorrecto");
+                return false;
+            }
+        };
+
+    </script>
+</body>
+</html>

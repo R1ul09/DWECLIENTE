@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="zona" style="width:200px;height:80px;border:1px solid black;"></div>
+    <script>
+        /*
+        EJERCICIO 3 — event.clientX / clientY
+        Enunciado:
+        Al hacer click en un div, mostrar la posición exacta donde se hizo click.
+        */
+
+        document.getElementById("zona").onclick = function (ev) {
+            console.log("Click en:", ev.clientX, ev.clientY);
+        };
+
+    </script>
+</body>
+</html>

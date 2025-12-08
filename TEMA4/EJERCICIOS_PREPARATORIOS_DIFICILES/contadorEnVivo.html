@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="text" placeholder="Escribe algo">
+    <p id="contador">0 caracteres</p>
+
+    <script>
+        /*
+        EJ4 — Contador en tiempo real con oninput
+        */
+
+        let text = document.getElementById("text");
+        let contador = document.getElementById("contador");
+
+        text.oninput = function () {
+            contador.textContent = text.value.length + " caracteres";
+        };
+
+    </script>
+</body>
+</html>
