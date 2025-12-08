@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Le pido al usuario los números separados por espacios.
+        // Por ejemplo: "1 2 1"
+        let entrada = prompt("Introduce los números de la primera fila separados por espacios:");
+
+        // Paso lo que ha escrito a un array de números
+        let filaInicial = entrada.split(" ").map(num => Number(num));
+
+        // Esta función hace la pirámide sumando hacia abajo
+        function construirPiramide(fila) {
+            let piramide = [fila];
+
+            while (fila.length > 1) {
+                let nuevaFila = [];
+
+                // Aquí voy sumando cada pareja: (fila[i] + fila[i+1])
+                for (let i = 0; i < fila.length - 1; i++) {
+                    nuevaFila.push(fila[i] + fila[i + 1]);
+                }
+
+                piramide.push(nuevaFila);
+                fila = nuevaFila;
+            }
+
+            return piramide;
+        }
+
+        // Construyo la pirámide completa
+        let resultado = construirPiramide(filaInicial);
+
+        // Ahora lo importante: mostrarlo bonito y centrado
+        function mostrarCentrado(piramide) {
+            // Cojo la longitud en caracteres de la fila más larga (la primera)
+            let anchoMaximo = piramide[0].join(" ").length;
+
+            piramide.forEach(fila => {
+                let texto = fila.join(" ");
+                // Centro el texto usando padStart
+                let centrado = texto.padStart((anchoMaximo + texto.length) / 2, " ");
+                console.log(centrado);
+            });
+        }
+
+        // Muestro la pirámide centrada
+        mostrarCentrado(resultado);
+
+    </script>
+</body>
+</html>
