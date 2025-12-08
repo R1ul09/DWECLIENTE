@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Generar todas las combinaciones binarias de n bits
+        🧠 Ejemplo
+
+        Entrada: n = 3
+
+        Salida:
+
+        000
+        001
+        010
+        011
+        100
+        101
+        110
+        111
+        */
+        function binarios(n, prefijo = "") {
+
+            // Si ya hice n bits, imprimo la cadena final
+            if (prefijo.length === n) {
+                console.log(prefijo);
+                return;
+            }
+
+            // Añado un 0 y sigo
+            binarios(n, prefijo + "0");
+
+            // Añado un 1 y sigo
+            binarios(n, prefijo + "1");
+        }
+
+        binarios(3);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*  
+            Ejercicio 4 — Variación 11 (boost de velocidad aleatorio)
+            Enunciado:
+            Cada tarea puede obtener un "boost" aleatorio que la vuelve 2 veces más rápida.
+            No se sabe cuál tendrá suerte.  
+            Entrada:
+            [{id:"A", duracion:400}, {id:"B", duracion:700}, {id:"C", duracion:300}]
+            Salida:
+            - Se van mostrando según terminan
+            - callbackFinal recibe los ids en orden final
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let completadas = [];
+
+            tareas.forEach(function(tarea) {
+
+                // Aquí decido si la tarea tiene suerte y va más rápido
+                let tieneBoost = Math.random() < 0.5;
+
+                let tiempoFinal = tieneBoost ? tarea.duracion / 2 : tarea.duracion;
+
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " completada" + (tieneBoost ? " (boost!)" : ""));
+
+                    completadas.push(tarea.id);
+
+                    if (completadas.length === tareas.length) {
+                        callbackFinal(completadas);
+                    }
+
+                }, tiempoFinal);
+
+            });
+        }
+
+        procesarTareas(
+            [
+                { id:"A", duracion:400 },
+                { id:"B", duracion:700 },
+                { id:"C", duracion:300 }
+            ],
+            function(resultado) {
+                console.log("Finalizado:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

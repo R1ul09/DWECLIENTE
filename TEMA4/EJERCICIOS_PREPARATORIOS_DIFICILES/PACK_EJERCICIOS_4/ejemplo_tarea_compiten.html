@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*  
+            Ejercicio 4 — Variación 15 (competencia)
+            Enunciado:
+            Cada tarea compite en una "carrera". No hay orden fijo.
+            La primera que termina se anuncia como ganadora.
+            Entrada:
+            [{id:"R1", duracion:500}, {id:"R2", duracion:300}, {id:"R3", duracion:700}]
+            Salida:
+            - Mensaje de ganadora
+            - Orden final en callbackFinal
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let completadas = [];
+            let ganadora = null;
+
+            tareas.forEach(function(tarea) {
+
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " llegó a la meta");
+
+                    // La primera que llega gana
+                    if (!ganadora) {
+                        ganadora = tarea.id;
+                        console.log("Ganadora: " + ganadora);
+                    }
+
+                    completadas.push(tarea.id);
+
+                    if (completadas.length === tareas.length) {
+                        callbackFinal(completadas);
+                    }
+
+                }, tarea.duracion);
+
+            });
+        }
+
+        procesarTareas(
+            [
+                { id:"R1", duracion:500 },
+                { id:"R2", duracion:300 },
+                { id:"R3", duracion:700 }
+            ],
+            function(resultado) {
+                console.log("Orden final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

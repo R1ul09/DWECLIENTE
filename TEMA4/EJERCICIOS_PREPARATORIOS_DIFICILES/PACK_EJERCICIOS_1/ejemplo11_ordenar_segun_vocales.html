@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 11 — Ordenar palabras según cantidad de vocales
+        📝 Enunciado
+        Dado un array de palabras:
+        ordénalas de mayor → menor cantidad de vocales
+        si empatan, ordena por longitud
+        si empatan, ordena alfabéticamente
+        */
+        function ordenarPorVocales(palabras) {
+            const vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+
+            function contarVocales(palabra) {
+                let total = 0;
+                for (let l of palabra) {
+                    if (vocales.includes(l)) total++;
+                }
+                return total;
+            }
+
+            return palabras.sort((a, b) => {
+                let vA = contarVocales(a);
+                let vB = contarVocales(b);
+
+                if (vA !== vB) return vB - vA;
+                if (a.length !== b.length) return b.length - a.length;
+                return a.localeCompare(b);
+            });
+        }
+
+        console.log(ordenarPorVocales(["murciélago", "sol", "cielo", "aéreo", "limón"]));
+    </script>
+
+</body>
+</html>

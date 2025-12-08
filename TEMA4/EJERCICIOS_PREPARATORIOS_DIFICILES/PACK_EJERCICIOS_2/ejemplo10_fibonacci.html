@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fibonacci(n) {
+
+            // Los dos primeros casos están definidos
+            if (n === 0 || n === 1) {
+                return n;
+            }
+
+            // Suma de los dos anteriores
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+
+        console.log(fibonacci(6)); // 8
+
+    </script>
+</body>
+</html>

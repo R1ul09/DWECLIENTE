@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function contarChar(texto, letra, i = 0) {
+
+            // Cuando el índice llega al final, paro
+            if (i === texto.length) {
+                return 0;
+            }
+
+            // Si coincide, sumo 1 y sigo
+            if (texto[i] === letra) {
+                return 1 + contarChar(texto, letra, i + 1);
+            }
+
+            // Si no coincide, solo avanzo
+            return contarChar(texto, letra, i + 1);
+        }
+
+        console.log(contarChar("banana", "a")); // 3
+
+    </script>
+</body>
+</html>

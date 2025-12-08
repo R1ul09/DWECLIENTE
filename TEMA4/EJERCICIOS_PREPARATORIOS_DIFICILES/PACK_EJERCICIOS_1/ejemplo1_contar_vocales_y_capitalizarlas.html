@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Contar vocales y capitalizarlas (el básico)
+        (Este es el modelo base del que salen todos los demás)
+        
+        📝 Enunciado
+        Crea una función recursiva que reciba una cadena y devuelva:
+        El número total de vocales.
+        La misma cadena pero con las vocales en MAYÚSCULA.
+        No uses bucles ni métodos como .replace()
+        */
+        function procesarVocales(texto, index = 0, contador = 0, resultado = "") {
+
+            // Si llego al final del texto, devuelvo los resultados
+            if (index === texto.length) {
+                return {
+                    totalVocales: contador,
+                    textoProcesado: resultado
+                };
+            }
+
+            // Cojo la letra actual
+            let letra = texto[index];
+            let vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+
+            // Si es vocal, la pongo en mayúscula y sumo al contador
+            if (vocales.includes(letra)) {
+                return procesarVocales(
+                    texto,
+                    index + 1,
+                    contador + 1,
+                    resultado + letra.toUpperCase()
+                );
+            }
+
+            // Si no es vocal, la dejo igual y sigo
+            return procesarVocales(
+                texto,
+                index + 1,
+                contador,
+                resultado + letra
+            );
+        }
+
+        console.log(procesarVocales("programacion recursiva"));
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 10 — Invertir cada palabra pero mantener la frase normal
+        📝 Enunciado
+        Función que reciba una frase:
+        ➡️ "Hola qué tal mundo"
+        ➡️ "aloH éuq lat odnum"
+        Y también debe devolver cuántas vocales se cambiaron de posición.
+        */
+        function invertirPalabras(frase) {
+            let palabras = frase.split(" ");
+            let vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+
+            let contadorDesplazadas = 0;
+
+            let invertidas = palabras.map(palabra => {
+                let original = palabra;
+                let inversa = palabra.split("").reverse().join("");
+
+                // Contar vocales en distinta posición
+                for (let i = 0; i < palabra.length; i++) {
+                    if (vocales.includes(original[i]) &&
+                        original[i] !== inversa[i]) {
+                        contadorDesplazadas++;
+                    }
+                }
+
+                return inversa;
+            });
+
+            return {
+                fraseInvertida: invertidas.join(" "),
+                vocalesDesplazadas: contadorDesplazadas
+            };
+        }
+
+        console.log(invertirPalabras("Hola que tal mundo"));
+    </script>
+
+</body>
+</html>

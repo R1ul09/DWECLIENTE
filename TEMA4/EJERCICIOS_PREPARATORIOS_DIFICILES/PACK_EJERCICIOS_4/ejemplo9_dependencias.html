@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            EJERCICIO INFERNAL 1 — Dependencias entre tareas
+            Enunciado:
+            Cada tarea puede tener dependencias (ids de otras tareas).
+            Una tarea NO PUEDE comenzar hasta que TODAS sus dependencias hayan terminado.
+            Debes ejecutar todo usando setTimeout y callbacks.
+            callbackFinal recibe el orden COMPLETO de finalización.
+
+            Entrada:
+            [
+                { id:"A", duracion:300, deps:[] },
+                { id:"B", duracion:200, deps:["A"] },
+                { id:"C", duracion:400, deps:["A","B"] }
+            ]
+
+            Salida:
+            Tarea A completada
+            Tarea B completada
+            Tarea C completada
+            Final: ["A","B","C"]
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let completadas = [];
+
+            function iniciarTarea(tarea) {
+
+                // Si ya está completada, no repetir
+                if (completadas.includes(tarea.id)) return;
+
+                // Comprobar si todas las dependencias ya han terminado
+                let listo = tarea.deps.every(function(depId) {
+                    return completadas.includes(depId);
+                });
+
+                if (!listo) return; // no puede empezar aún
+
+                // Ejecutar la tarea
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " completada");
+                    completadas.push(tarea.id);
+
+                    // Cada vez que terminamos una, intentamos iniciar las siguientes
+                    tareas.forEach(iniciarTarea);
+
+                    // Si ya están todas, llamamos al callback final
+                    if (completadas.length === tareas.length) {
+                        callbackFinal(completadas);
+                    }
+
+                }, tarea.duracion);
+            }
+
+            // Intentamos iniciar todas las que no tengan deps
+            tareas.forEach(iniciarTarea);
+        }
+
+        procesarTareas(
+            [
+                { id:"A", duracion:300, deps:[] },
+                { id:"B", duracion:200, deps:["A"] },
+                { id:"C", duracion:400, deps:["A","B"] }
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

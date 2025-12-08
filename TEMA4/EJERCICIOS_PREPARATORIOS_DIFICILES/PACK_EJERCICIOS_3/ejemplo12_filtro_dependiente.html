@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 7 — Filtro dependiente de resultados previos
+
+        Enunciado:
+        Crea procesarConAcumulado(arr, filtro, transformacion) donde:
+        - filtro recibe (n, acumuladoActual)
+        - transformacion recibe el número y lo transforma
+
+        Ejemplo:
+        arr = [2, 4, 1, 8, 3]
+        Regla del filtro:
+        incluir solo si n + acumulado < 10
+
+        Transformación:
+        n => n * 2
+
+        Salida esperada:
+        2 → acum=2 ✓
+        4 → acum=6 ✓
+        1 → acum=7 ✓
+        8 → NO
+        3 → NO
+        Transformados → [4, 8, 2]
+        */
+
+        function procesarConAcumulado(arr, filtro, transformacion) {
+            let resultado = [];
+            let acumulado = 0;
+
+            for (let i = 0; i < arr.length; i++) {
+                if (filtro(arr[i], acumulado)) {
+                    acumulado += arr[i];
+                    resultado.push(transformacion(arr[i]));
+                }
+            }
+
+            return resultado;
+        }
+
+        // Ejemplo
+        console.log(
+            procesarConAcumulado(
+                [2, 4, 1, 8, 3],
+                (n, acum) => n + acum < 10,
+                n => n * 2
+            )
+        );
+
+    </script>
+</body>
+</html>

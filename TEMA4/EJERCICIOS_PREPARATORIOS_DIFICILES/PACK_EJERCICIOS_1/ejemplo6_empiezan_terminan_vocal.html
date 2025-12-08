@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 6 — Detectar cuántas palabras empiezan y terminan en vocal
+
+        📝 Enunciado
+        Crea una función que reciba una cadena y devuelva:
+        cuántas palabras empiezan por vocal
+        cuántas acaban en vocal
+        la misma frase pero con las palabras que cumplen ambas cosas envueltas en [* *]
+        👉 Sin bucles. Solo recursividad para recorrer el texto.
+        */
+        function analizarPalabras(texto, index = 0, palabraActual = "", empiezaV = false, totalInicio = 0, totalFin = 0, resultado = "") {
+
+            let vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+
+            // Si llego al final, proceso la última palabra
+            if (index === texto.length) {
+
+                if (palabraActual.length > 0) {
+                    let terminaV = vocales.includes(palabraActual[palabraActual.length - 1]);
+
+                    if (empiezaV) totalInicio++;
+                    if (terminaV) totalFin++;
+
+                    // Si empieza y termina en vocal → la rodeo con [* *]
+                    if (empiezaV && terminaV) {
+                        palabraActual = "[*" + palabraActual + "*]";
+                    }
+                    resultado += palabraActual;
+                }
+
+                return {
+                    palabrasQueEmpiezanEnVocal: totalInicio,
+                    palabrasQueTerminanEnVocal: totalFin,
+                    textoProcesado: resultado
+                };
+            }
+
+            let letra = texto[index];
+
+            // Si es un espacio → cierro palabra
+            if (letra === " ") {
+
+                if (palabraActual.length > 0) {
+                    let terminaV = vocales.includes(palabraActual[palabraActual.length - 1]);
+
+                    if (empiezaV) totalInicio++;
+                    if (terminaV) totalFin++;
+
+                    if (empiezaV && terminaV) {
+                        palabraActual = "[*" + palabraActual + "*]";
+                    }
+
+                    resultado += palabraActual + " ";
+                }
+
+                // Reinicio palabra
+                return analizarPalabras(texto, index + 1, "", false, totalInicio, totalFin, resultado);
+            }
+
+            // Si la palabra está vacía, la letra actual marca el inicio
+            if (palabraActual === "") {
+                empiezaV = vocales.includes(letra);
+            }
+
+            // Sigo acumulando letras
+            return analizarPalabras(
+                texto,
+                index + 1,
+                palabraActual + letra,
+                empiezaV,
+                totalInicio,
+                totalFin,
+                resultado
+            );
+        }
+
+        console.log(analizarPalabras("esto es una prueba de ejemplo unico"));
+    </script>
+
+</body>
+</html>

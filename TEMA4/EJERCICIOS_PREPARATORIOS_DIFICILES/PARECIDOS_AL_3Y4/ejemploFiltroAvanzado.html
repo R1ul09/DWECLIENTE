@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        EJERCICIO 1 — Funciones flecha, callbacks y filtrado avanzado
+        Enunciado
+        Implementa una función procesarUsuarios(usuarios, criterio, callbackResultado) donde:
+        usuarios = array de { nombre, edad, activo, puntuacion }
+        criterio = función flecha que decide si el usuario pasa el filtro.
+        
+        Debes:
+        Filtrar usuarios según el criterio.
+        Ordenarlos por puntuación descendente.
+        Crear un nuevo array con los nombres en mayúsculas.
+        Llamar a callbackResultado(lista) con la lista final.
+        Si no cumple nadie → "Ningún usuario cumple el criterio".
+        Debe usarse al menos un callback inline.
+
+        Ejemplo de entrada
+        let usuarios = [
+            { nombre: "Ana", edad: 20, activo: true, puntuacion: 88 },
+            { nombre: "Luis", edad: 17, activo: true, puntuacion: 50 },
+            { nombre: "Maria", edad: 25, activo: false, puntuacion: 77 },
+            { nombre: "Pedro", edad: 30, activo: true, puntuacion: 92 }
+        ];
+
+        procesarUsuarios(
+            usuarios,
+            u => u.edad >= 18 && u.activo,
+            resultado => console.log(resultado)
+        );
+
+        Ejemplo de salida
+        ["PEDRO", "ANA"]
+        */
+
+        let usuarios = [
+            { nombre: "Ana", edad: 20, activo: true, puntuacion: 88 },
+            { nombre: "Luis", edad: 17, activo: true, puntuacion: 50 },
+            { nombre: "Maria", edad: 25, activo: false, puntuacion: 77 },
+            { nombre: "Pedro", edad: 30, activo: true, puntuacion: 92 }
+        ];
+
+        function procesarUsuarios(usuarios, criterio, callbackResultado) {
+
+            // Filtrar según el criterio
+            const filtrados = usuarios.filter(u => criterio(u));
+
+             // Si está vacío → mensaje y callback
+            if (filtrados.length === 0) {
+                callbackResultado("Ningún usuario cumple el criterio");
+                return;
+            }
+
+            // Ordenar por puntuación descendente
+            const ordenados = filtrados.sort((a, b) => b.puntuacion - a.puntuacion);
+
+            // Convertir nombres a mayúsculas
+            const mayusculas = ordenados.map(u => u.nombre.toUpperCase());
+
+            // Enviar resultado al callback
+            callbackResultado(mayusculas);
+        }
+
+        procesarUsuarios(usuarios, u => u.edad >= 18 && u.activo, function(resultado) {
+            console.log(resultado);
+        })
+    </script>
+</body>
+</html>

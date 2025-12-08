@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            EJERCICIO INFERNAL 2 — Cancelación entre tareas
+            Enunciado:
+            Hay varias tareas compitiendo.
+            La PRIMERA que termine cancela automáticamente a las demás.
+            callbackFinal recibe SOLO la ganadora.
+
+            Entrada:
+            [{id:"X", duracion:600}, {id:"Y", duracion:300}, {id:"Z", duracion:900}]
+
+            Salida:
+            Tarea Y completada
+            (las otras no llegan a ejecutarse totalmente)
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let terminado = false; // si ya hay ganador
+            let timeouts = [];     // guardo todos los ids de timeout para cancelar
+
+            tareas.forEach(function(tarea) {
+
+                let t = setTimeout(function() {
+
+                    if (terminado) return; // si ya hay ganador, ignoro
+
+                    console.log("Tarea " + tarea.id + " completada (ganadora)");
+
+                    terminado = true;
+
+                    // Cancelo TODAS las demás tareas
+                    timeouts.forEach(clearTimeout);
+
+                    callbackFinal(tarea.id);
+
+                }, tarea.duracion);
+
+                timeouts.push(t);
+            });
+        }
+
+        procesarTareas(
+            [
+                {id:"X", duracion:600},
+                {id:"Y", duracion:300},
+                {id:"Z", duracion:900}
+            ],
+            function(resultado) {
+                console.log("Ganadora:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

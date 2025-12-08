@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        NUEVO EJERCICIO 1 (versión más difícil del de vocales + capitalizar)
+        📝 Enunciado (más difícil)
+        Escribe una función procesarFrases(frases) que reciba un array de strings, donde cada string es una frase completa, y haga lo siguiente:
+        Separar cada frase en palabras.
+        Capitalizar cada palabra (primera letra en mayúscula, resto en minúscula).
+        Contar cuántas vocales totales hay entre todas las palabras.
+        Contar cuántas palabras empiezan por vocal.
+
+        Devolver un objeto con esta estructura:
+
+        {
+        frasesProcesadas: [...],   // cada frase reconstruida con las palabras capitalizadas
+        totalVocales: N,
+        palabrasQueEmpiezanPorVocal: M
+        }
+
+        Si alguna frase no es string → ignorarla (no error).
+
+        📥 Ejemplo de entrada
+        let frases = [
+        "hola que TAL",
+        "el arBOL es alto",
+        "AVIÓn roto"
+        ];
+
+        📤 Ejemplo de salida
+        {
+        frasesProcesadas: [
+            "Hola Que Tal",
+            "El Árbol Es Alto",
+            "Avión Roto"
+        ],
+        totalVocales: 13,
+        palabrasQueEmpiezanPorVocal: 4
+        }
+        */
+
+        let frases = [
+            "hola que TAL",
+            "el arBOL es alto",
+            "AVIÓn roto"
+        ];
+
+        function procesarFrases(frases) {
+
+            let totalVocales = 0;
+            let palabrasQueEmpiezanPorVocal = 0
+            const vocales = "aeiou"
+
+            // Aquí guardaremos cada frase ya procesada
+            let frasesProcesadas = frases.map(frase => {
+                
+                // Si no es string lo ignoramos
+                if (typeof frase != "string") {
+                    return ""
+                }
+
+                // Parto la frase en palabras
+                let palabras = frase.split(" ");
+
+                // Capitalizo palabra a palabra
+                let palabrasProcesadas = palabras.map(palabra => {
+                    
+                    // Contar vocales de la palabra
+                    for (let i = 0; i < palabra.length; i++) {
+                        if (vocales.includes(palabra[i].toLowerCase())) {
+                            totalVocales++;
+                        }
+                    }
+                    
+                    // Ver si empieza por vocal
+                    if (vocales.includes(palabra[0].toLowerCase())) {
+                        palabrasQueEmpiezanPorVocal++;
+                    }
+
+                    // Devuelvo la palabra capitalizada
+                    return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
+                });
+                
+                // Devuelvo la frase reconstruida ya capitalizada
+                return palabrasProcesadas.join(" ");
+                    
+            });
+
+            let respuesta = {
+                "frasesProcesadas": frasesProcesadas,
+                "totalVocales": totalVocales,
+                "palabrasQueEmpiezanPorVocal": palabrasQueEmpiezanPorVocal
+            }
+            return respuesta;
+        }
+
+        console.log(procesarFrases(frases));
+    </script>
+</body>
+</html>

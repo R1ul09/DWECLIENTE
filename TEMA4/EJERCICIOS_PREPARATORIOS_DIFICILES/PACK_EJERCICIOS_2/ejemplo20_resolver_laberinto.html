@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Resolver un laberinto recursivamente (maze solver)
+
+        🧠 Representación
+
+        0 = camino
+        1 = pared
+        E = entrada
+        S = salida
+
+        const laberinto = [
+            ["E", 0, 1, 0],
+            [1, 0, 1, 0],
+            [0, 0, 0, "S"]
+        ];
+        */
+        function resolverLaberinto(mapa, fila, col, visitado = {}) {
+
+            // Si salgo del mapa → no vale
+            if (fila < 0 || col < 0 || fila >= mapa.length || col >= mapa[0].length) {
+                return false;
+            }
+
+            // Si es pared → no vale
+            if (mapa[fila][col] === 1) {
+                return false;
+            }
+
+            // Si ya pasé por aquí → evito bucle infinito
+            let clave = fila + "," + col;
+            if (visitado[clave]) {
+                return false;
+            }
+            visitado[clave] = true;
+
+            // Si llego a la salida → hemos ganado
+            if (mapa[fila][col] === "S") {
+                return true;
+            }
+
+            // Intento moverme en 4 direcciones
+            return (
+                resolverLaberinto(mapa, fila - 1, col, visitado) || // arriba
+                resolverLaberinto(mapa, fila + 1, col, visitado) || // abajo
+                resolverLaberinto(mapa, fila, col - 1, visitado) || // izquierda
+                resolverLaberinto(mapa, fila, col + 1, visitado)    // derecha
+            );
+        }
+
+        console.log(
+            resolverLaberinto(
+                [
+                    ["E", 0, 1, 0],
+                    [1, 0, 1, 0],
+                    [0, 0, 0, "S"]
+                ],
+                0, 0
+            )
+        );
+
+    </script>
+</body>
+</html>

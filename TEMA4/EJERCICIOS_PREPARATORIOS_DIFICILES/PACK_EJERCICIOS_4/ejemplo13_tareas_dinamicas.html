@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            EJERCICIO INFERNAL 5 — Prioridad dinámica
+            Enunciado:
+            Cada tarea tiene una prioridad.
+            Cuando una tarea termina, TODAS las demás reducen su duración a la mitad.
+            callbackFinal recibe el orden final.
+
+            Entrada:
+            [
+                {id:"1", duracion:600},
+                {id:"2", duracion:800},
+                {id:"3", duracion:1200}
+            ]
+
+            Salida:
+            Tarea 2 completada
+            (las otras se vuelven más rápidas)
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let completadas = [];
+            let timers = {};
+
+            function iniciar(tarea) {
+
+                timers[tarea.id] = setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " completada");
+
+                    completadas.push(tarea.id);
+
+                    // Reducimos las duraciones de las tareas restantes
+                    tareas.forEach(function(t) {
+                        if (!completadas.includes(t.id)) {
+                            clearTimeout(timers[t.id]);
+                            t.duracion = t.duracion / 2;
+
+                            // Reiniciamos la tarea con la nueva duración
+                            iniciar(t);
+                        }
+                    });
+
+                    if (completadas.length === tareas.length) {
+                        callbackFinal(completadas);
+                    }
+
+                }, tarea.duracion);
+            }
+
+            tareas.forEach(iniciar);
+        }
+
+        procesarTareas(
+            [
+                {id:"1", duracion:600},
+                {id:"2", duracion:800},
+                {id:"3", duracion:1200}
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

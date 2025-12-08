@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Contar cuántas veces aparece una palabra dentro de un texto (recursivo + slicing)
+        🧠 Objetivo
+
+        Sin usar loops ni .split().
+        Buscar cuántas veces aparece una palabra dentro de una frase.
+        */
+        function contarApariciones(texto, palabra) {
+
+            // Caso base: si el texto ya es más corto que la palabra → no puede haber coincidencias
+            if (texto.length < palabra.length) {
+                return 0;
+            }
+
+            // Si el texto empieza por la palabra → 1 + recursión
+            if (texto.startsWith(palabra)) {
+                return 1 + contarApariciones(texto.slice(palabra.length), palabra);
+            }
+
+            // Si no coincide, avanzo un carácter
+            return contarApariciones(texto.slice(1), palabra);
+        }
+
+        console.log(contarApariciones("hola adios hola hola adios", "hola")); 
+
+    </script>
+</body>
+</html>

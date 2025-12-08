@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 4 — Tareas con subtareas
+
+        Enunciado:
+        - Primero se ejecuta la tarea principal.
+        - Luego todas sus subtareas.
+        - callbackFinal recibe todos los IDs en orden de finalización.
+
+        */
+
+        function procesarTareasConSubtareas(tareas, callbackFinal) {
+
+            let resultado = []; // Aquí guardamos todas las tareas y subtareas ya hechas
+
+            // Número total (tareas + subtareas)
+            let total = tareas.length + tareas.reduce(function(acc, t) {
+                return acc + t.subtareas.length;
+            }, 0);
+
+            tareas.forEach(function(tarea) {
+
+                // Ejecutamos la tarea principal
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " completada");
+                    resultado.push(tarea.id);
+
+                    // Ahora ejecutamos todas sus subtareas
+                    tarea.subtareas.forEach(function(sub) {
+
+                        setTimeout(function() {
+
+                            console.log("Subtarea " + sub.id + " completada");
+                            resultado.push(sub.id);
+
+                            // Cuando ya tenemos todas, fin
+                            if (resultado.length === total) {
+                                callbackFinal(resultado);
+                            }
+
+                        }, sub.duracion);
+
+                    });
+
+                }, tarea.duracion);
+
+            });
+        }
+
+        // Ejemplo:
+        procesarTareasConSubtareas(
+            [
+                {id:"A", duracion:300, subtareas:[{id:"A1", duracion:200}]},
+                {id:"B", duracion:100, subtareas:[{id:"B1", duracion:50}, {id:"B2", duracion:150}]}
+            ],
+            function(res) {
+                console.log("Final:", res);
+            }
+        );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 14 — Transformar frase alternando mayúsculas y minúsculas, contando vocales
+
+        Ejemplo:
+        ➡️ "hola mundo"
+        ➡️ "HoLa MuNdO"
+        */
+        function alternar(frase) {
+            const vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+            let totalVocales = 0;
+
+            let resultado = "";
+            let indice = 0; // solo cuenta letras, no espacios
+
+            for (let c of frase) {
+                if (c === " ") {
+                    resultado += " ";
+                    continue;
+                }
+
+                if (vocales.includes(c)) totalVocales++;
+
+                if (indice % 2 === 0) resultado += c.toUpperCase();
+                else resultado += c.toLowerCase();
+
+                indice++;
+            }
+
+            return {
+                transformado: resultado,
+                vocales: totalVocales
+            };
+        }
+
+        console.log(alternar("hola mundo"));
+    </script>
+
+</body>
+</html>

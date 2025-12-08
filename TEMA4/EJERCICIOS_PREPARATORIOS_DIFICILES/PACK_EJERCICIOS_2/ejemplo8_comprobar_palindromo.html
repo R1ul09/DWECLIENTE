@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function esPalindromo(texto, i = 0, j = texto.length - 1) {
+
+            // Si los índices se cruzan, ya comprobé todo
+            if (i >= j) {
+                return true;
+            }
+
+            // Si los extremos no coinciden → no es palíndromo
+            if (texto[i] !== texto[j]) {
+                return false;
+            }
+
+            // Compruebo los siguientes extremos
+            return esPalindromo(texto, i + 1, j - 1);
+        }
+
+        console.log(esPalindromo("oso")); // true
+        console.log(esPalindromo("hola")); // false
+
+    </script>
+</body>
+</html>

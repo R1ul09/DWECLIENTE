@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 8 — Filtrar capicúas y devolverlos invertidos
+        Entrada:
+        arr = [121, 45, 303, 88]
+        Salida:
+        ["121", "303", "88"] (invertidos quedan igual en este ejemplo)
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            const filtrados = arr.filter(filtro);
+            return filtrados.map(transformacion);
+        }
+
+        // Filtro: capicúa
+        const esCapicua = n => {
+            const t = String(n);
+            return t === t.split("").reverse().join("");
+        };
+
+        // Transformación: devolver la versión invertida
+        const invertirTexto = n => String(n).split("").reverse().join("");
+
+        console.log(filtrarYTransformar([121,45,303,88], esCapicua, invertirTexto));
+
+    </script>
+</body>
+</html>

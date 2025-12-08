@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        EJERCICIO 2 — Inventario con map, reduce y agrupación
+        Enunciado
+        Crea una función analizarInventario(productos, callbackFinal) donde:
+        productos = { id, categoria, cantidad, precioUnidad }
+
+        Debe:
+        Calcular el valor total del inventario.
+        Crear un array { id, valorProducto }.
+        Agrupar por categoría → { categoria: [ids...] }
+        Llamar a callbackFinal(objFinal).
+
+        Debe usarse:
+        map
+        reduce
+        una función anónima
+        un callback inline
+
+        Ejemplo de entrada
+        let productos = [
+            { id: "T1", categoria: "tecnologia", cantidad: 5, precioUnidad: 300 },
+            { id: "T2", categoria: "tecnologia", cantidad: 2, precioUnidad: 100 },
+            { id: "R1", categoria: "ropa", cantidad: 10, precioUnidad: 20 },
+            { id: "A1", categoria: "alimentacion", cantidad: 30, precioUnidad: 2 }
+        ];
+
+        analizarInventario(productos, resultado => {
+            console.log(resultado);
+        });
+
+        Ejemplo de salida
+        {
+        valorTotalInventario: 5*300 + 2*100 + 10*20 + 30*2,   // 1500 + 200 + 200 + 60 = 1960
+        detalleValores: [
+            { id: "T1", valorProducto: 1500 },
+            { id: "T2", valorProducto: 200 },
+            { id: "R1", valorProducto: 200 },
+            { id: "A1", valorProducto: 60 }
+        ],
+        grupos: {
+            tecnologia: ["T1", "T2"],
+            ropa: ["R1"],
+            alimentacion: ["A1"]
+        }
+        }
+        */
+
+        let productos = [
+            { id: "T1", categoria: "tecnologia", cantidad: 5, precioUnidad: 300 },
+            { id: "T2", categoria: "tecnologia", cantidad: 2, precioUnidad: 100 },
+            { id: "R1", categoria: "ropa", cantidad: 10, precioUnidad: 20 },
+            { id: "A1", categoria: "alimentacion", cantidad: 30, precioUnidad: 2 }
+        ];
+
+        function analizarInventario(productos, callbackFinal) {
+            
+            // Aquí estoy creando un array nuevo donde por cada producto
+            // guardo su id y también cuánto vale ese producto multiplicando cantidad * precio.
+            // Vamos, que lo transformo todo en un "resumen" de cada producto.
+            const detalleValores = productos.map(p => ({
+                "id": p.id,
+                "valorProducto": p.cantidad * p.precioUnidad
+            }));
+
+            // Aquí voy sumando todos los "valorProducto" que he calculado antes.
+            // Empiezo en 0 y voy acumulando cada valor.
+            const valorTotal = detalleValores.reduce((acumulador, objeto) => acumulador + objeto.valorProducto, 0);
+
+            // Aquí voy agrupando los productos por categoría.
+            // Si una categoría no existe aún en el acumulador, la creo con un array vacío.
+            // Luego voy metiendo dentro el id de cada producto.
+            const grupos = productos.reduce((acumulador, producto) => {
+
+                // Si no hay un grupo con ese nombre de categoría lo creo
+                if (!acumulador[producto.categoria]) {
+                    acumulador[producto.categoria] = [];
+                }
+
+                // Y meto el id dentro del grupo correspondiente
+                acumulador[producto.categoria].push(producto.id);
+
+                // Devuelvo el objeto acumulador para que siga funcionando el reduce
+                return acumulador;
+            }, {})
+
+            const resultado = {
+                valorTotal,
+                detalleValores,
+                grupos
+            }
+
+            // Y aquí le paso ese resultado al callback,
+            // que es la función que me dijo el usuario que debía ejecutar al final.
+            callbackFinal(resultado);
+        }
+
+        analizarInventario(productos, resultado => {
+            console.log(resultado);
+        });
+    </script>
+</body>
+</html>

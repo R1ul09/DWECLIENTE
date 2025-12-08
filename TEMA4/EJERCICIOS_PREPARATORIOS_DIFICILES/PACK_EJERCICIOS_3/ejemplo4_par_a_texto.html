@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 4 — Suma de dígitos par → devolver como texto
+        Entrada:
+        arr = [12,34,55,91]
+        Salida:
+        ["Número 12", "Número 34"]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            const filtrados = arr.filter(filtro);
+            return filtrados.map(transformacion);
+        }
+
+        // Arrow para sumar dígitos y ver si es par
+        const sumaDigitosPar = n => {
+            const suma = String(n)
+                .split("")
+                .reduce((acc, d) => acc + Number(d), 0);
+            return suma % 2 === 0;
+        };
+
+        // Arrow para pasarlo a string
+        const aTexto = n => `Número ${n}`;
+
+        console.log(filtrarYTransformar([12,34,55,91], sumaDigitosPar, aTexto));
+
+    </script>
+</body>
+</html>

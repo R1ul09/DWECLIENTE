@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Crear todas las combinaciones posibles de una palabra (recursivo profundo)
+
+        Este es nivel examen difícil.
+
+        🧠 Ejemplo
+
+        Entrada: "abc"
+
+        Salida:
+
+        ["abc", "acb", "bac", "bca", "cab", "cba"]
+        */
+        function permutaciones(texto) {
+
+            // Si la palabra tiene 1 letra, solo hay una permutación
+            if (texto.length === 1) {
+                return [texto];
+            }
+
+            let resultado = [];
+
+            // Recorro cada letra como letra fija
+            for (let i = 0; i < texto.length; i++) {
+
+                let letraFija = texto[i];
+
+                // Quito la letra fija del texto
+                let resto = texto.slice(0, i) + texto.slice(i + 1);
+
+                // Genero permutaciones del resto recursivamente
+                let perms = permutaciones(resto);
+
+                // A cada permutación le añado la letra fija delante
+                perms.forEach(p => {
+                    resultado.push(letraFija + p);
+                });
+            }
+
+            return resultado;
+        }
+
+        console.log(permutaciones("abc"));
+
+    </script>
+</body>
+</html>

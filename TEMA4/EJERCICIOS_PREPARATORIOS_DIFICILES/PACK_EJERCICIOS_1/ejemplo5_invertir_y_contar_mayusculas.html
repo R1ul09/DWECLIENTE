@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 5 — Invertir cadena y contar cuántas letras son mayúsculas
+        
+        📝 Enunciado
+        Devuelve la cadena invertida
+        Cuenta cuántas letras estaban en mayúscula
+        */
+        function invertirYContarMayus(texto, index = 0, contador = 0, resultado = "") {
+
+            if (index === texto.length) {
+                return {
+                    mayusculas: contador,
+                    invertido: resultado
+                };
+            }
+
+            let letra = texto[index];
+            let esMayus = letra === letra.toUpperCase() && letra !== letra.toLowerCase();
+
+            return invertirYContarMayus(
+                texto,
+                index + 1,
+                esMayus ? contador + 1 : contador,
+                letra + resultado // aquí meto la letra al principio (esto lo invierte)
+            );
+        }
+
+        console.log(invertirYContarMayus("HoLa Mundo"));
+    </script>
+
+</body>
+</html>

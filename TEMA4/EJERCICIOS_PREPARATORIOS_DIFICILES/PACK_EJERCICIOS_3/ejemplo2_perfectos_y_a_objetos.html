@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 2 — Filtrar números perfectos y pasarlos a objeto
+        Entrada:
+        arr = [6,10,28]
+        Salida:
+        [{valor:6}, {valor:28}]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            const filtrados = arr.filter(filtro);
+            return filtrados.map(transformacion);
+        }
+
+        // Arrow para saber si es perfecto
+        const esPerfecto = n => {
+            let suma = 0;
+            for (let i = 1; i < n; i++) {
+                if (n % i === 0) suma += i;
+            }
+            return suma === n;
+        };
+
+        // Arrow para convertir a objeto
+        const aObjeto = n => ({ valor: n });
+
+        console.log(filtrarYTransformar([6,10,28], esPerfecto, aObjeto));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 3 — Tareas en cadena (una por una)
+
+        Enunciado:
+        - No queremos que las tareas vayan en paralelo.
+        - Cuando acaba una, empieza la siguiente.
+        - callbackFinal recibe los IDs en orden original.
+
+        */
+
+        function procesarTareasEnCadena(tareas, callbackFinal) {
+
+            let index = 0;       // Controla qué tarea toca ahora
+            let resultado = [];  // Aquí guardamos los IDs completados
+
+            function ejecutarSiguiente() {
+
+                // Cogemos la tarea actual
+                let tarea = tareas[index];
+
+                // Simulamos su tiempo
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " completada");
+
+                    // Guardamos su ID
+                    resultado.push(tarea.id);
+
+                    // Pasamos a la siguiente tarea
+                    index++;
+
+                    // Si quedan más, seguimos
+                    if (index < tareas.length) {
+                        ejecutarSiguiente();
+                    } else {
+                        // Si no, llamamos al callback final
+                        callbackFinal(resultado);
+                    }
+
+                }, tarea.duracion);
+
+            }
+
+            // Arrancamos el proceso
+            ejecutarSiguiente();
+        }
+
+        // Ejemplo
+        procesarTareasEnCadena(
+            [
+                {id:"A", duracion:500},
+                {id:"B", duracion:300},
+                {id:"C", duracion:100}
+            ],
+            function(res) {
+                console.log("Final:", res);
+            }
+        );
+
+    </script>
+</body>
+</html>

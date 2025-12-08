@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 9 — Agrupar palabras por su vocal dominante
+        📝 Enunciado
+        Crea una función que reciba un array de palabras y:
+        determine qué vocal aparece más veces en cada palabra
+        agrupe las palabras por esa vocal
+        ignore palabras sin vocales
+        devuelva un objeto así:
+
+        {
+        a: ["casa", "ratón"],
+        e: ["verde"],
+        i: ["pintura", "limite"],
+        o: ["sol", "boton"],
+        u: ["mundo"]
+        }
+
+        🎯 Requisitos:
+        No usar recursión
+        No usar métodos avanzados tipo reduce (solo map, forEach, etc.)
+        */
+        function agruparPorVocalDominante(palabras) {
+            const vocales = "aeiouáéíóú";
+            let grupos = { a: [], e: [], i: [], o: [], u: [] };
+
+            palabras.forEach(palabra => {
+                let conteo = { a: 0, e: 0, i: 0, o: 0, u: 0 };
+
+                for (let letra of palabra.toLowerCase()) {
+                    let base = letra.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    if (vocales.includes(base)) {
+                        conteo[base]++;
+                    }
+                }
+
+                let mayor = 0;
+                let vocalDominante = null;
+
+                for (let v in conteo) {
+                    if (conteo[v] > mayor) {
+                        mayor = conteo[v];
+                        vocalDominante = v;
+                    }
+                }
+
+                if (vocalDominante) {
+                    grupos[vocalDominante].push(palabra);
+                }
+            });
+
+            return grupos;
+        }
+
+        console.log(agruparPorVocalDominante(["Casa", "Verde", "Límite", "Sol", "Ratón", "Pintura", "Mundo", "Botón"]));
+    </script>
+
+</body>
+</html>

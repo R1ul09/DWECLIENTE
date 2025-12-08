@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            EJERCICIO INFERNAL 3 — Reintentos
+            Enunciado:
+            Cada tarea puede fallar (random).
+            Si falla, se reintenta hasta 3 veces.
+            Si después de 3 fallos aún no funciona → se marca como fallida.
+            callbackFinal recibe listas: { exitos, fallos }
+
+            Entrada:
+            [{id:"A", duracion:300}, {id:"B", duracion:400}]
+
+            Salida:
+            Tarea A completada
+            Tarea B falló intento 1...
+            Tarea B completada
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let exitos = [];
+            let fallos = [];
+
+            tareas.forEach(function(tarea) {
+
+                function ejecutar(intento) {
+
+                    setTimeout(function() {
+
+                        let falla = Math.random() < 0.4; // 40% de fallo
+
+                        if (falla) {
+
+                            console.log("Tarea " + tarea.id + " falló intento " + intento);
+
+                            if (intento >= 3) {
+                                // Si ya falló 3 veces, la doy por perdida
+                                fallos.push(tarea.id);
+                                if (exitos.length + fallos.length === tareas.length) {
+                                    callbackFinal({exitos, fallos});
+                                }
+                            } else {
+                                // La vuelvo a intentar
+                                ejecutar(intento + 1);
+                            }
+
+                        } else {
+
+                            console.log("Tarea " + tarea.id + " completada");
+                            exitos.push(tarea.id);
+
+                            if (exitos.length + fallos.length === tareas.length) {
+                                callbackFinal({exitos, fallos});
+                            }
+                        }
+                    }, tarea.duracion);
+                }
+
+                ejecutar(1);
+            });
+        }
+
+        procesarTareas(
+            [
+                {id:"A", duracion:300},
+                {id:"B", duracion:400}
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 13 — Filtrar palabras palíndromas y capitalizarlas
+        Enunciado
+        Dado un array de palabras:
+        quedarse solo con las palíndromas
+        devolverlas capitalizadas
+        devolver cuántas vocales totales tienen
+        */
+        function procesarPalindromas(palabras) {
+            const vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+
+            let resultado = [];
+            let totalVocales = 0;
+
+            palabras.forEach(p => {
+                let limpia = p.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                let invertida = limpia.split("").reverse().join("");
+
+                if (limpia === invertida) {
+                    // Capitalizo
+                    let cap = p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
+                    resultado.push(cap);
+
+                    // Contar vocales
+                    for (let letra of p) {
+                        if (vocales.includes(letra)) totalVocales++;
+                    }
+                }
+            });
+
+            return { palindromas: resultado, totalVocales };
+        }
+
+    console.log(procesarPalindromas(["oso", "casa", "ana", "radar", "sol"]));
+</script>
+
+</body>
+</html>

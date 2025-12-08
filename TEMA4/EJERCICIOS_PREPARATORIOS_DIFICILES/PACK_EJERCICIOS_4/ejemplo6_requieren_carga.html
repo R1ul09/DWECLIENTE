@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*  
+            Ejercicio 4 — Variación 12 (carga previa)
+            Enunciado:
+            Cada tarea primero necesita "cargar" durante 200 ms antes de empezar su tiempo real.
+            Entrada:
+            [{id:"L1", duracion:300}, {id:"L2", duracion:500}]
+            Salida:
+            - Se muestra cuando carga, luego cuando termina
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let completadas = [];
+
+            tareas.forEach(function(tarea) {
+
+                console.log("Cargando tarea " + tarea.id + "...");
+
+                // Primero simulo la carga
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " lista, ejecutando...");
+
+                    // Ahora ejecuta su tiempo real
+                    setTimeout(function() {
+
+                        console.log("Tarea " + tarea.id + " completada");
+
+                        completadas.push(tarea.id);
+
+                        if (completadas.length === tareas.length) {
+                            callbackFinal(completadas);
+                        }
+
+                    }, tarea.duracion);
+
+                }, 200);
+            });
+        }
+
+        procesarTareas(
+            [
+                { id:"L1", duracion:300 },
+                { id:"L2", duracion:500 }
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

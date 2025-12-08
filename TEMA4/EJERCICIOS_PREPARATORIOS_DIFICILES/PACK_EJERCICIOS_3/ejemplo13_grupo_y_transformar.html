@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 8 — Filtro por grupos de 2 en 2
+
+        Enunciado:
+        Crea procesarPorGrupos(arr, filtro, transformacion) donde:
+        - filtro recibe (par) → par = [numActual, siguiente]
+        - transformacion recibe ese mismo par y lo transforma en un número
+
+        Ejemplo:
+        arr = [3,7,2,10,8,1]
+        Filtro: incluir pares cuya suma sea > 10
+        Transformación: devolver la multiplicación del par
+
+        Pares: (3,7) (2,10) (8,1)
+        Sumas:   10      12      9
+        Incluidos: (2,10)
+
+        Transformados → [20]
+        */
+
+        function procesarPorGrupos(arr, filtro, transformacion) {
+            let resultado = [];
+
+            for (let i = 0; i < arr.length; i += 2) {
+                let par = [arr[i], arr[i + 1]];
+                if (par[1] !== undefined && filtro(par)) {
+                    resultado.push(transformacion(par));
+                }
+            }
+
+            return resultado;
+        }
+
+        // Ejemplo
+        console.log(
+            procesarPorGrupos(
+                [3,7,2,10,8,1],
+                par => par[0] + par[1] > 10,
+                par => par[0] * par[1]
+            )
+        );
+
+    </script>
+</body>
+</html>

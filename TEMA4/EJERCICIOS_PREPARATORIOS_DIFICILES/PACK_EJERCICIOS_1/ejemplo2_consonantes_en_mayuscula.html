@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 2 — Contar consonantes y ponerlas en mayúscula
+        
+        📝 Enunciado
+        Igual que el original, pero ahora:
+        Contar consonantes
+        Convertir SOLO las consonantes en mayúscula
+        */
+        
+        function procesarConsonantes(texto, index = 0, contador = 0, resultado = "") {
+
+            if (index === texto.length) {
+                return {
+                    totalConsonantes: contador,
+                    textoProcesado: resultado
+                };
+            }
+
+            let letra = texto[index];
+            let vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+            let esLetra = /[a-zA-ZáéíóúÁÉÍÓÚ]/.test(letra);
+
+            // Aquí miro si es letra pero NO vocal → entonces es consonante
+            if (esLetra && !vocales.includes(letra)) {
+                return procesarConsonantes(
+                    texto,
+                    index + 1,
+                    contador + 1,
+                    resultado + letra.toUpperCase()
+                );
+            }
+
+            return procesarConsonantes(
+                texto,
+                index + 1,
+                contador,
+                resultado + letra
+            );
+        }
+
+        console.log(procesarConsonantes("hola recursividad"));
+    </script>
+
+</body>
+</html>

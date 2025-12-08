@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function maximo(arr, i = 0) {
+
+            // Si estoy en la última posición, ese es el máximo desde ahí
+            if (i === arr.length - 1) {
+                return arr[i];
+            }
+
+            // Busco el máximo del resto
+            let maxResto = maximo(arr, i + 1);
+
+            // Comparo el actual con el máximo del resto
+            return arr[i] > maxResto ? arr[i] : maxResto;
+        }
+
+        console.log(maximo([3, 9, 2, 5])); // 9
+
+    </script>
+</body>
+</html>

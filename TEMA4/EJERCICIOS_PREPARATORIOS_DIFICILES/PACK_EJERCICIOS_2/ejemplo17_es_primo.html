@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Ver si un número es primo usando recursividad
+        🧠 Objetivo
+
+        No se puede usar bucles.
+        Debemos dividir el número entre todos los números desde 2 hasta √n usando recursión.
+        */
+        function esPrimo(n, divisor = 2) {
+
+            // Los primos empiezan en 2
+            if (n < 2) {
+                return false;
+            }
+
+            // Si divisor supera la raíz cuadrada → ya sé que es primo
+            if (divisor * divisor > n) {
+                return true;
+            }
+
+            // Si divide exacto → NO es primo
+            if (n % divisor === 0) {
+                return false;
+            }
+
+            // Pruebo el siguiente divisor
+            return esPrimo(n, divisor + 1);
+        }
+
+        console.log(esPrimo(29)); // true
+        console.log(esPrimo(21)); // false
+
+    </script>
+</body>
+</html>

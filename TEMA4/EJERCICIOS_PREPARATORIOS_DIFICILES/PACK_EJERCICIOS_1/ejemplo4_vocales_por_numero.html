@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 4 — Cambiar vocales por números (A=1, E=2, I=3, O=4, U=5)
+        
+        📝 Enunciado
+        Convierte cada vocal por un número y cuenta cuántas vocales has cambiado.
+        */
+        function vocalesANumeros(texto, index = 0, contador = 0, resultado = "") {
+
+            if (index === texto.length) {
+                return {
+                    totalCambios: contador,
+                    textoProcesado: resultado
+                };
+            }
+
+            let letra = texto[index];
+            let mapa = {
+                "a": "1", "e": "2", "i": "3", "o": "4", "u": "5",
+                "A": "1", "E": "2", "I": "3", "O": "4", "U": "5"
+            };
+
+            if (mapa[letra]) {
+                return vocalesANumeros(
+                    texto,
+                    index + 1,
+                    contador + 1,
+                    resultado + mapa[letra]
+                );
+            }
+
+            return vocalesANumeros(texto, index + 1, contador, resultado + letra);
+        }
+
+        console.log(vocalesANumeros("programacion"));
+    </script>
+
+</body>
+</html>

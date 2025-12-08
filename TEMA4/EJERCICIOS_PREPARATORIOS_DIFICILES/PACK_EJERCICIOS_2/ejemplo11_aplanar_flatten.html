@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Aplanar un array anidado (flatten) solo con recursividad
+        🧠 Objetivo
+
+        Convertir esto:
+
+        [1, [2, [3, 4], 5], 6]
+
+
+        En esto:
+
+        [1, 2, 3, 4, 5, 6]
+        */
+
+        function aplanar(arr) {
+
+            // Si no es array → lo meto directamente en uno
+            if (!Array.isArray(arr)) {
+                return [arr];
+            }
+
+            // Caso array: voy cogiendo el primer elemento y el resto
+            if (arr.length === 0) {
+                return [];
+            }
+
+            // Aplano el primer elemento
+            let primer = aplanar(arr[0]);
+
+            // Aplano el resto del array
+            let resto = aplanar(arr.slice(1));
+
+            // Uno los dos trozos
+            return primer.concat(resto);
+        }
+
+        console.log(aplanar([1, [2, [3, 4], 5], 6]));
+
+    </script>
+</body>
+</html>

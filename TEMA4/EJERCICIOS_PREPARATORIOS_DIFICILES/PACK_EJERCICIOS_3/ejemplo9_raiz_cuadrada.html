@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 9 — Filtrar números con raíz entera y dividir entre 2
+        Entrada:
+        arr = [4,7,9,16,20]
+        Salida:
+        [2, 3, 8]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            const filtrados = arr.filter(filtro);
+            return filtrados.map(transformacion);
+        }
+
+        // Filtro: raíz entera
+        const raizEntera = n => Number.isInteger(Math.sqrt(n));
+
+        // Transformación: dividir entre 2
+        const dividirEntre2 = n => n / 2;
+
+        console.log(filtrarYTransformar([4,7,9,16,20], raizEntera, dividirEntre2));
+
+    </script>
+</body>
+</html>

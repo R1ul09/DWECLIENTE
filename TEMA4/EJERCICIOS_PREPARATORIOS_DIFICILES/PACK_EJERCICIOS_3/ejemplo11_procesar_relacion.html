@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 6 — Comparar elementos entre sí (con funciones anónimas)
+
+        Enunciado:
+        Crea una función procesarRelacion(arr, filtro, transformacion) donde:
+        - filtro recibe (num, indice, arr) y decide si incluirlo comparándolo con otro elemento.
+        - transformacion recibe el número filtrado y devuelve otro valor.
+
+        Haz un ejemplo donde:
+        Entrada:
+        arr = [10, 5, 20, 3, 40]
+        filtro = (n, i, arr) => n > arr[i+1] || i === arr.length-1
+        transformacion = n => n * 3
+
+        Salida:
+        [30, 60, 120]
+        */
+
+        function procesarRelacion(arr, filtro, transformacion) {
+            // Hago el filtrado pasando los datos que necesita el filtro
+            let filtrados = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (filtro(arr[i], i, arr)) {
+                    filtrados.push(arr[i]);
+                }
+            }
+
+            // Aplico la transformación
+            let transformados = [];
+            for (let i = 0; i < filtrados.length; i++) {
+                transformados.push(transformacion(filtrados[i]));
+            }
+
+            return transformados;
+        }
+
+        // Ejemplo
+        console.log(
+            procesarRelacion(
+                [10, 5, 20, 3, 40],
+                (n, i, arr) => n > arr[i+1] || i === arr.length - 1,
+                n => n * 3
+            )
+        );
+
+    </script>
+</body>
+</html>

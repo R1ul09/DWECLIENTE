@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        NUEVO EJERCICIO 2 (versión más difícil del recursivo)
+        📝 Enunciado (más difícil)
+        Escribe una función recursiva sumarRango(inicio, fin) que:
+        Devuelva la suma de todos los valores enteros entre inicio y fin, incluidos ambos.
+        Si inicio > fin, la función debe intercambiar automáticamente los valores.
+        Si alguno no es número, devolver null.
+        NO se pueden usar bucles.
+
+        📥 Ejemplo de entrada
+        sumarRango(3, 7);
+
+        📤 Salida
+        25
+        */
+
+        function sumaRango(inicio, fin) {
+
+            // Miramos que los parametros sean numeros, sino devolvemos null
+            if (typeof inicio != "number" || typeof fin != "number") {
+                return null;
+            }
+
+            // si inicio es mayor que el final, los intercambiamos
+            if (inicio > fin) {
+                [inicio, fin] = [fin, inicio];
+            }
+
+            // caso base de que pare, si es el mismo numero, pues entonce parara
+            if (inicio == fin) {
+                return inicio;
+            }
+
+            // esto va a devolver el inicio + la funcion con el inicio 
+            return inicio + sumaRango(inicio + 1, fin);
+        }
+
+        console.log(sumaRango(3, 7))
+    </script>
+</body>
+</html>

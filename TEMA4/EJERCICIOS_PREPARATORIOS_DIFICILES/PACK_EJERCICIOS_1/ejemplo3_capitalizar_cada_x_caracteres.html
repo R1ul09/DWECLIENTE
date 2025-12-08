@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 3 — Capitalizar cada X caracteres
+
+        📝 Enunciado
+        Crea una función recursiva que ponga en mayúscula cada 3 letras de un texto.
+        Si algún caracter NO es letra, lo ignora para el contador.
+        */
+        function capitalizarCadaTres(texto, index = 0, contador = 1, resultado = "") {
+
+            if (index === texto.length) {
+                return resultado;
+            }
+
+            let letra = texto[index];
+            let esLetra = /[a-zA-ZáéíóúÁÉÍÓÚ]/.test(letra);
+
+            if (esLetra) {
+                // Si es la 3ª letra → la pongo en mayúscula
+                if (contador === 3) {
+                    return capitalizarCadaTres(
+                        texto,
+                        index + 1,
+                        1,
+                        resultado + letra.toUpperCase()
+                    );
+                } else {
+                    return capitalizarCadaTres(
+                        texto,
+                        index + 1,
+                        contador + 1,
+                        resultado + letra
+                    );
+                }
+            }
+
+            // Si no es letra no cambia el contador
+            return capitalizarCadaTres(texto, index + 1, contador, resultado + letra);
+        }
+
+        console.log(capitalizarCadaTres("hola como estas amigo"));
+    </script>
+
+</body>
+</html>

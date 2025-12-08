@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 1 — Filtrar primos y elevarlos al cuadrado
+        Entrada:
+        arr = [2,3,4,5,6,7]
+        Salida:
+        [4, 9, 25, 49]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            // Primero filtro la lista usando la función anónima filtro
+            const filtrados = arr.filter(filtro);
+
+            // Luego transformo lo filtrado
+            return filtrados.map(transformacion);
+        }
+
+        // Arrow para saber si un número es primo
+        const esPrimo = n => {
+            if (n <= 1) return false;
+            for (let i = 2; i < n; i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        };
+
+        // Arrow para elevar al cuadrado
+        const alCuadrado = n => n * n;
+
+        console.log(filtrarYTransformar([2,3,4,5,6,7], esPrimo, alCuadrado));
+
+    </script>
+</body>
+</html>

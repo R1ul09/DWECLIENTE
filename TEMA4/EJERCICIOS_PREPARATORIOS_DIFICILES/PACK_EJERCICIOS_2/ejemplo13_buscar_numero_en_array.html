@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Buscar un número dentro de un array (recursivo tipo "algoritmo de búsqueda")
+        */
+        function buscar(arr, objetivo, i = 0) {
+
+            // Caso base: si llego al final, no está
+            if (i >= arr.length) {
+                return false;
+            }
+
+            // Si lo encuentro → true
+            if (arr[i] === objetivo) {
+                return true;
+            }
+
+            // Paso al siguiente elemento
+            return buscar(arr, objetivo, i + 1);
+        }
+
+        console.log(buscar([4, 8, 2, 9], 2));   // true
+        console.log(buscar([4, 8, 2, 9], 5));   // false
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        EJERCICIO 4 — Asincronía avanzada con setTimeout, prioridades y orden especial
+        Enunciado
+        Implementa gestionarProcesos(procesos, callbackFinal) donde:
+        procesos = { id, duracion, prioridad }
+        Cada proceso se ejecuta con setTimeout(duracion)
+        Al terminar imprime (callback inline):
+        "Proceso <id> finalizado con prioridad <prioridad>"
+
+        El array final debe ordenarse así:
+        Primero según orden real de finalización
+        Si dos procesos acaban exactamente a la vez → el de mayor prioridad primero
+        Al finalizar todos → llamar a callbackFinal(listaProcesosFinalizados).
+
+        Ejemplo de entrada
+        let procesos = [
+            { id: "X", duracion: 300, prioridad: 1 },
+            { id: "Y", duracion: 200, prioridad: 3 },
+            { id: "Z", duracion: 200, prioridad: 2 }
+        ];
+
+        gestionarProcesos(procesos, resultado => {
+            console.log(resultado);
+        });
+
+        Ejemplo de salida (aprox)
+
+        Salida por consola (orden real):
+
+        Proceso Y finalizado con prioridad 3
+        Proceso Z finalizado con prioridad 2
+        Proceso X finalizado con prioridad 1
+
+
+        Resultado final enviado al callback:
+
+        [
+        { id: "Y", duracion: 200, prioridad: 3 },
+        { id: "Z", duracion: 200, prioridad: 2 },
+        { id: "X", duracion: 300, prioridad: 1 }
+        ]
+        */
+
+        function gestionarProcesos(procesos, callbackFinal) {
+
+            let procesosTerminados = [];
+
+            procesos.forEach(proceso => {
+
+                setTimeout(() => {
+
+                    // Esto solo imprime al terminar el proceso
+                    console.log("Proceso " + proceso.id + " finalizado con prioridad " + proceso.prioridad);
+
+                    // Aquí guardo el proceso tal cual, lo necesito después para ordenarlo
+                    procesosTerminados.push(proceso);
+                    
+                    // Si ya terminaron todos, ahora sí ordeno y llamo al callback final
+                    if (procesosTerminados.length === procesos.length) {
+
+                        // Ordeno primero por el tiempo real de finalización (ya vienen en ese orden)
+                        // PERO si dos tienen la misma duración, ordeno por prioridad (mayor primero)
+                        procesosTerminados.sort((a, b) => {
+
+                            if (a.duracion === b.duracion) {
+                                // mayor prioridad primero
+                                return b.prioridad - a.prioridad;
+                            }
+
+                            // si no empatan, dejo el orden de llegada
+                            return 0;
+                        });
+
+                        // Llamo al callback final con la lista ordenada
+                        callbackFinal(procesosTerminados);
+                    }
+                    
+                }, proceso.duracion);
+
+            });
+
+        }
+
+        let procesos = [
+            { id: "X", duracion: 300, prioridad: 1 },
+            { id: "Y", duracion: 200, prioridad: 2 },
+            { id: "Z", duracion: 200, prioridad: 2 }
+        ];
+
+        gestionarProcesos(procesos, resultado => {
+            console.log(resultado);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 5 — Filtrar Fibonacci y elevarlos al cubo
+        Entrada:
+        arr = [0,1,2,3,5,8,13]
+        Salida:
+        [0,1,27,125,512,2197]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            const filtrados = arr.filter(filtro);
+            return filtrados.map(transformacion);
+        }
+
+        // Comprueba si un número es Fibonacci
+        const esFibonacci = n => {
+            const cuadradoPerfecto = x => Number.isInteger(Math.sqrt(x));
+            return (
+                cuadradoPerfecto(5*n*n + 4) ||
+                cuadradoPerfecto(5*n*n - 4)
+            );
+        };
+
+        const alCubo = n => n ** 3;
+
+        console.log(filtrarYTransformar([0,1,2,3,5,8,13], esFibonacci, alCubo));
+
+    </script>
+</body>
+</html>

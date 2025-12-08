@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 8 — Contar letras repetidas consecutivas y comprimir el texto
+
+        Formato tipo compresión RLE:
+        Ejemplo:
+        "aaabbc" → "a3b2c1"
+        */
+        function comprimir(texto, index = 0, actual = "", contador = 0, resultado = "") {
+
+            if (index === texto.length) {
+
+                if (actual !== "") {
+                    resultado += actual + contador;
+                }
+
+                return resultado;
+            }
+
+            let letra = texto[index];
+
+            // Si estoy empezando
+            if (actual === "") {
+                return comprimir(texto, index + 1, letra, 1, "");
+            }
+
+            // Si la letra es igual → aumento el contador
+            if (letra === actual) {
+                return comprimir(texto, index + 1, actual, contador + 1, resultado);
+            }
+
+            // Si cambia la letra → cierro la anterior
+            return comprimir(
+                texto,
+                index + 1,
+                letra,
+                1,
+                resultado + actual + contador
+            );
+        }
+
+        console.log(comprimir("aaabbccccdde"));
+    </script>
+
+</body>
+</html>

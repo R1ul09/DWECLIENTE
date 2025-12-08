@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Función recursiva que suma solo los números pares desde 0 hasta n
+        function sumarParesHasta(n) {
+
+            // Si n es menor que 2, ya no hay pares que sumar
+            if (n < 2) {
+                return 0;
+            }
+
+            // Si n es par, lo sumo y salto 2 hacia atrás
+            if (n % 2 === 0) {
+                return n + sumarParesHasta(n - 2);
+            }
+
+            // Si n es impar, bajo uno para llegar al par anterior
+            return sumarParesHasta(n - 1);
+        }
+
+        console.log(sumarParesHasta(10)); // 30
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 3 — Filtrar números con dígitos crecientes y duplicarlos
+        Entrada:
+        arr = [12,89,123,98]
+        Salida:
+        [24, 178, 246]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            const filtrados = arr.filter(filtro);
+            return filtrados.map(transformacion);
+        }
+
+        // Mira si los dígitos van subiendo
+        const digitosCrecientes = n => {
+            const t = String(n);
+            for (let i = 0; i < t.length - 1; i++) {
+                if (t[i] >= t[i+1]) return false;
+            }
+            return true;
+        };
+
+        // Duplico el número
+        const duplicar = n => n * 2;
+
+        console.log(filtrarYTransformar([12,89,123,98], digitosCrecientes, duplicar));
+
+    </script>
+</body>
+</html>

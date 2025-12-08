@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Sumar TODAS las cifras de un número (recursividad doble)
+        🧠 Ejemplo
+
+        9872 → 9 + 8 + 7 + 2 = 26
+        */
+        function sumarCifras(n) {
+
+            // Si solo queda 1 cifra, paro
+            if (n < 10) {
+                return n;
+            }
+
+            // Sumo la última cifra + el resto
+            let ultima = n % 10;
+            let resto = Math.floor(n / 10);
+
+            return ultima + sumarCifras(resto);
+        }
+
+        console.log(sumarCifras(9872)); // 26
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 10 — Filtrar según otro array y transformar combinando valores
+
+        Enunciado:
+        Crea procesarDoble(arr1, arr2, filtro, transformacion) donde:
+        - filtro recibe (n1, n2)
+        - transformacion recibe los mismos dos valores
+
+        Ejemplo:
+        arr1 = [2, 8, 3, 5]
+        arr2 = [1, 4, 10, 2]
+        Filtro: incluir si n1 * n2 es impar
+        Transformación: devolver n1 + n2 + (n1*n2)
+
+        Operaciones:
+        2*1=2 (NO)
+        8*4=32 (NO)
+        3*10=30 (NO)
+        5*2=10 (NO)
+
+        Salida → []
+        */
+
+        function procesarDoble(arr1, arr2, filtro, transformacion) {
+            let resultado = [];
+
+            for (let i = 0; i < arr1.length; i++) {
+                let n1 = arr1[i];
+                let n2 = arr2[i];
+
+                if (filtro(n1, n2)) {
+                    resultado.push(transformacion(n1, n2));
+                }
+            }
+
+            return resultado;
+        }
+
+        // Ejemplo
+        console.log(
+            procesarDoble(
+                [2,8,3,5],
+                [1,4,10,2],
+                (a,b) => (a*b) % 2 !== 0,
+                (a,b) => a + b + (a * b)
+            )
+        );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 7 — Reemplazar cada vocal por la siguiente vocal (a→e, e→i, i→o, o→u, u→a)
+
+        📝 Enunciado
+        Haz una función que:
+        Cambie cada vocal por la siguiente
+        Cuente cuántos reemplazos se hicieron
+        Devuelva el texto transformado
+        */
+        function cambiarVocales(texto, index = 0, contador = 0, resultado = "") {
+
+            if (index === texto.length) {
+                return {
+                    cambios: contador,
+                    textoProcesado: resultado
+                };
+            }
+
+            let letra = texto[index];
+            let mapa = {
+                "a": "e", "e": "i", "i": "o", "o": "u", "u": "a",
+                "A": "E", "E": "I", "I": "O", "O": "U", "U": "A"
+            };
+
+            if (mapa[letra]) {
+                return cambiarVocales(
+                    texto,
+                    index + 1,
+                    contador + 1,
+                    resultado + mapa[letra]
+                );
+            }
+
+            return cambiarVocales(texto, index + 1, contador, resultado + letra);
+        }
+
+        console.log(cambiarVocales("Hola Mundo"));
+    </script>
+
+</body>
+</html>

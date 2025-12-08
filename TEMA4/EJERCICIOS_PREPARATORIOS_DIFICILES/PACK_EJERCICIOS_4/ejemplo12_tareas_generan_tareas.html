@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            EJERCICIO INFERNAL 4 — Generar nuevas tareas
+            Enunciado:
+            Cada tarea, al finalizar, puede generar 0, 1 o 2 tareas nuevas.
+            Las nuevas tareas también deben procesarse.
+            callbackFinal recibe TODAS las tareas hechas.
+
+            Entrada:
+            [{id:"A", duracion:300}]
+
+            Ejemplo visual:
+            A → genera B y C → B genera D → ...
+
+            Salida:
+            Orden de finalización de TODAS las tareas generadas
+        */
+
+        function procesarTareas(tareasIniciales, callbackFinal) {
+
+            let todas = [...tareasIniciales];      // todas las tareas creadas
+            let completadas = [];
+
+            function ejecutarTarea(tarea) {
+
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " completada");
+
+                    completadas.push(tarea.id);
+
+                    // Genero entre 0 y 2 tareas nuevas
+                    let cuantas = Math.floor(Math.random() * 3);
+
+                    for (let i = 0; i < cuantas; i++) {
+                        let nueva = {
+                            id: tarea.id + "-" + (i + 1),
+                            duracion: 200 + Math.floor(Math.random() * 300)
+                        };
+                        todas.push(nueva);
+                        ejecutarTarea(nueva);
+                    }
+
+                    if (completadas.length === todas.length) {
+                        callbackFinal(completadas);
+                    }
+
+                }, tarea.duracion);
+            }
+
+            tareasIniciales.forEach(ejecutarTarea);
+        }
+
+        procesarTareas(
+            [
+                {id:"A", duracion:300}
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        Reducir un array a un valor (tipo reduce) solo con recursividad
+        🧠 Objetivo
+
+        Hacer un reduce casero, sin bucles.
+        */
+        function reducir(arr, fn, acumulador, i = 0) {
+
+            // Si llegué al final → devuelvo el acumulador final
+            if (i === arr.length) {
+                return acumulador;
+            }
+
+            // Aplico la función al elemento actual
+            let nuevoAcum = fn(acumulador, arr[i]);
+
+            // Paso al siguiente
+            return reducir(arr, fn, nuevoAcum, i + 1);
+        }
+
+        console.log(
+            reducir([1,2,3,4], (acc, n) => acc + n, 0)
+        ); // 10
+
+    </script>
+</body>
+</html>

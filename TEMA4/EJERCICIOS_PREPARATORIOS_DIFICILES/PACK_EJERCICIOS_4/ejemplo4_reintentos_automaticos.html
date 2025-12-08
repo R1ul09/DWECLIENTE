@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 5 — Tareas que se repiten si fallan
+
+        Enunciado:
+        - Cada tarea puede fallar (50% probabilidad).
+        - Tiene un número máximo de intentos.
+        - callbackFinal devuelve qué tareas se completaron y cuáles se agotaron.
+
+        */
+
+        function procesarTareasRepetidas(tareas, callbackFinal) {
+
+            let completadas = [];
+            let agotadas = [];
+            let total = tareas.length;
+
+            tareas.forEach(function(tarea) {
+
+                let intentos = 0;
+
+                function intentar() {
+
+                    intentos++;
+
+                    setTimeout(function() {
+
+                        let fallo = Math.random() < 0.5;
+
+                        if (fallo) {
+                            console.log("Intento " + intentos + " de " + tarea.id + " → falló");
+
+                            if (intentos < tarea.maxIntentos) {
+                                intentar(); // volvemos a intentar
+                            } else {
+                                agotadas.push(tarea.id);
+                                comprobarFin();
+                            }
+
+                        } else {
+                            console.log("Intento " + intentos + " de " + tarea.id + " → completada");
+                            completadas.push(tarea.id);
+                            comprobarFin();
+                        }
+
+                    }, tarea.duracion);
+
+                }
+
+                intentar(); // empezamos el proceso
+
+            });
+
+            function comprobarFin() {
+                if (completadas.length + agotadas.length === total) {
+                    callbackFinal({ completadas: completadas, agotadas: agotadas });
+                }
+            }
+        }
+
+        // Ejemplo:
+        procesarTareasRepetidas(
+            [
+                {id:"A", duracion:200, maxIntentos:3}
+            ],
+            function(res) {
+                console.log("Final:", res);
+            }
+        );
+
+    </script>
+</body>
+</html>

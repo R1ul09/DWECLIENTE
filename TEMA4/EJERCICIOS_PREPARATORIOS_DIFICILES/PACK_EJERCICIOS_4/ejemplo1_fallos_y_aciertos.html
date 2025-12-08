@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 2 — Tareas con fallos aleatorios
+
+        Enunciado:
+        - Cada tarea tiene un 30% de probabilidad de fallar.
+        - Si falla → mostramos "Tarea X falló".
+        - Si sale bien → "Tarea X completada".
+        - callbackFinal recibe { exitos:[], fallos:[] }
+
+        */
+
+        function procesarTareasConFallos(tareas, callbackFinal) {
+
+            // Aquí guardaremos los IDs según si fallan o se completan
+            let exitos = [];
+            let fallos = [];
+
+            // Recorremos las tareas
+            tareas.forEach(function(tarea) {
+
+                // Simulamos su duración
+                setTimeout(function() {
+
+                    // Generamos un fallo aleatorio en 30%
+                    let fallo = Math.random() < 0.3;
+
+                    // Si falla...
+                    if (fallo) {
+                        console.log("Tarea " + tarea.id + " falló");
+                        fallos.push(tarea.id);
+                    } else {
+                        console.log("Tarea " + tarea.id + " completada");
+                        exitos.push(tarea.id);
+                    }
+
+                    // Si ya terminaron todas...
+                    if (exitos.length + fallos.length === tareas.length) {
+                        callbackFinal({ exitos: exitos, fallos: fallos });
+                    }
+
+                }, tarea.duracion);
+
+            });
+        }
+
+        // Ejemplo
+        procesarTareasConFallos(
+            [
+                {id:"X", duracion:300},
+                {id:"Y", duracion:200},
+                {id:"Z", duracion:500}
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

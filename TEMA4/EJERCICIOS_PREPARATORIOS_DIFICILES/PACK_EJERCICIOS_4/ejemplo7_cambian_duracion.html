@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*  
+            Ejercicio 4 — Variación 13 (cambio de duración en mitad)
+            Enunciado:
+            Cada tarea empieza con su duración normal, pero a mitad del tiempo
+            se acorta o se alarga aleatoriamente.
+            Entrada:
+            [{id:"X", duracion:400}, {id:"Y", duracion:600}]
+            Salida:
+            - Muestra cuando cambia de tiempo
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let completadas = [];
+
+            tareas.forEach(function(tarea) {
+
+                // Tiempo de la primera mitad
+                let mitad = tarea.duracion / 2;
+
+                setTimeout(function() {
+
+                    console.log("Tarea " + tarea.id + " en mitad del proceso...");
+
+                    // Cambio aleatorio: se hace más corta o más larga
+                    let nuevaDuracion = Math.random() < 0.5 ? 150 : 500;
+
+                    console.log("Tarea " + tarea.id + " cambia duración a " + nuevaDuracion);
+
+                    setTimeout(function() {
+
+                        console.log("Tarea " + tarea.id + " completada");
+
+                        completadas.push(tarea.id);
+
+                        if (completadas.length === tareas.length) {
+                            callbackFinal(completadas);
+                        }
+
+                    }, nuevaDuracion);
+
+                }, mitad);
+            });
+        }
+
+        procesarTareas(
+            [
+                { id:"X", duracion:400 },
+                { id:"Y", duracion:600 }
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

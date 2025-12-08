@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 9 — Filtro dependiente del porcentaje de elementos válidos
+
+        Enunciado:
+        Crea procesarConPorcentaje(arr, filtro, transformacion) donde:
+        - Solo se transforman elementos que cumplan el filtro.
+        - PERO solo incluimos al final si el porcentaje de aprobados es mayor al 40%.
+
+        Ejemplo:
+        arr = [5,12,8,20,3,15]
+        Filtro: n => n > 10
+        Transformación: n => n + 100
+
+        Filtro da: 12,20,15 (3 aprobados)
+        Porcentaje = 3/6 = 50% > 40%
+
+        Salida → [112,120,115]
+        */
+
+        function procesarConPorcentaje(arr, filtro, transformacion) {
+            let filtrados = [];
+
+            for (let i = 0; i < arr.length; i++) {
+                if (filtro(arr[i])) {
+                    filtrados.push(arr[i]);
+                }
+            }
+
+            if (filtrados.length / arr.length <= 0.4) {
+                return []; // porcentaje muy bajo
+            }
+
+            let resultado = [];
+            for (let i = 0; i < filtrados.length; i++) {
+                resultado.push(transformacion(filtrados[i]));
+            }
+
+            return resultado;
+        }
+
+        // Ejemplo
+        console.log(
+            procesarConPorcentaje(
+                [5,12,8,20,3,15],
+                n => n > 10,
+                n => n + 100
+            )
+        );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        EJERCICIO 12 — Convertir frase a camelCase, contar vocales y consonantes
+        📝 Enunciado
+        Ejemplo:
+        ➡️ "hola mundo feliz"
+        ➡️ "holaMundoFeliz"
+        Además debe devolver:
+        total de vocales
+        total de consonantes
+        */
+        function camelizar(frase) {
+            let vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+            let palabras = frase.trim().split(/\s+/);
+
+            let totalVocales = 0;
+            let totalConsonantes = 0;
+
+            let camel = palabras
+                .map((p, i) => {
+                    p = p.toLowerCase();
+
+                    for (let letra of p) {
+                        if (vocales.includes(letra)) totalVocales++;
+                        else if (/[a-zñáéíóú]/i.test(letra)) totalConsonantes++;
+                    }
+
+                    if (i === 0) return p;
+                    return p.charAt(0).toUpperCase() + p.slice(1);
+                })
+                .join("");
+
+            return {
+                camelCase: camel,
+                vocales: totalVocales,
+                consonantes: totalConsonantes
+            };
+        }
+
+        console.log(camelizar("hola MUNDO feliz"));
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*  
+            Ejercicio 4 — Variación 14 (energía)
+            Enunciado:
+            Cada tarea tiene una "energía" inicial y va perdiendo 1 cada 100 ms.
+            Cuando llega a 0, se considera completada.
+            Entrada:
+            [{id:"E1", energia:5}, {id:"E2", energia:8}]
+            Salida:
+            - Cada 100ms se muestra la energía restante
+        */
+
+        function procesarTareas(tareas, callbackFinal) {
+
+            let completadas = [];
+
+            tareas.forEach(function(tarea) {
+
+                function gastarEnergia() {
+
+                    console.log("Tarea " + tarea.id + ": energía = " + tarea.energia);
+
+                    tarea.energia--;
+
+                    if (tarea.energia <= 0) {
+                        console.log("Tarea " + tarea.id + " completada");
+                        completadas.push(tarea.id);
+
+                        if (completadas.length === tareas.length) {
+                            callbackFinal(completadas);
+                        }
+                    } else {
+                        setTimeout(gastarEnergia, 100);
+                    }
+                }
+
+                gastarEnergia();
+            });
+        }
+
+        procesarTareas(
+            [
+                { id:"E1", energia:5 },
+                { id:"E2", energia:8 }
+            ],
+            function(resultado) {
+                console.log("Final:", resultado);
+            }
+        );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 7 — Filtrar números mayores que la media y multiplicarlos por la media
+        Entrada:
+        arr = [10,20,30,40]
+        Salida:
+        [30*25, 40*25] → [750, 1000]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            const filtrados = arr.filter(filtro);
+            return filtrados.map(transformacion);
+        }
+
+        // Calculo la media una vez
+        const arr = [10, 20, 30, 40];
+        const media = arr.reduce((a,b)=>a+b,0) / arr.length;
+
+        // Filtro: mayores que la media
+        const mayoresQueMedia = n => n > media;
+
+        // Transformación: multiplicar por la media
+        const multiplicarPorMedia = n => n * media;
+
+        console.log(filtrarYTransformar(arr, mayoresQueMedia, multiplicarPorMedia));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Ejercicio 6 — Filtrar números que contengan el dígito 7 y restarles 10
+        Entrada:
+        arr = [17, 70, 34, 27, 99]
+        Salida:
+        [7, 60, 17]
+        */
+
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            // Primero filtro según la condición
+            const filtrados = arr.filter(filtro);
+
+            // Luego aplico la transformación
+            return filtrados.map(transformacion);
+        }
+
+        // Filtro: números que tienen un 7 en algún lado
+        const contiene7 = n => String(n).includes("7");
+
+        // Transformación: restar 10
+        const restar10 = n => n - 10;
+
+        console.log(filtrarYTransformar([17, 70, 34, 27, 99], contiene7, restar10));
+
+    </script>
+</body>
+</html>

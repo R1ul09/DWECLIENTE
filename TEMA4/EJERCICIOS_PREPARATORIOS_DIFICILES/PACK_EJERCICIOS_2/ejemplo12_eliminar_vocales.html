@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function quitarVocales(texto, i = 0) {
+
+            const vocales = "aeiouáéíóúAEIOUÁÉÍÓÚ";
+
+            // Caso base: si llego al final del string, paro
+            if (i === texto.length) {
+                return "";
+            }
+
+            // Cojo el carácter actual
+            let letra = texto[i];
+
+            // Si es vocal, la salto
+            if (vocales.includes(letra)) {
+                return quitarVocales(texto, i + 1);
+            }
+
+            // Si NO es vocal, la dejo y sigo concatenando
+            return letra + quitarVocales(texto, i + 1);
+        }
+
+        console.log(quitarVocales("Recursividad Avanzada")); 
+
+    </script>
+</body>
+</html>

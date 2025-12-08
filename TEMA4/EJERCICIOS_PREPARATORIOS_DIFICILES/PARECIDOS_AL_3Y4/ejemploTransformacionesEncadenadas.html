@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        EJERCICIO 3 — Transformaciones encadenadas y control de errores
+        Enunciado
+        Implementa procesarTexto(texto, transformaciones, callbackFinal) donde:
+        texto es un string.
+        transformaciones es un array de funciones que modifican el texto.
+        Se aplican en orden.
+        Si alguna devuelve algo que NO sea string → callbackFinal("Error: transformación inválida")
+        Debes medir el tiempo de ejecución total con performance.now().
+        Si todo va bien → devolver:
+
+        {
+        textoFinal: "...",
+        tiempoMs: X
+        }
+
+        Ejemplo de entrada
+        let texto = "Hola 123 mundo";
+
+        let transformaciones = [
+            t => t.toUpperCase(),
+            t => t.replace(/\s+/g, "-"),
+            t => t.replace(/[0-9]/g, ""),
+            t => t.split("").reverse().join("")
+        ];
+
+        procesarTexto(texto, transformaciones, res => {
+            console.log(res);
+        });
+
+        Ejemplo de salida
+        {
+        textoFinal: "ODNUM-ALOH",
+        tiempoMs: 0.32
+        }
+        */
+
+        function procesarTexto(texto, transformaciones, callbackFinal) {
+
+            const start = performance.now();
+
+            // Esta variable va a ir guardando el texto tal y como va cambiando.
+            // Empieza siendo el texto original que me pasas.
+            let textoActual = texto;
+
+            // Aquí recorro una por una todas las funciones que vienen en transformaciones
+            for (let transformacion of transformaciones) {
+
+                // Aplico la transformación al texto actual.
+                // Básicamente, cojo el texto que llevo y lo paso por la función.
+                textoActual = transformacion(textoActual);
+
+                // Compruebo si lo que ha devuelto la función sigue siendo un string.
+                // Si no lo es, significa que alguien devolvió algo raro y paro el proceso.
+                if (typeof textoActual != "string") {
+                    callbackFinal("Error: transformación inválida");
+                    return
+                }
+            }
+
+            const end = performance.now();
+
+            const duracion = end - start;
+
+            const resultado = {
+                "textoFinal": textoActual,
+                "tiempoMs": duracion
+            }
+
+            callbackFinal(resultado);
+        }
+
+        let texto = "Hola 123 mundo";
+
+        let transformaciones = [
+            t => t.toUpperCase(),
+            t => t.replace(/\s+/g, "-"),
+            t => t.replace(/[0-9]/g, ""),
+            t => t.split("").reverse().join("")
+        ];
+
+        procesarTexto(texto, transformaciones, resultado => {
+            console.log(resultado);
+        });
+    </script>
+</body>
+</html>
