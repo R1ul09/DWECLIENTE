@@ -26,25 +26,32 @@
         totalVocales: 9 }
         */
 
+        // Array que vamos a comprobar
         let array = ["hola", "mUndo", "árbol", "PIrrAmiDe"];
 
+        // creamos la funciin
         function capitalizarYContarVocales(words) {
 
             let totalVocales = 0;
+            // creamos las vocales posibles
             const vocales = "aeiou"
 
+            // creamos un array que va a ser igual a lo siguiente
             let ArrayCapitalizado = words.map(palabra => {
 
+                // vemos el total de vocales
                 for (let i = 0; i < palabra.length; i++) {
                     if (vocales.includes(palabra[i].toLowerCase())) {
                         totalVocales++;
                     }
                 }
                 
+                // devolvemos la palabra con la primera en mayuscula
                 return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
                 
             })
 
+            // creamos la respuesta
             let respuesta = {
                 "palabras": ArrayCapitalizado,
                 "totalVocales": totalVocales
@@ -52,6 +59,8 @@
             return respuesta;
         }
 
+        console.log("Array utilizado: " + array);
+        console.log("-- RESULTADO --")
         console.log(capitalizarYContarVocales(array));
     </script>
 </body>
