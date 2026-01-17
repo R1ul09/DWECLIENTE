@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio de Sucesión de Fibonacci</h1>
+    <h2>Nota: Si pones mas de el numero 35, empieza a tardar mucho en cargar el resultado</h2>
+    <label for="numero">Introduce el numero para hacer Fibonacci:</label>
+    <input type="number" name="numero" id="numero">
+    <br>
+    <br>
+    <button onclick="resultado()">Calcular</button>
+    <br>
+    <div id="resultado"></div>
+
+    <script>
+
+        /*
+            La secuencia de sucesión de Fibonacci tiene la fórmula Fn = Fn-1 + Fn-2. En otras palabras, el siguiente número es una suma de los dos anteriores.
+
+            Los dos primeros números son 1, luego 2(1+1), luego 3(1+2), 5(2+3) y así sucesivamente: 1, 1, 2, 3, 5, 8, 13, 21....
+
+            La sucesión de Fibonacci está relacionada la proporción áurea y muchos fenómenos naturales alrededor nuestro.
+
+            Escribe una función fib(n) que devuelve la secuencia n-th de Fibonacci.
+        */
+        let numero = document.getElementById("numero").value;
+
+        function fibonacci(numero) {
+
+            if (numero <= 1) {
+                return numero;
+            } else {
+                return fibonacci(numero - 1) + fibonacci(numero - 2);
+            }
+            
+        }
+
+        function resultado() {
+            let numero = parseInt(document.getElementById("numero").value);
+
+            let resultado = fibonacci(numero);
+
+            document.getElementById("resultado").innerHTML = "Resultado: " + resultado;
+        }
+
+    </script>
+</body>
+</html>

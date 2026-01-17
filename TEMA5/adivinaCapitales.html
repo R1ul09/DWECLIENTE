@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>si hass acabado dale al f5</h1>
+    <script>
+        /*
+        Requerimientos:
+        1. Entrada de Datos: El programa debe solicitar al usuario que introduzca por teclado
+        6 nombres de ciudades capitales. Estas se almacenarán en un array (o lista).
+        2. Función de Validación y Regularización: Debes implementar una función que
+        reciba el array y realice lo siguiente:
+        ○ Comprobar que cada nombre tenga una longitud mínima de 5 caracteres.
+        ○ Si un nombre no es válido, el programa debe informar del error y pedir al
+        usuario que introduzca una nueva palabra para esa posición hasta que sea
+        correcta.
+        ○ Convertir todas las palabras válidas a minúsculas.
+        3. Lógica del Juego:
+        ○ El programa elegirá una capital de la lista de forma aleatoria.
+        ○ El usuario deberá intentar adivinar la capital introduciendo su respuesta por
+        teclado.
+        ○ Sistema de Pistas: En cada intento fallido, el programa mostrará una pista
+        incremental. La pista consistirá en mostrar la palabra oculta mediante
+        guiones bajos (_), revelando una letra más en cada turno (empezando por la
+        primera).
+        4. Finalización:
+        ○ El usuario gana si adivina la palabra antes de que se revelen todas sus
+        letras.
+        ○ El usuario pierde si se completa la palabra mediante las pistas y no ha
+        logrado acertar.
+        Ejemplo de pista: Si la capital es PARIS:
+        ● Intento 1 (fallido): p _ _ _ _
+        ● Intento 2 (fallido): p a _ _ _
+        ● Intento 3 (fallido): p a r _ _
+        */
+
+        function validarCapital(lista) {
+
+            for (let i = 0; i < lista.length; i++) {
+
+                while (lista[i].length < 5) {
+                    lista[i] = prompt("La capital '" + lista[i] + "' no es válida. Escríbeme otra que tenga mínimo 5 letras:");
+                }
+
+                lista[i] = lista[i].toLowerCase();
+            }
+
+            return lista;
+        }
+
+        let capitales = []
+
+        for (let i = 0; i < 6; i++) {
+            let capital = prompt("Escribe la capital número " + (i + 1) + ":");
+            capitales.push(capital);
+        }
+
+        capitales = validarCapital(capitales);
+
+        let capitalSecreta = capitales[Math.floor(Math.random() * capitales.length)];
+
+        let pista = "";
+
+        let cantidadGuiones = capitalSecreta.length;
+
+        let giones = "_ ";
+
+        let acertado = false;
+
+        let conadorIntentos = 0
+
+        for (let i = 0; i < capitalSecreta.length - 1; i++) {
+
+            cantidadGuiones--;
+            conadorIntentos++;
+            
+            pista += capitalSecreta[i];
+
+            let intento = prompt("Adivina la capital.\nPista: " + pista + giones.repeat(cantidadGuiones));
+
+            intento = intento.toLowerCase();
+
+            if (intento === capitalSecreta) {
+                let premio = 0;
+                
+                if (conadorIntentos === 1) {
+                    premio = 500;
+                } else if (conadorIntentos === 2) {
+                    premio = 300;
+                } else if (conadorIntentos === 3) {
+                    premio = 100;
+                }
+
+                if (premio > 0) {
+                    alert("Exacto, la palabra era " + capitalSecreta + ". y como lo has acertado a la " + conadorIntentos + " vez/s has ganado " + premio + "€");
+                } else {
+                    alert("Exacto, la palabra era " + capitalSecreta);
+                }
+                
+                acertado = true;
+                break;
+            }
+        }
+
+        if (acertado == false) {
+            alert("Lo siento, no acertaste. La capital era " + capitalSecreta);
+        }
+
+        /*
+        Pseudocodigo:
+        - primero creamos una funcion: para validar las capitales, 
+        la idea es recorrer la lista que nos den y, 
+        si alguna capital tiene menos de 5 letras, 
+        lanzamos un prompt para que el usuario escriba otra hasta que sea válida. 
+        Luego, aprovechamos y pasamos todo a minúsculas
+
+        lueg Hacemos un bucle que se repita 6 veces para pedirle 
+        al usuario las 6 ciudades y las metemos en un array vacio
+
+        Llamamos a la función de validar que hicimos antes para que todas las 
+        ciudades cumplan la regla de los 5 caracteres y estén en minúsculas
+
+        Pillamos una ciudad al azar del array usando el Math.random
+
+        Necesitamos una para ir guardando la pista (que empieza vacía).
+        Otra para saber cuántos guiones poner al principio.
+        Un contador de intentos que empiece en 0 para saber cuánto dinero darle luego.
+        Un "interruptor" (booleano) para saber si ha acertado o no.
+
+        Bucle principal o el juego com tal:
+        Recorremos la palabra letra por letra (menos la última para que no se vea entera).
+        En cada vuelta: sumamos 1 al contador de intentos, quitamos un guion y añadimos la siguiente letra a la pista.
+        Le pedimos al usuario que intente adivinar con un prompt donde le enseñamos la pista y los guiones que faltan.
+        Si acierta:
+        Miramos el contador de intentos. Si es 1 gana 500€, si es 2 gana 300€ y si es 3 gana 100€. Si tarda más, no gana nada extra.
+        Soltamos el alert con su premio, decimos que acertado es verdadero y cortamos el bucle con un break.
+        Final: Si al terminar el bucle el interruptor de acertado sigue en falso, le decimos que ha perdido y cuál era la capital secreta.
+        */
+
+        console.log(pista);
+    </script>
+</body>
+</html>
