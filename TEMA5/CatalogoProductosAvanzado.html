@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        input {
+            padding: 6px 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 7px 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        thead {
+            background-color: #e5e7eb;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        img {
+            width: 80px;
+            border-radius: 4px;
+        }
+    </style>
+
+
+<body>
+    <h1>Productos Filtrados</h1>
+    <label for="campo">Filtro a buscar (Ejemplo: phone, laptop):</label>
+    <input type="text" id="campo">
+    <button onclick="obtenerProductoPorBusqueda()">Buscar</button>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción Corta</th>
+                <th>Descuento</th>
+            </tr>
+        </thead>
+
+        <tbody id="datos">
+
+        </tbody>
+    </table>
+    
+    <script>
+        /*
+            Ejercicio 3: Buscador de Productos Detallado  
+            Objetivo: Usar parámetros de búsqueda en la URL y manejar errores cuando no hay 
+            resultados. 
+            ● API: https://dummyjson.com/products/search?q={valor} 
+            ● Tarea: 
+            1. Crea un input de texto y un botón "Buscar". 
+            2. Cuando el usuario escriba algo (ej: "phone") y pulse el botón, usa fetch 
+            para llamar a la URL de búsqueda. 
+            3. Pinta los resultados en una tabla mostrando: Imagen, Nombre, Descripción 
+            corta y Descuento. 
+            4. Reto: Si la búsqueda no devuelve productos, muestra un mensaje que diga: 
+            "No se encontraron productos que coincidan con tu búsqueda".
+        */
+
+        async function obtenerProductoPorBusqueda() {
+            const campo = document.getElementById("campo").value;
+            const respuesta = await fetch("https://dummyjson.com/products/search?q=" + campo)
+            const producto = await respuesta.json();
+            const total = producto.products.length;
+
+            if (total == 0) {
+                alert("No se encontraron productos que coincidan con tu búsqueda");
+                location.reload();
+                return
+            }
+
+            const tabla = document.getElementById("datos");
+            tabla.innerHTML = "";
+
+            try {
+                
+                for (let i = 0; i < total; i++) {
+                    const productoActual = producto.products[i];
+
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td><img src="${productoActual.images[0]}"></td>
+                        <td>${productoActual.title}</td>
+                        <td>${productoActual.description}</td>
+                        <td>${productoActual.discountPercentage}</td>
+                    `
+
+                    tabla.appendChild(fila);
+                }
+
+            } catch (error) {
+                console.log("error")
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin-right: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4f46e5;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #4338ca;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        thead {
+            background-color: #e5e7eb;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+    </style>
+
+<body>
+
+    <h1>Productos</h1>
+    <button onclick="obtenerProductos()">Mostrar</button>
+    <button onclick="obtenerProductosConStockMenor10()">Mostrar Menos Stock</button>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+
+        <tbody id="datos">
+
+        </tbody>
+    </table>
+    
+    <script>
+        /*
+            Ejercicio 2: Catálogo de Productos  
+            Objetivo: Gestionar un objeto de respuesta que contiene un array y aplicar filtros básicos. 
+            ● API: https://dummyjson.com/products 
+            ● Tarea: 
+            1. Crea una función async que obtenga todos los productos de la tienda. 
+            2. Pinta una tabla con las columnas: Título, Precio, Stock y Marca. 
+            3. Añade un botón que diga "Filtrar por stock bajo" que, al pulsarlo, limpie la 
+            tabla y muestre solo los productos con menos de 10 unidades en stock.
+        */
+
+        async function obtenerProductos() {
+            const respuesta = await fetch("https://dummyjson.com/products")
+            const producto = await respuesta.json();
+            const total = producto.products.length;
+            const tabla = document.getElementById("datos");
+            tabla.innerHTML = "";
+
+            try {
+                
+                for (let i = 0; i < total; i++) {
+                    const productoActual = producto.products[i];
+
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${productoActual.title}</td>
+                        <td>${productoActual.price}</td>
+                        <td>${productoActual.stock}</td>
+                        <td>${productoActual.brand}</td>
+                    `
+
+                    tabla.appendChild(fila);
+                }
+
+            } catch (error) {
+                console.log("error")
+            }
+        }
+
+        async function obtenerProductosConStockMenor10() {
+            const respuesta = await fetch("https://dummyjson.com/products")
+            const producto = await respuesta.json();
+            const total = producto.products.length;
+            const tabla = document.getElementById("datos");
+            tabla.innerHTML = "";
+
+            try {
+                
+                for (let i = 0; i < total; i++) {
+                    const productoActual = producto.products[i];
+
+                    if (productoActual.stock < 10) {
+                        const fila = document.createElement('tr');
+                        fila.innerHTML = `
+                            <td>${productoActual.title}</td>
+                            <td>${productoActual.price}</td>
+                            <td>${productoActual.stock}</td>
+                            <td>${productoActual.brand}</td>
+                        `
+
+                    tabla.appendChild(fila);
+                    }
+
+                }
+
+            } catch (error) {
+                console.log("error")
+            }
+        }
+    </script>
+</body>
+</html>

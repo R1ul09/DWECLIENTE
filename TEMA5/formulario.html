@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 30px; background-color: #f4f7f6; }
+        .container { background: white; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h2 { color: #333; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        
+        .botones { display: flex; gap: 10px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; color: white; }
+        
+        .btn-add { background-color: #007bff; }
+        .btn-clear, .btnDescargar { background-color: #dc3545; }
+        .btnImportar { background-color: #6f42c1; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Listado con Persistencia</h2>
+    <form id="formAlumno">
+        <input type="text" id="nombre" placeholder="Nombre del alumno" required>
+        <input type="text" id="apellidos" placeholder="Apellidos del alumno" required>
+        <input type="number" id="edad" placeholder="Edad del alumno" required>
+        <input type="number" id="nota" placeholder="Nota del alumno" required>
+        <input type="tel" id="movil" placeholder="Movil del alumno (9 dijitos)" pattern="6[0-9]{8}" title="El número de móvil debe tener 9 dígitos y empiece por 6" required>
+        <input type="file" id="inputFile" accept=".json" style="display: none;">
+        <div class="botones">
+            <button type="submit" class="btn-add">Añadir Alumno</button>
+            <button type="button" id="btnBorrarTodo" class="btn-clear">Borrar Todo</button>
+            <button type="button" id="btnDescargar" class="btnDescargar">Descargar JSON</button>
+            <button type="button" id="btnImportar" class="btnImportar">Importar JSON</button>
+        </div>
+    </form>
+
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Nota</th>
+                <th>Móvil</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpo"></tbody>
+    </table>
+</div>
+
+<script>
+    // --- 1. INICIALIZACIÓN (Cargar datos del LocalStorage) ---
+    // Intentamos leer la lista guardada; si no existe, empezamos con un array vacío
+    let alumnos = JSON.parse(localStorage.getItem('alumnos_dwec')) || [];
+
+    const form = document.getElementById('formAlumno');
+    const cuerpo = document.getElementById('cuerpo');
+    const btnClear = document.getElementById('btnBorrarTodo');
+    const btnDescargar = document.getElementById('btnDescargar');
+    const inputFile = document.getElementById('inputFile');
+    const btnImportar = document.getElementById('btnImportar');
+
+    // Al arrancar, pintamos lo que haya en memoria
+    renderizar();
+
+    // --- 2. GESTIÓN DE DATOS ---
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const nuevo = {
+            nombre: document.getElementById('nombre').value,
+            apellidos: document.getElementById('apellidos').value,
+            edad: parseInt(document.getElementById('edad').value),
+            nota: parseFloat(document.getElementById('nota').value),
+            movil: document.getElementById('movil').value
+        };
+        
+        alumnos.push(nuevo);
+        guardarYSincronizar(); // Guardamos y pintamos
+        form.reset();
+    });
+
+    btnClear.addEventListener('click', () => {
+        if(confirm("¿Seguro que quieres borrar toda la lista?")) {
+            alumnos = [];
+            guardarYSincronizar();
+        }
+    });
+
+    btnDescargar.addEventListener('click', () => {
+        // convertir el array de objetos a una cadena JSON con formato (indentación de 2 espacios)
+        const datosEnString = JSON.stringify(alumnos, null, 2)
+
+        // crear un objeto Blob con el contenido y el tipo (application/json)
+        const blob = new Blob([datosEnString], { type: 'application/json' });
+    
+        // creamos una URL temporal que apunte a ese Blob
+        const url = window.URL.createObjectURL(blob);
+        
+        // crear un enlace invisible para forzar la descarga
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'alumnos.json';
+        
+        // simular el clic y limpiar la memoria
+        link.click();
+        window.URL.revokeObjectURL(url);
+    })
+
+    btnImportar.addEventListener('click', () => {
+        inputFile.click();
+    });
+
+    inputFile.addEventListener('change', (e) => {
+        // con esto obtenemos el archivo seleccionado
+        const archivo = e.target.files[0];
+        // si el archivo es null (el usuario canceló), salimos
+        if (!archivo) return;
+
+        // creamos un FileReader para leer el contenido del archivo
+        const lector = new FileReader();
+        
+        // cuando la lectura termine, procesamos el contenido
+        lector.onload = (evento) => {
+            try {
+                // Convertimos el texto del archivo de vuelta a un Array de objetos
+                const datosNuevos = JSON.parse(evento.target.result);
+                
+                // si es un array haremos el reemplazo
+                if (Array.isArray(datosNuevos)) {
+                    // Reemplazamos la lista actual ppr la nueva
+                    alumnos = datosNuevos;
+                    // Guardamos en LocalStorage y renderizamos
+                    guardarYSincronizar();
+                    alert("¡Datos importados con éxito!");
+                } else {
+                    alert("El formato del archivo no es un listado válido.");
+                }
+            } catch (error) {
+                alert("Error: El archivo no es un JSON válido.");
+            }
+            // Limpiamos el input para poder subir el mismo archivo otra vez si fuera necesario
+            inputFile.value = ""; 
+        };
+
+        // con readAsText iniciamos la lectura del archivo como texto
+        lector.readAsText(archivo);
+    });
+    // --- 3. PERSISTENCIA Y VISTA ---
+
+    function guardarYSincronizar() {
+        // Convertimos el array a STRING para guardarlo en LocalStorage
+        localStorage.setItem('alumnos_dwec', JSON.stringify(alumnos));
+        renderizar();
+    }
+
+    function renderizar() {
+        cuerpo.innerHTML = "";
+        alumnos.forEach((alum, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${i + 1}</td><td>${alum.nombre}</td>`
+                         + `<td>${alum.apellidos}</td><td>${alum.edad}</td>`
+                         + `<td>${alum.nota}</td><td>${alum.movil}</td>`;
+            cuerpo.appendChild(tr);
+        });
+    }
+</script>
+
+</body>
+</html>

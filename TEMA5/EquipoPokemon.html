@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    :root {
+        --rotom-red: #F25041;
+        --screen-bg: #E0F7FA;
+        --ui-blue: #29B6F6;
+        --ui-dark: #263238;
+        --text-color: #37474F;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #FFDE7D; /* Amarillo Alola */
+        background-image: 
+            radial-gradient(#ffc107 15%, transparent 16%),
+            radial-gradient(#ffc107 15%, transparent 16%);
+        background-size: 60px 60px;
+        background-position: 0 0, 30px 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        margin: 0;
+    }
+
+    .pokedex-device {
+        background-color: var(--rotom-red);
+        width: 100%;
+        max-width: 650px;
+        border-radius: 40px;
+        box-shadow: 0 20px 0 #bf362a, 0 20px 20px rgba(0,0,0,0.3);
+        padding: 30px;
+        border: 4px solid #4a1c18;
+        text-align: center;
+    }
+
+    .rotom-eyes { display: flex; justify-content: center; margin-bottom: 15px; }
+    .rotom-eye { width: 20px; height: 20px; background: #29B6F6; border-radius: 50%; box-shadow: 0 0 10px #81D4FA; border: 2px solid white; }
+
+    h1 {
+        font-family: 'Press Start 2P', cursive;
+        color: white;
+        font-size: 24px;
+        margin-bottom: 25px;
+        text-shadow: 4px 4px 0px #4a1c18;
+        text-transform: uppercase;
+    }
+
+    input[type="text"] {
+        padding: 12px;
+        border-radius: 25px;
+        border: 3px solid #4a1c18;
+        font-weight: 700;
+        outline: none;
+        width: 60%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        background-color: var(--ui-blue);
+        color: white;
+        border: 3px solid #4a1c18;
+        padding: 10px 15px;
+        border-radius: 25px;
+        font-weight: 900;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 4px 0 #1565C0;
+        margin: 5px;
+    }
+
+    button:active { transform: translateY(4px); box-shadow: none; }
+
+    .screen-container {
+        background-color: var(--ui-dark);
+        padding: 15px;
+        border-radius: 20px;
+        border: 3px solid #4a1c18;
+        margin-top: 20px;
+    }
+
+    .screen-display {
+        background-color: var(--screen-bg);
+        border-radius: 10px;
+        padding: 10px;
+        min-height: 200px;
+    }
+
+    table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+    
+    thead th {
+        text-align: left;
+        color: var(--ui-dark);
+        font-size: 12px;
+        text-transform: uppercase;
+        padding: 10px;
+        border-bottom: 2px solid var(--ui-blue);
+    }
+
+    tbody tr { background-color: white; transition: transform 0.2s; }
+    tbody tr:hover { background-color: rgb(214, 214, 214); }
+
+    td {
+        padding: 10px;
+        vertical-align: middle;
+        font-weight: 700;
+        color: var(--text-color);
+        text-transform: capitalize;
+    }
+
+    td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+    td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+    
+    td img { width: 60px; height: 60px; }
+</style>
+
+<body>
+
+    <div class="pokedex-device">
+        <div class="rotom-eyes"><div class="rotom-eye"></div></div>
+        
+        <h1>Pokédex</h1>
+        
+        <!-- HTML Original (controles) -->
+        <input type="text" id="pokemon" placeholder="ID o nombre">
+        <br>
+        <button onclick="obtenerUno()">Mostrar uno</button>
+        <button onclick="obtenerDatos()">Mostrar Pokemons id 1, 4, 7</button>
+
+        <!-- HTML Original (tabla) envuelto en div de estilo -->
+        <div class="screen-container">
+            <div class="screen-display">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nombre</th>
+                            <th>Experiencia base</th>
+                        </tr>
+                    </thead>
+                    <tbody id="datos">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /*
+            Ejercicio 1: El Equipo Pokémon  
+            Objetivo: Aprender a realizar múltiples peticiones secuenciales controladas por un bucle y 
+            pintarlas en una tabla. 
+            ● API: https://pokeapi.co/api/v2/pokemon/{nombre_o_id} 
+            ● Tarea: 
+            1. Crea un array de IDs (ej: [1, 4, 7]). 
+            2. Al pulsar un botón, recorre el array con un bucle for...of. 
+            3. Dentro del bucle, usa await fetch para obtener los datos de cada uno. 
+            4. Añade una fila a la tabla por cada Pokémon con su foto, nombre y 
+            experiencia base.         
+        */
+
+        const ids = [1, 4, 7];
+
+        async function obtenerDatos() {
+            const tabla = document.getElementById("datos");
+            tabla.innerHTML = "";
+
+            try {
+                for (let id of ids) {
+                    const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon/" + id);
+                    const pokemon = await respuesta.json();
+
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `
+                        <td><img src="${pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default}"></td>
+                        <td>${pokemon.name}</td>
+                        <td>${pokemon.base_experience}</td>
+                    `;
+                    tabla.appendChild(fila);
+
+                    console.log(pokemon);
+                }
+            } catch (error) {
+                console.log("Error");
+            }
+        }
+
+        async function obtenerUno() {
+            const valor = document.getElementById("pokemon").value;
+            const tabla = document.getElementById("datos");
+            tabla.innerHTML = "";
+
+            try {
+                const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon/" + valor);
+                const pokemon = await respuesta.json();
+
+                const fila = document.createElement("tr");
+                fila.innerHTML = `
+                    <td><img src="${pokemon.id <= 649 ? pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default : pokemon.sprites.front_default}"></td>
+                    <td>${pokemon.name}</td>
+                    <td>${pokemon.base_experience}</td>
+                `;
+                tabla.appendChild(fila);
+
+                console.log(pokemon);
+            } catch (error) {
+                console.log("No existe el pokemon");
+            }
+        }
+    </script>
+
+</body>
+</html>
