@@ -12,7 +12,7 @@ $log = "Fecha: " . date("Y-m-d H:i:s") . "\n";
 $log .= "Método: " . $_SERVER['REQUEST_METHOD'] . "\n";
 $log .= "Datos recibidos: " . print_r($_POST, true) . "\n";
 $log .= "-----------------------------------\n";
-$file_put_contents("debug_log.txt", $log, FILE_APPEND);
+file_put_contents("debug_log.txt", $log, FILE_APPEND);
 // -----------------------------------------------------------
 // Configuracion BD y DSN
 $host = 'localhost';

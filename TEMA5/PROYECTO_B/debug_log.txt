@@ -959,3 +959,97 @@ Datos recibidos: Array
 )
 
 -----------------------------------
+Fecha: 2026-02-09 11:48:55
+Método: POST
+Datos recibidos: Array
+(
+    [nombre] => Raul
+    [correo] => zalduaraul005@gmail.com
+    [movil] => 666666666
+    [edad] => 19
+    [idioma] => A1
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:48:55
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:49:23
+Método: PUT
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:49:24
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:50:31
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:53:48
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:54:05
+Método: POST
+Datos recibidos: Array
+(
+    [nombre] => Raul
+    [correo] => zalduaraul23336784@gmail.com
+    [movil] => 666666666
+    [edad] => 20
+    [idioma] => A1
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:54:05
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:54:19
+Método: DELETE
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:54:21
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:54:49
+Método: PUT
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-09 11:54:50
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
