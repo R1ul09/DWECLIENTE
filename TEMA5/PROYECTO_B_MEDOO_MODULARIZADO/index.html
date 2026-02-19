@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulario AJAX Fetch</title>
+  </head>
+  <body>
+    <style>
+      /* Configuración general */
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f7f6;
+          color: #333;
+          max-width: 900px;
+          margin: 40px auto;
+          padding: 20px;
+      }
+
+      h2 {
+          color: #2c3e50;
+          border-bottom: 2px solid #3498db;
+          padding-bottom: 10px;
+      }
+
+      /* Estilo del Formulario */
+      #miFormulario {
+          background: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          margin-bottom: 30px;
+      }
+
+      #miFormulario input, #miFormulario select {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+      }
+
+      #miFormulario button {
+          padding: 12px;
+          background-color: #3498db;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 16px;
+          transition: background 0.3s;
+      }
+
+      #miFormulario button:hover {
+          background-color: #2980b9;
+      }
+
+      #miFormulario button:disabled {
+          background-color: #bdc3c7;
+      }
+
+      /* Estilo de la Tabla */
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          background: white;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      thead {
+          background-color: #3498db;
+          color: white;
+      }
+
+      th, td {
+          padding: 12px 15px;
+          text-align: left;
+          border-bottom: 1px solid #eee;
+      }
+
+      tbody tr:hover {
+          background-color: #f1f1f1;
+      }
+
+      /* Mensajes de respuesta */
+      #mensajeRespuesta {
+          margin-top: 15px;
+          font-weight: bold;
+          text-align: center;
+      }
+    </style>
+    <h2>Registro de Usuario</h2>
+    <form id="miFormulario">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <input type="email" name="correo" placeholder="Tu correo" required />
+      <input type="tel" name="movil" placeholder="Tu movil (tiene que empezar por 6 y tener 9 dijitos)" pattern="6[0-9]{8}" title="Debe contener 9 dígitos y empezar por 6" required>
+      <input type="number" name="edad" placeholder="Tu edad (solo mayores de 18)">
+      <select name="idioma" id="idioma">
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="B1">B1</option>
+        <option value="B2">B2</option>
+        <option value="C1">C1</option>
+        <option value="C2">C2</option>
+        <option value="none">No tengo</option>
+      </select>
+      <button type="submit" id="btnEnviar">Registrar</button>
+    </form>
+    <div id="mensajeRespuesta"></div>
+    <br>
+    <h2>Listado de Usuarios</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Movil</th>
+          <th>Edad</th>
+          <th>Idioma</th>
+          <th>Fecha de Registro</th>
+        </tr>
+      </thead>
+      <tbody id="datos"></tbody>
+    </table>
+    <br>
+    <h2>Eliminar Usuario</h2>
+    <label for="selectID">Escoje el id del Usuario a eliminar</label>
+    <select name="id" id="selectID"></select>
+    <button id="eliminar">Eliminar</button>
+    <br>
+    <h2>Modificar Usuario</h2>
+    <label for="modifyID">Escoje el id del Usuario a modificar</label>
+    <select name="id" id="modifyID"></select>
+    <form id="formularioModificar" style="display:none; margin-top: 20px;">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="email" name="correo" placeholder="Correo">
+        <input type="tel" name="movil" placeholder="Móvil">
+        <input type="number" name="edad" placeholder="Edad">
+        <select name="idioma">
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+            <option value="none">No tengo</option>
+        </select>
+        <button type="submit" id="btnActualizar" style="background-color: #f39c12;">Actualizar Datos</button>
+    </form>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

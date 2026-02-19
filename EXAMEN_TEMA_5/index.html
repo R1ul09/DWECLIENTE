@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gestión de Tienda de Ropa</title>
+  </head>
+  <body>
+
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+}
+
+input, select, button {
+  margin: 5px 0;
+  padding: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+button {
+  cursor: pointer;
+}
+
+    </style>
+    <h2>Registro de Producto</h2>
+    <form id="miFormulario">
+      <input type="text" name="codigo" placeholder="Código (9 caracteres)" maxlength="9" required />
+      <input type="text" name="nombre" placeholder="Nombre del producto" required />
+      <input type="text" name="talla" placeholder="Talla (ej: M, L, XL)" required />
+      <input type="number" step="0.01" name="precio" placeholder="Precio (ej: 15.50)" required />
+      <input type="email" name="email_creador" placeholder="Email del creador" required />
+      <button type="submit" id="btnEnviar">Registrar Producto</button>
+    </form>
+
+    <div id="mensajeRespuesta"></div>
+    <br>
+
+    <h2>Listado de Productos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Talla</th>
+          <th>Precio</th>
+          <th>Creador</th>
+        </tr>
+      </thead>
+      <tbody id="datos"></tbody>
+    </table>
+
+    <br>
+    <h2>Eliminar Producto</h2>
+    <label for="selectID">Escoje el ID del producto a eliminar:</label>
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <select name="id" id="selectID" style="flex-grow: 1;"></select>
+        <button id="eliminar" style="background-color: #e74c3c;">Eliminar</button>
+    </div>
+
+    <br>
+    <h2>Modificar Producto</h2>
+    <label for="modifyID">Escoje el ID del producto a modificar:</label>
+    <select name="id" id="modifyID" style="width: 100%; margin-top: 10px;"></select>
+
+    <form id="formularioModificar" style="display:none; margin-top: 20px;">
+        <input type="text" name="codigo" placeholder="Código" maxlength="9">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="talla" placeholder="Talla">
+        <input type="number" step="0.01" name="precio" placeholder="Precio">
+        <input type="email" name="email_creador" placeholder="Email del creador">
+        <button type="submit" id="btnActualizar" style="background-color: #f39c12;">Actualizar Producto</button>
+    </form>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

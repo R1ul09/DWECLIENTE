@@ -1,0 +1,94 @@
+Fecha: 2026-02-12 13:37:58
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-12 13:38:54
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-12 13:39:11
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:47:10
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:47:37
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:49:04
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:50:33
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:51:49
+Método: POST
+Datos recibidos: Array
+(
+    [codigo] => 123456789
+    [nombre] => Chaqueta
+    [talla] => 12
+    [precio] => 14
+    [email_creador] => forwjf@gmail
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:52:10
+Método: POST
+Datos recibidos: Array
+(
+    [codigo] => 123456788
+    [nombre] => Chaqueta
+    [talla] => 12
+    [precio] => 14
+    [email_creador] => forwjf@gmail
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:52:10
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:52:21
+Método: DELETE
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-19 12:52:23
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------

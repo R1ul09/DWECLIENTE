@@ -1,0 +1,21 @@
+Fecha: 2026-02-12 13:37:58
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-12 13:38:54
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
+Fecha: 2026-02-12 13:39:11
+Método: GET
+Datos recibidos: Array
+(
+)
+
+-----------------------------------
