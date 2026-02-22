@@ -108,8 +108,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     try {
+        $codigoBuscado = $_GET['codigo'] ?? null;
         // Obtener todos los productos con Medoo
-        $productos = $database->select('productos', '*');
+        if ($codigoBuscado) {
+            // Si hay código, filtramos con LIKE (busca coincidencias parciales)
+            $productos = $database->select('productos', '*', [
+                // [~] es el operador LIKE en Medoo para buscar coincidencias
+                "codigo[~]" => $codigoBuscado
+            ]);
+        } else {
+            // Si no hay código, traemos todos
+            $productos = $database->select('productos', '*');
+        }
 
         // Devolver los productos en formato JSON
         echo json_encode($productos);

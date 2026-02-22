@@ -12,6 +12,7 @@ const btnEliminar = document.getElementById("eliminar");
 const formModificar = document.getElementById("formularioModificar");
 const selectID = document.getElementById("selectID");
 const modifyID = document.getElementById("modifyID");
+const buscadorCodigo = document.getElementById("buscadorCodigo");
 
 // Estado: productos en memoria
 let productosLocales = [];
@@ -60,7 +61,8 @@ async function crearProducto(event) {
 // Listar productos
 async function listaProductos() {
   try {
-    const productos = await api.obtenerProductos();
+    const filtro = buscadorCodigo.value;
+    const productos = await api.obtenerProductos(filtro);
     
     productosLocales = productos;
 
@@ -134,3 +136,4 @@ document.addEventListener('DOMContentLoaded', listaProductos);
 btnEliminar.addEventListener('click', borrarProducto);
 modifyID.addEventListener('change', cargarDatosEnFormulario);
 formModificar.addEventListener("submit", modificarProducto);
+buscadorCodigo.addEventListener("input", listaProductos);

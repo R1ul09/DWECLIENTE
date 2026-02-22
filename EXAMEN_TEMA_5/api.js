@@ -8,8 +8,11 @@ export async function crearProducto(datos) {
   return await respuesta.json();
 }
 
-export async function obtenerProductos() {
-  const respuesta = await fetch("servidor.php", {
+export async function obtenerProductos(codigo = "") {
+  // Si hay código, lo enviamos en la URL: servidor.php?codigo=123
+  const url = codigo ? `servidor.php?codigo=${codigo}` : "servidor.php";
+  
+  const respuesta = await fetch(url, {
     method: "GET"
   });
   return await respuesta.json();
