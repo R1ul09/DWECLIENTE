@@ -1,139 +1,195 @@
-// main.js - El cerebro de la app
-
 import * as api from './api.js';
 import * as components from './components.js';
 
-// Elementos del DOM
-const formulario = document.getElementById("miFormulario");
-const mensajeDiv = document.getElementById("mensajeRespuesta");
-const btnEnviar = document.getElementById("btnEnviar");
-const tablaDatos = document.getElementById("datos");
-const btnEliminar = document.getElementById("eliminar");
-const formModificar = document.getElementById("formularioModificar");
-const selectID = document.getElementById("selectID");
-const modifyID = document.getElementById("modifyID");
-const buscadorCodigo = document.getElementById("buscadorCodigo");
+// recojemos todos los elementos
+const tabla = document.getElementById("cuerpoTabla");
+const formNuevo = document.getElementById("miFormulario");
+const formEditar = document.getElementById("miFormularioEditar");
+const divErrorNuevo = document.getElementById("mensajeError");
+const divErrorEditar = document.getElementById("mensajeErrorEditar");
+const selectTalla = document.getElementById("filtroTalla");
 
-// Estado: productos en memoria
-let productosLocales = [];
+// creamos un array para guardar los productos
+let misProductos = [];
 
-// Crear producto
-async function crearProducto(event) {
-  event.preventDefault();
+// tallas permitidas
+const tallasPermitidas = ["XS", "S", "M", "L", "XL", "XXL"];
 
-  btnEnviar.disabled = true;
-  btnEnviar.innerText = "Enviando...";
-  mensajeDiv.innerText = "";
-
-  const datos = new FormData(formulario);
-
-  // Validar código (según SQL: CHAR(9))
-  const codigo = datos.get('codigo');
-  if (codigo.length !== 9) {
-    mensajeDiv.style.color = "red";
-    mensajeDiv.innerText = "Error: El código debe tener exactamente 9 caracteres";
-    btnEnviar.disabled = false;
-    btnEnviar.innerText = "Registrar";
-    return;
-  }
-
-  try {
-    const data = await api.crearProducto(datos);
-
-    if (data.status === "ok") {
-      mensajeDiv.style.color = "green";
-      mensajeDiv.innerText = `Éxito: ${data.mensaje}`;
-      formulario.reset();
-      listaProductos();
-    } else {
-      throw new Error(data.error || "Error desconocido");
+// creamos una funcion para cargar los dato, y va a ssrvir para cada vez que hagamo una acciÃ³n
+async function cargar() {
+    try {
+        const datos = await api.obtenerProductos();
+        misProductos = datos;
+        pintar();
+    } catch (error) {
+        console.error("Error al cargar:", error);
     }
-  } catch (error) {
-    console.error("Hubo un problema:", error);
-    mensajeDiv.style.color = "red";
-    mensajeDiv.innerText = "Error: " + error.message;
-  } finally {
-    btnEnviar.disabled = false;
-    btnEnviar.innerText = "Registrar";
-  }
 }
 
-// Listar productos
-async function listaProductos() {
-  try {
-    const filtro = buscadorCodigo.value;
-    const productos = await api.obtenerProductos(filtro);
+// esta es la funcion para pintar los datos
+function pintar() {
+    tabla.innerHTML = "";
+    // esto es para el filtrado
+    const tallaSeleccionada = selectTalla.value;
+
+    // Usamos .filter() para filtrar los productos en el frontend
+    const productosFiltrados = misProductos.filter(producto => {
+        // limpiamos espacios para que el filtro sea preciso
+        const tallaProducto = producto.talla ? producto.talla.trim() : "";
+        return tallaSeleccionada === "Todas" || tallaProducto === tallaSeleccionada;
+    });
+
+    // Ahora iteramos sobre el array filtrado para pintar
+    productosFiltrados.forEach(producto => {
+        // usamos la funcion del componente para crear la fila HTML
+        tabla.innerHTML += components.crearFilaHTML(producto);
+    });
+}
+
+// hacemos un window para que aparezca el modal de si queremos borrar el producto
+window.eliminarFila = async (id) => {
+    if (confirm("¿Seguro que quieres borrar este producto?")) {
+        try {
+            await api.borrarProducto(id);
+            alert("Eliminado con exito");
+            cargar();
+        } catch (error) {
+            alert("Error al borrar");
+        }
+    }
+};
+
+// lo mismo para el mismo para ele modificar
+window.modificarFila = (id) => {
+    // Buscamos el producto en el array local
+    const producto = misProductos.find(producto => producto.id == id);
     
-    productosLocales = productos;
+    if (producto) {
+        // Cerramos el de nuevo y abrimos el de editar
+        formNuevo.style.display = "none";
+        formEditar.style.display = "block";
 
-    // Pintar tabla y selects
-    components.pintarTabla(productos, tablaDatos);
-    components.pintarSelects(productos, selectID, modifyID);
-
-  } catch (error) {
-    console.error("Hubo un problema:", error);
-  }
-}
-
-// Borrar producto
-async function borrarProducto(event) {
-  event.preventDefault();
-
-  const id = selectID.value;
-
-  try {
-    const resultado = await api.borrarProducto(id);
-
-    if (resultado.status === "ok") {
-      alert(resultado.mensaje);
-      listaProductos(); // Cambiado de reload a recarga de lista para mejor UX
+        // Rellenamos los campos con los id que especificamos de editar
+        document.getElementById("edit-id").value = producto.id;
+        document.getElementById("edit-codigo").value = producto.codigo;
+        document.getElementById("edit-nombre").value = producto.nombre;
+        document.getElementById("edit-talla").value = producto.talla;
+        document.getElementById("edit-precio").value = producto.precio;
+        document.getElementById("edit-email").value = producto.email_creador;
     }
-  } catch (error) {
-    console.error("Error al borrar:", error);
-  }
-}
+};
 
-// Cargar datos en formulario de modificación
-function cargarDatosEnFormulario() {
-  const idSeleccionado = modifyID.value;
-  const producto = productosLocales.find(p => p.id == idSeleccionado);
+// esto es para el de crear, cuando le demos al boton de embiar
+formNuevo.addEventListener("submit", async (event) => {
+    // hacemos para que no se reinicie la pagina
+    event.preventDefault();
+    divErrorNuevo.innerText = "";
 
-  if (producto) {
-    formModificar.style.display = "flex";
-    formModificar.querySelector('[name="codigo"]').value = producto.codigo;
-    formModificar.querySelector('[name="nombre"]').value = producto.nombre;
-    formModificar.querySelector('[name="talla"]').value = producto.talla;
-    formModificar.querySelector('[name="precio"]').value = producto.precio;
-    formModificar.querySelector('[name="email_creador"]').value = producto.email_creador;
-  } else {
-    formModificar.style.display = "none";
-  }
-}
+    // vamos a añadir los regex
+    const codigo = document.getElementById("codigo").value;
+    const precio = document.getElementById("precio").value;
 
-// Modificar producto
-async function modificarProducto(event) {
-  event.preventDefault();
+    const regexCodigo = /^[a-zA-Z0-9]{9}$/;
+    const regexPrecio = /^\d+(\.\d{2})?$/;
 
-  const id = modifyID.value;
-  const formData = new FormData(formModificar);
-
-  try {
-    const resultado = await api.modificarProducto(id, formData);
-
-    if (resultado.status === "ok") {
-      alert(resultado.mensaje);
-      formModificar.style.display = "none";
-      listaProductos();
+    if (!regexCodigo.test(codigo)) {
+      divErrorNuevo.innerText = "El código debe tener exactamente 9 caracteres";
+      return;
     }
-  } catch (error) {
-    console.error("Error al modificar:", error);
-  }
-}
 
-// Eventos
-formulario.addEventListener("submit", crearProducto);
-document.addEventListener('DOMContentLoaded', listaProductos);
-btnEliminar.addEventListener('click', borrarProducto);
-modifyID.addEventListener('change', cargarDatosEnFormulario);
-formModificar.addEventListener("submit", modificarProducto);
-buscadorCodigo.addEventListener("input", listaProductos);
+    if (!regexPrecio.test(precio)) {
+      divErrorNuevo.innerText = "El precio debe ser un número decimal positivo (ej: 15.50).";
+      return;
+    }
+
+    const talla = document.getElementById("talla").value;
+    if (!tallasPermitidas.includes(talla.toUpperCase())) {
+      divErrorNuevo.innerText = "La talla debe ser una de las siguientes: XS, S, M, L, XL, XXL";
+      return;
+    }
+
+    const datosEnvio = new FormData();
+    datosEnvio.append("codigo", document.getElementById("codigo").value);
+    datosEnvio.append("nombre", document.getElementById("nombre").value);
+    datosEnvio.append("talla", document.getElementById("talla").value);
+    datosEnvio.append("precio", document.getElementById("precio").value);
+    datosEnvio.append("email_creador", document.getElementById("email").value);
+
+    try {
+        await api.crearProducto(datosEnvio);
+        alert("¡Producto creado!");
+        formNuevo.reset();
+        formNuevo.style.display = "none";
+        cargar();
+    } catch (err) {
+        divErrorNuevo.innerText = "Error al guardar en el servidor.";
+    }
+});
+
+// lo mismo para modificar
+formEditar.addEventListener("submit", async (event) => {
+    // lo mismo para que no se actualize solo
+    event.preventDefault();
+    divErrorEditar.innerText = "";
+
+    // vamos a añadir los regex
+    const codigo = document.getElementById("edit-codigo").value;
+    const precio = document.getElementById("edit-precio").value;
+
+    const regexCodigo = /^[a-zA-Z0-9]{9}$/;
+    const regexPrecio = /^\d+(\.\d{2})?$/;
+
+    if (!regexCodigo.test(codigo)) {
+      divErrorEditar.innerText = "El código debe tener exactamente 9 caracteres";
+      return;
+    }
+
+    if (!regexPrecio.test(precio)) {
+      divErrorEditar.innerText = "El precio debe ser un número decimal positivo (ej: 15.50).";
+      return;
+    }
+
+    const talla = document.getElementById("edit-talla").value;
+    if (!tallasPermitidas.includes(talla.toUpperCase())) {
+      divErrorEditar.innerText = "La talla debe ser una de las siguientes: XS, S, M, L, XL, XXL";
+      return;
+    }
+
+    // cojemos el id
+    const id = document.getElementById("edit-id").value;
+    const formData = new FormData();
+    
+    // cojemos los valores para el modificar
+    formData.append("nombre", document.getElementById("edit-nombre").value);
+    formData.append("talla", document.getElementById("edit-talla").value);
+    formData.append("precio", document.getElementById("edit-precio").value);
+    formData.append("codigo", document.getElementById("edit-codigo").value);
+    formData.append("email_creador", document.getElementById("edit-email").value);
+
+    try {
+        await api.modificarUsuario(id, formData);
+        alert("¡Producto actualizado!");
+        formEditar.reset();
+        formEditar.style.display = "none";
+        cargar();
+    } catch (err) {
+        divErrorEditar.innerText = "Error al actualizar.";
+    }
+});
+
+// y aqui van a ir los eventod del panel de controlo
+document.getElementById("btnCargar").onclick = cargar;
+
+document.getElementById("btnNuevo").onclick = () => {
+    // Cerramos el de editar si esta abierto
+    formEditar.style.display = "none";
+    formNuevo.style.display = (formNuevo.style.display === "none") ? "block" : "none";
+};
+
+document.getElementById("btnLimpiar").onclick = () => {
+    misProductos = [];
+    tabla.innerHTML = "";
+};
+
+// Cambio del filtro
+selectTalla.onchange = pintar;

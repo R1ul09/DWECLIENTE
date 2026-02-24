@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // Insertar con Medoo (mucho más simple que PDO puro)
+        // Insertar con Medoo
         $database->insert('productos', [
             'codigo' => $codigo,
             'nombre' => $nombre,
@@ -108,27 +108,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     try {
-        $codigoBuscado = $_GET['codigo'] ?? null;
-        // Obtener todos los productos con Medoo
-        if ($codigoBuscado) {
-            // Si hay código, filtramos con LIKE (busca coincidencias parciales)
-            $productos = $database->select('productos', '*', [
-                // [~] es el operador LIKE en Medoo para buscar coincidencias
-                "codigo[~]" => $codigoBuscado
-            ]);
-        } else {
-            // Si no hay código, traemos todos
-            $productos = $database->select('productos', '*');
-        }
+        $productos = $database->select('productos', '*');
 
-        // Devolver los productos en formato JSON
+        // Los enviamos todos al frontend en formato JSON
         echo json_encode($productos);
 
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode([
             "status" => "error", 
-            "error" => "Error en BDD: " . $e->getMessage()
+            "error" => "Error al obtener productos: " . $e->getMessage()
         ]);
     }
 }
